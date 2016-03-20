@@ -30,11 +30,11 @@ Route::get('api/v1/login', 'api\v1\loginController@login');
 
 Route::get('api/v1/users', 'api\v1\usersController@index');
 Route::post('api/v1/users/create', 'api\v1\usersController@index');
-Route::get('api/v1/user/{id}', 'api\v1\usersController@edit');
-Route::put('api/v1/user/{id}', 'api\v1\usersController@update');
-Route::delete('api/v1/user/{id}', 'api\v1\usersController@unactive');
-Route::patch('api/v1/user/{id}', 'api\v1\usersController@active');
-Route::put('api/v1/user/{id}/new_pass', 'api\v1\usersController@new_pass');
+Route::get('api/v1/users/{id}', 'api\v1\usersController@edit');
+Route::put('api/v1/users/{id}', 'api\v1\usersController@update');
+Route::delete('api/v1/users/{id}', 'api\v1\usersController@unactive');
+Route::patch('api/v1/users/{id}', 'api\v1\usersController@active');
+Route::put('api/v1/users/{id}/update_pass', 'api\v1\usersController@update_pass');
 
 Route::group(['middleware' => ['web']], function () {
     //
