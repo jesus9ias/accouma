@@ -8,11 +8,31 @@ class usersModel extends Model{
   protected $table = 'users';
   public $timestamps = false;
 
-  public function scopeGetUsers($query){
+  public function scopeGetUsers($query, $fields = []){
     return $query->get();
   }
 
-  public function scopeGetUser($query, $id){
+  public function scopeGetUser($query, $id, $fields = []){
     return $query->where('id', '=', $id)->get();
+  }
+
+  public function scopeCreateUser($query, $data = []){
+    return $query->where('id', '=', $id)->insertGetId($data);
+  }
+
+  public function scopeUpdateUser($query, $id, $data = []){
+    return $query->where('id', '=', $id)->update($data);
+  }
+
+  public function scopeUpdateUserPass($query, $id, $newPass = ''){
+    return $query->where('id', '=', $id)->update(['pass' => $newPass]);
+  }
+
+  public function scopeActiveUser($query, $id){
+    return $query->where('id', '=', $id)->update(['status' => 2]);
+  }
+
+  public function scopeUnactiveUser($query, $id){
+    return $query->where('id', '=', $id)->update(['status' => 3]);
   }
 }
