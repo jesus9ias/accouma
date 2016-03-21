@@ -7,6 +7,7 @@ use Request;
 use Response;
 use Hash;
 
+use App\Helpers\Helpers;
 use App\models\usersModel as users;
 
 class usersController extends Controller{
@@ -45,6 +46,34 @@ class usersController extends Controller{
     users::updateUser($id, $data);
     return Response::json([
       'result' => [],
+      'msg' => 'success'
+    ], 200);
+  }
+
+  public function create(){
+    $names = Request::input('names', '');
+    $last_names = Request::input('last_names', '');
+    $user = Request::input('user', '');
+    $email = Request::input('email', '');
+
+    $pass = Helpers::random_txt(8);
+    $hpass = Hash::make($pass);
+
+    $data = [
+      'names' => $names,
+      'last_names' => $last_names,
+      'user' => $user,
+      'email' => $email,
+      'pass' => $hpass,
+      'date_created' => date("Y-m-d h:i:s"),
+      'date_updated' => date("Y-m-d h:i:s"),
+      'status' => 1
+    ];
+    $newId = users::createUser($data);
+    return Response::json([
+      'result' => [
+        'newId' => $newId
+      ],
       'msg' => 'success'
     ], 200);
   }

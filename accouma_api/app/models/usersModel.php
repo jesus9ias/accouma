@@ -17,7 +17,7 @@ class usersModel extends Model{
   }
 
   public function scopeCreateUser($query, $data = []){
-    return $query->where('id', '=', $id)->insertGetId($data);
+    return $query->insertGetId($data);
   }
 
   public function scopeUpdateUser($query, $id, $data = []){
