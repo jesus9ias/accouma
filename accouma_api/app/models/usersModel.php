@@ -28,11 +28,11 @@ class usersModel extends Model{
     return $query->where('id', '=', $id)->update(['pass' => $newPass]);
   }
 
-  public function scopeActiveUser($query, $id){
+  public function scopeActivateUser($query, $id){
     return $query->where('id', '=', $id)->update(['status' => 2]);
   }
 
-  public function scopeUnactiveUser($query, $id){
+  public function scopeDisableUser($query, $id){
     return $query->where('id', '=', $id)->update(['status' => 3]);
   }
 

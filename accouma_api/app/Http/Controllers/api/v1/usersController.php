@@ -89,7 +89,7 @@ class usersController extends Controller{
   }
 
   public function active($id){
-    users::activeUser($id);
+    users::activateUser($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -97,7 +97,7 @@ class usersController extends Controller{
   }
 
   public function unactive($id){
-    users::unactiveUser($id);
+    users::disableUser($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
