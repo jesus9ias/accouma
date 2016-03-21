@@ -35,4 +35,8 @@ class usersModel extends Model{
   public function scopeUnactiveUser($query, $id){
     return $query->where('id', '=', $id)->update(['status' => 3]);
   }
+
+  public function scopeTokenUser($query, $id, $token){
+    return $query->where('id', '=', $id)->update(['token' => $token]);
+  }
 }

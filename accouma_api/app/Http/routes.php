@@ -26,7 +26,9 @@ Route::get('/', function () {
 |
 */
 
-Route::get('api/v1/login', 'api\v1\loginController@login');
+Route::get('api/v1/login', 'api\v1\loginController@is_logued');
+Route::post('api/v1/login', 'api\v1\loginController@login');
+Route::delete('api/v1/login', 'api\v1\loginController@close');
 
 Route::get('api/v1/users', 'api\v1\usersController@index');
 Route::post('api/v1/users/create', 'api\v1\usersController@index');

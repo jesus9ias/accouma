@@ -55,8 +55,7 @@ class usersController extends Controller{
     users::updateUserPass($id, $newPass);
     return Response::json([
       'result' => [],
-      'msg' => 'success',
-      'pass' => $newPass
+      'msg' => 'success'
     ], 200);
   }
 
