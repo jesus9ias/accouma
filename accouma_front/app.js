@@ -3,6 +3,8 @@ var app = express();
 
 var html_dir = 'views/';
 
+app.use(express.static('build'));
+
 app.get('/', function (req, res) {
   res.sendfile(html_dir + 'index.html');
 });
