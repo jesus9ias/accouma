@@ -96,7 +96,7 @@ class usersController extends Controller{
     ], 200);
   }
 
-  public function unactive($id){
+  public function disable($id){
     users::disableUser($id);
     return Response::json([
       'result' => [],
