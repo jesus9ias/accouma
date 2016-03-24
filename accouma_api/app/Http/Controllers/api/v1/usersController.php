@@ -81,7 +81,7 @@ class usersController extends Controller{
   public function update_pass($id){
     $pass = Request::get('pass', '');
     $newPass = Hash::make($pass);
-    users::updateUserPass($id, $newPass);
+    users::updateUser($id, ['pass' => $newPass]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -89,7 +89,7 @@ class usersController extends Controller{
   }
 
   public function active($id){
-    users::activateUser($id);
+    users::updateUser($id, ['status' => 2]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -97,7 +97,7 @@ class usersController extends Controller{
   }
 
   public function disable($id){
-    users::disableUser($id);
+    users::updateUser($id, ['status' => 3]);
     return Response::json([
       'result' => [],
       'msg' => 'success'

@@ -8,7 +8,7 @@ class usersModel extends Model{
   protected $table = 'users';
   public $timestamps = false;
 
-  public function scopeGetUsers($query, $fields = []){
+  public function scopeGetUsers($query, $fields = [], $filters = []){
     return $query->get();
   }
 
@@ -24,19 +24,4 @@ class usersModel extends Model{
     return $query->where('id', '=', $id)->update($data);
   }
 
-  public function scopeUpdateUserPass($query, $id, $newPass = ''){
-    return $query->where('id', '=', $id)->update(['pass' => $newPass]);
-  }
-
-  public function scopeActivateUser($query, $id){
-    return $query->where('id', '=', $id)->update(['status' => 2]);
-  }
-
-  public function scopeDisableUser($query, $id){
-    return $query->where('id', '=', $id)->update(['status' => 3]);
-  }
-
-  public function scopeTokenUser($query, $id, $token){
-    return $query->where('id', '=', $id)->update(['token' => $token]);
-  }
 }
