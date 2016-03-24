@@ -23,8 +23,7 @@ class loginController extends Controller{
         if(Hash::check($pass, $apass)){
 
           $token = Helpers::random_txt(64);
-          users::tokenUser($id, $token);
-
+          users::updateUser($id, ['token' => $token]);
           return Response::json([
             'result' => [
               'id' => $id,
@@ -78,7 +77,7 @@ class loginController extends Controller{
         ->where('token', '=', $token)
         ->get();
       if(count($user) == 1){
-        users::tokenUser($id, '');
+        users::updateUser($id, ['token' => $token]);
         return Response::json([
           'result' => [],
           'msg' => 'Success',
