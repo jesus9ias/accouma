@@ -8,7 +8,7 @@ class accountsModel extends Model{
   protected $table = 'accounts';
   public $timestamps = false;
 
-  public function scopeGetAccounts($query, $fields = []){
+  public function scopeGetAccounts($query, $fields = [], $filters = []){
     return $query->get();
   }
 
@@ -22,14 +22,6 @@ class accountsModel extends Model{
 
   public function scopeUpdateAccount($query, $id, $data = []){
     return $query->where('id', '=', $id)->update($data);
-  }
-
-  public function scopeActivateAccount($query, $id){
-    return $query->where('id', '=', $id)->update(['status' => 2]);
-  }
-
-  public function scopeDisableAccount($query, $id){
-    return $query->where('id', '=', $id)->update(['status' => 3]);
   }
 
 }

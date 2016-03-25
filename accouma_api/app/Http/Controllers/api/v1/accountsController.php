@@ -11,6 +11,10 @@ use App\models\accountsModel as accounts;
 
 class accountsController extends Controller{
 
+  public function __construct(){
+		$this->middleware('isLogued', ['only' => ['index']]);
+	}
+
   public function index(){
     $accounts = accounts::getAccounts();
     return Response::json([
@@ -39,18 +43,12 @@ class accountsController extends Controller{
   }
 
   public function update($id){
-    $names = Request::input('names', '');
-    $description = Request::input('description', '');
-    $user_id = Request::input('user_id', '');
-    $date_created = date("Y-m-d H:i:s");
-    $status = 2;
+    $name = Request::get('name', '');
+    $description = Request::get('description', '');
 
     $data = [
       'name' => $name,
-      'description' => $description,
-      'user_id' => $user_id,
-      'date_created' => $date_created,
-      'status' => $status
+      'description' => $description
     ];
     accounts::updateAccount($id, $data);
     return Response::json([
@@ -60,7 +58,7 @@ class accountsController extends Controller{
   }
 
   public function create(){
-    $names = Request::input('names', '');
+    $name = Request::input('name', '');
     $description = Request::input('description', '');
     $user_id = Request::input('user_id', '');
     $date_created = date("Y-m-d H:i:s");
@@ -84,8 +82,8 @@ class accountsController extends Controller{
 
 
 
-  public function active($id){
-    accounts::activateAccount($id);
+  public function activate($id){
+    accounts::updateAccount($id, ['status' => 2]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -93,7 +91,7 @@ class accountsController extends Controller{
   }
 
   public function disable($id){
-    accounts::disableAccount($id);
+    accounts::updateAccount($id, ['status' => 3]);
     return Response::json([
       'result' => [],
       'msg' => 'success'

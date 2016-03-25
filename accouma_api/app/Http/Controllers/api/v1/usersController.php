@@ -88,7 +88,7 @@ class usersController extends Controller{
     ], 200);
   }
 
-  public function active($id){
+  public function activate($id){
     users::updateUser($id, ['status' => 2]);
     return Response::json([
       'result' => [],

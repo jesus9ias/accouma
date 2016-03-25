@@ -38,7 +38,7 @@ Route::post('api/v1/users/create', 'api\v1\usersController@create');
 Route::get('api/v1/users/{id}', 'api\v1\usersController@edit');
 Route::put('api/v1/users/{id}', 'api\v1\usersController@update');
 Route::delete('api/v1/users/{id}', 'api\v1\usersController@disable');
-Route::patch('api/v1/users/{id}', 'api\v1\usersController@active');
+Route::patch('api/v1/users/{id}', 'api\v1\usersController@activate');
 Route::put('api/v1/users/{id}/update_pass', 'api\v1\usersController@updatePass');
 
 Route::get('api/v1/accounts', 'api\v1\accountsController@index');
@@ -46,7 +46,7 @@ Route::post('api/v1/accounts/create', 'api\v1\accountsController@create');
 Route::get('api/v1/accounts/{id}', 'api\v1\accountsController@edit');
 Route::put('api/v1/accounts/{id}', 'api\v1\accountsController@update');
 Route::delete('api/v1/accounts/{id}', 'api\v1\accountsController@disable');
-Route::patch('api/v1/accounts/{id}', 'api\v1\accountsController@active');
+Route::patch('api/v1/accounts/{id}', 'api\v1\accountsController@activate');
 
 Route::group(['middleware' => ['web']], function () {
     //
