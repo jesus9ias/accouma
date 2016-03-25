@@ -12,7 +12,7 @@ use App\models\accountsModel as accounts;
 class accountsController extends Controller{
 
   public function __construct(){
-		$this->middleware('isLogued', ['only' => ['index']]);
+		$this->middleware('isLogued');
 		$this->middleware('isAdmin', ['only' => ['index']]);
 	}
 
