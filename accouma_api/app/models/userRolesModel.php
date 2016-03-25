@@ -24,6 +24,10 @@ class userRolesModel extends Model{
     return $query->where('user_id', '=', $user)->where('status', '=', $status)->get();
   }
 
+  public function scopeGetRoleByUser($query, $user, $role, $status = 2){
+    return $query->where('user_id', '=', $user)->where('role_slug', '=', $role)->where('status', '=', $status)->get();
+  }
+
   public function scopeCreateUserRole($query, $data = []){
     return $query->insertGetId($data);
   }

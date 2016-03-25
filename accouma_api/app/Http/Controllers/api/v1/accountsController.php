@@ -13,6 +13,7 @@ class accountsController extends Controller{
 
   public function __construct(){
 		$this->middleware('isLogued', ['only' => ['index']]);
+		$this->middleware('isAdmin', ['only' => ['index']]);
 	}
 
   public function index(){

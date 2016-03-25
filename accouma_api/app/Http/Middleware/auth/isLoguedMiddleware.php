@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Middleware\login;
+namespace App\Http\Middleware\auth;
 
 use Closure;
 use Response;
-use DB;
 use App\models\usersModel as users;
 
 class isLoguedMiddleware{
