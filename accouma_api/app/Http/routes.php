@@ -48,6 +48,11 @@ Route::put('api/v1/accounts/{id}', 'api\v1\accountsController@update');
 Route::delete('api/v1/accounts/{id}', 'api\v1\accountsController@disable');
 Route::patch('api/v1/accounts/{id}', 'api\v1\accountsController@activate');
 
+Route::get('api/v1/concepts', 'api\v1\conceptsController@index');
+Route::post('api/v1/concepts/create', 'api\v1\conceptsController@create');
+Route::get('api/v1/concepts/{id}', 'api\v1\conceptsController@edit');
+Route::put('api/v1/concepts/{id}', 'api\v1\conceptsController@update');
+
 Route::group(['middleware' => ['web']], function () {
     //
 });
