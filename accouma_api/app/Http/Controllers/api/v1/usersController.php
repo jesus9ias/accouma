@@ -78,7 +78,7 @@ class usersController extends Controller{
     ], 200);
   }
 
-  public function update_pass($id){
+  public function updatePass($id){
     $pass = Request::get('pass', '');
     $newPass = Hash::make($pass);
     users::updateUser($id, ['pass' => $newPass]);

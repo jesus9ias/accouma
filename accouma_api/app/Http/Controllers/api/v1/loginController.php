@@ -9,6 +9,7 @@ use Hash;
 
 use App\Helpers\Helpers;
 use App\models\usersModel as users;
+use App\models\usersTokensModel as usersTokens;
 
 class loginController extends Controller{
     public function login(){
@@ -45,7 +46,7 @@ class loginController extends Controller{
       }
     }
 
-    public function is_logued(){
+    public function isLogued(){
       $id = Request::get('id', 0);
       $token = Request::get('token', '');
 
@@ -89,4 +90,5 @@ class loginController extends Controller{
         ], 404);
       }
     }
+
 }
