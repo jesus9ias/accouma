@@ -26,9 +26,12 @@ Route::get('/', function () {
 |
 */
 
-Route::get('api/v1/login', 'api\v1\loginController@is_logued');
+Route::get('api/v1/login', 'api\v1\loginController@isLogued');
 Route::post('api/v1/login', 'api\v1\loginController@login');
 Route::delete('api/v1/login', 'api\v1\loginController@close');
+
+Route::post('api/v1/recove/send_recove_token', 'api\v1\recoveController@sendRecoveToken');
+Route::put('api/v1/recove/complete_recove/{email}/{token}', 'api\v1\recoveController@completeRecove');
 
 Route::get('api/v1/users', 'api\v1\usersController@index');
 Route::post('api/v1/users/create', 'api\v1\usersController@create');
@@ -36,7 +39,7 @@ Route::get('api/v1/users/{id}', 'api\v1\usersController@edit');
 Route::put('api/v1/users/{id}', 'api\v1\usersController@update');
 Route::delete('api/v1/users/{id}', 'api\v1\usersController@disable');
 Route::patch('api/v1/users/{id}', 'api\v1\usersController@active');
-Route::put('api/v1/users/{id}/update_pass', 'api\v1\usersController@update_pass');
+Route::put('api/v1/users/{id}/update_pass', 'api\v1\usersController@updatePass');
 
 Route::get('api/v1/accounts', 'api\v1\accountsController@index');
 Route::post('api/v1/accounts/create', 'api\v1\accountsController@create');
