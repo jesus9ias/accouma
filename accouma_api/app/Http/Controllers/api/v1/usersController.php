@@ -9,6 +9,7 @@ use Hash;
 
 use App\Helpers\Helpers;
 use App\models\usersModel as users;
+use App\models\userRolesModel as userRoles;
 
 class usersController extends Controller{
 
@@ -55,24 +56,47 @@ class usersController extends Controller{
     $last_names = Request::input('last_names', '');
     $user = Request::input('user', '');
     $email = Request::input('email', '');
+    $make_admin = Request::input('make_admin', 0);
 
     $pass = Helpers::random_txt(8);
     $hpass = Hash::make($pass);
 
-    $data = [
+    $userData = [
       'names' => $names,
       'last_names' => $last_names,
       'user' => $user,
       'email' => $email,
       'pass' => $hpass,
       'date_created' => date("Y-m-d h:i:s"),
-      'date_updated' => date("Y-m-d h:i:s"),
+      'date_updated' => Null,
       'status' => 1
     ];
-    $newId = users::createUser($data);
+    $newUserId = users::createUser($userData);
+    $userRoleData = [
+      'user_id' => $newUserId,
+      'role_slug' => 'user',
+      'date_created' => date("Y-m-d h:i:s"),
+      'date_removed' => Null,
+      'status' => 2
+    ];
+    $newUserRoleId = userRoles::createUserRole($userRoleData);
+    if($make_admin == 1){
+      $adminRoleData = [
+        'user_id' => $newUserId,
+        'role_slug' => 'admin',
+        'date_created' => date("Y-m-d h:i:s"),
+        'date_removed' => Null,
+        'status' => 2
+      ];
+      $newAdminRoleId = userRoles::createUserRole($adminRoleData);
+    }else{
+      $newAdminRoleId = 0;
+    }
     return Response::json([
       'result' => [
-        'newId' => $newId
+        'newUserId' => $newUserId,
+        'newUserRoleId' => $newUserRoleId,
+        'newAdminRoleId' => $newAdminRoleId
       ],
       'msg' => 'success'
     ], 200);
