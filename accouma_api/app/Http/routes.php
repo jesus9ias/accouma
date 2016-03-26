@@ -53,6 +53,9 @@ Route::post('api/v1/concepts/create', 'api\v1\conceptsController@create');
 Route::get('api/v1/concepts/{id}', 'api\v1\conceptsController@edit');
 Route::put('api/v1/concepts/{id}', 'api\v1\conceptsController@update');
 
+Route::put('api/v1/user_roles/{user_id}/{role_slug}', 'api\v1\userRolesController@asign');
+Route::delete('api/v1/user_roles/{user_id}/{role_slug}', 'api\v1\userRolesController@remove');
+
 Route::group(['middleware' => ['web']], function () {
     //
 });
