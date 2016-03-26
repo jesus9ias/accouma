@@ -13,6 +13,11 @@ use App\models\userRolesModel as userRoles;
 
 class usersController extends Controller{
 
+  public function __construct(){
+		$this->middleware('isLogued');
+		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
+	}
+
   public function index(){
     $users = users::getUsers();
     return Response::json([
