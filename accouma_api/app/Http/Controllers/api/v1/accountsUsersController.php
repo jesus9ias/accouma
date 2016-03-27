@@ -10,6 +10,7 @@ use App\Helpers\Helpers;
 use App\models\accountsUsersModel as accountsUsers;
 
 class accountsUsersController extends Controller{
+
   public function index(){
     $accounts = accountsUsers::getAccountUsers();
     return Response::json([
@@ -78,19 +79,16 @@ class accountsUsersController extends Controller{
     ], 200);
   }
 
-  public function createAccountUser($account){
-    $names = Request::input('names', '');
-    $description = Request::input('description', '');
-    $user_id = Request::input('user_id', '');
-    $date_created = date("Y-m-d H:i:s");
-    $status = 2;
+  public function createAccountUser($account_id){
+    $user_id = Request::input('user_id', 0);
+    $is_admin = Request::input('is_admin', 0);
 
     $data = [
-      'name' => $name,
-      'description' => $description,
+      'account_id' => $account_id,
       'user_id' => $user_id,
-      'date_created' => $date_created,
-      'status' => $status
+      'date_added' => date("Y-m-d H:i:s"),
+      'is_admin' => $is_admin,
+      'status' => 2
     ];
     $newId = accountsUsers::createAccountUser($data);
     return Response::json([
@@ -100,8 +98,6 @@ class accountsUsersController extends Controller{
       'msg' => 'success'
     ], 200);
   }
-
-
 
   public function recoveAccountUser($account,$id){
     accountsUsers::activateAccountUser($id);
@@ -118,4 +114,5 @@ class accountsUsersController extends Controller{
       'msg' => 'success'
     ], 200);
   }
+
 }
