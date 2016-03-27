@@ -47,6 +47,10 @@ Route::get('api/v1/accounts/{id}', 'api\v1\accountsController@edit');
 Route::put('api/v1/accounts/{id}', 'api\v1\accountsController@update');
 Route::delete('api/v1/accounts/{id}', 'api\v1\accountsController@disable');
 Route::patch('api/v1/accounts/{id}', 'api\v1\accountsController@activate');
+Route::patch('api/v1/accounts/{account_id}/reasign', 'api\v1\accountsController@reasignAccountOwner');
+Route::get('api/v1/accounts/{account_id}/get_users', 'api\v1\accountsController@getUsers');
+
+Route::post('api/v1/accountsUsers/{id}', 'api\v1\accountsUsersController@createAccountUser');
 
 Route::get('api/v1/concepts', 'api\v1\conceptsController@index');
 Route::post('api/v1/concepts/create', 'api\v1\conceptsController@create');
