@@ -8,7 +8,7 @@ class accountsUsersModel extends Model{
   protected $table = 'accounts_users';
   public $timestamps = false;
 
-  public function scopeGetAccountUsers($query){
+  public function scopeGetAccountsUsers($query){
     return $query->get();
   }
 

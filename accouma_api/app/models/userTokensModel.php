@@ -4,11 +4,11 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class usersTokensModel extends Model{
+class userTokensModel extends Model{
   protected $table = 'users_tokens';
   public $timestamps = false;
 
-  public function scopeGetUsersTokens($query, $fields = [], $filters = []){
+  public function scopeGetUserTokens($query, $fields = [], $filters = []){
     return $query->get();
   }
 

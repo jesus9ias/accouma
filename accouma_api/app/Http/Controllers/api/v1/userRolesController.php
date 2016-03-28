@@ -8,7 +8,7 @@ use Response;
 use Hash;
 
 use App\Helpers\Helpers;
-use App\models\userRolesModel as userRoles;
+use App\models\userRolesModel as UserRoles;
 
 class userRolesController extends Controller{
 
@@ -25,7 +25,7 @@ class userRolesController extends Controller{
       'date_removed' => Null,
       'status' => 2
     ];
-    $newUserRoleId = userRoles::createUserRole($userRoleData);
+    $newUserRoleId = UserRoles::createUserRole($userRoleData);
     return Response::json([
       'result' => [
         'newUserRoleId' => $newUserRoleId
@@ -35,13 +35,13 @@ class userRolesController extends Controller{
   }
 
   public function remove($user_id, $role_slug){
-    $roles = userRoles::where('user_id', '=', $user_id)->where('role_slug', '=', $role_slug)->where('status', '=', 2)->get();
+    $roles = UserRoles::where('user_id', '=', $user_id)->where('role_slug', '=', $role_slug)->where('status', '=', 2)->get();
     $role_id = $roles[0]->id;
     $userRoleData = [
       'date_removed' => date("Y-m-d h:i:s"),
       'status' => 3
     ];
-    userRoles::updateUserRole($role_id, $userRoleData);
+    UserRoles::updateUserRole($role_id, $userRoleData);
     return Response::json([
       'result' => [],
       'msg' => 'Success'

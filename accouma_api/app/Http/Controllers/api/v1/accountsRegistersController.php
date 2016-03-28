@@ -7,12 +7,12 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\accountsRegistersModel as accountsRegisters;
+use App\models\accountRegistersModel as Registers;
 
 class accountsRegistersController extends Controller{
 
   public function index(){
-    $accounts = accountsRegisters::getAccountRegisters();
+    $accounts = Registers::getAccountRegisters();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -22,7 +22,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function indexAccount($account){
-    $accounts = accountsRegisters::getAccountRegisters();
+    $accounts = Registers::getAccountRegisters();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -32,7 +32,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function accountAccomulated($account){
-    $accounts = accountsRegisters::getAccountRegisters();
+    $accounts = Registers::getAccountRegisters();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -42,7 +42,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function editAccountRegister($account,$id){
-    $account = accountsRegisters::getAccountRegister($id);
+    $account = Registers::getAccountRegister($id);
     if(count($account) == 1){
       return Response::json([
         'result' => [
@@ -72,7 +72,7 @@ class accountsRegistersController extends Controller{
       'date_created' => $date_created,
       'status' => $status
     ];
-    accountsRegisters::updateAccountRegister($id, $data);
+    Registers::updateAccountRegister($id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -93,7 +93,7 @@ class accountsRegistersController extends Controller{
       'date_created' => $date_created,
       'status' => $status
     ];
-    $newId = accountsRegisters::createAccountRegister($data);
+    $newId = Registers::createAccountRegister($data);
     return Response::json([
       'result' => [
         'newId' => $newId
@@ -105,7 +105,7 @@ class accountsRegistersController extends Controller{
 
 
   public function recoveAccountRegister($account,$id){
-    accountsRegisters::activateAccountRegister($id);
+    Registers::activateAccountRegister($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -113,7 +113,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function deleteAccountRegister($account,$id){
-    accountsRegisters::disableAccountRegister($id);
+    Registers::disableAccountRegister($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'

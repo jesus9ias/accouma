@@ -7,7 +7,7 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\conceptsModel as concepts;
+use App\models\userConceptsModel as Concepts;
 
 class conceptsController extends Controller{
 
@@ -17,7 +17,7 @@ class conceptsController extends Controller{
   }
 
   public function index(){
-    $concepts = concepts::getConcepts();
+    $concepts = Concepts::getConcepts();
     return Response::json([
       'result' => [
         'rows' => $concepts
@@ -27,7 +27,7 @@ class conceptsController extends Controller{
   }
 
   public function edit($id){
-    $concept = concepts::getConcept($id);
+    $concept = Concepts::getConcept($id);
     if(count($concept) == 1){
       return Response::json([
         'result' => [
@@ -49,7 +49,7 @@ class conceptsController extends Controller{
     $data = [
       'concept' => $concept,
     ];
-    concepts::updateConcept($id, $data);
+    Concepts::updateConcept($id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -65,7 +65,7 @@ class conceptsController extends Controller{
       'concept' => $concept,
       'date_added' => date("Y-m-d H:i:s"),
     ];
-    $newId = concepts::createConcept($data);
+    $newId = Concepts::createConcept($data);
     return Response::json([
       'result' => [
         'newId' => $newId

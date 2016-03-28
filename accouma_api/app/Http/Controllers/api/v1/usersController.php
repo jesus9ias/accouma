@@ -8,18 +8,24 @@ use Response;
 use Hash;
 
 use App\Helpers\Helpers;
-use App\models\usersModel as users;
-use App\models\userRolesModel as userRoles;
+use App\models\usersModel as Users;
+use App\models\userRolesModel as UserRoles;
 
 class usersController extends Controller{
 
   public function __construct(){
 		$this->middleware('isLogued');
 		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
+		//$this->middleware('pagination', ['only' => ['index']]);
 	}
 
   public function index(){
-    $users = users::getUsers();
+    $page = Request::get('page', 0);
+    $skip = Request::get('skip', 0);
+    $take = Request::get('take', 0);
+    $order = Request::get('order', '');
+
+    $users = Users::getUsers();
     return Response::json([
       'result' => [
         'rows' => $users
@@ -29,7 +35,7 @@ class usersController extends Controller{
   }
 
   public function edit($id){
-    $user = users::getUser($id);
+    $user = Users::getUser($id);
     if(count($user) == 1){
       return Response::json([
         'result' => [
@@ -49,7 +55,7 @@ class usersController extends Controller{
     $names = Request::get('names', '');
     $last_names = Request::get('last_names', '');
     $data = ['names' => $names, 'last_names' => $last_names];
-    users::updateUser($id, $data);
+    Users::updateUser($id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -76,7 +82,7 @@ class usersController extends Controller{
       'date_updated' => Null,
       'status' => 1
     ];
-    $newUserId = users::createUser($userData);
+    $newUserId = Users::createUser($userData);
     $userRoleData = [
       'user_id' => $newUserId,
       'role_slug' => 'user',
@@ -84,7 +90,7 @@ class usersController extends Controller{
       'date_removed' => Null,
       'status' => 2
     ];
-    $newUserRoleId = userRoles::createUserRole($userRoleData);
+    $newUserRoleId = UserRoles::createUserRole($userRoleData);
     if($make_admin == 1){
       $adminRoleData = [
         'user_id' => $newUserId,
@@ -93,7 +99,7 @@ class usersController extends Controller{
         'date_removed' => Null,
         'status' => 2
       ];
-      $newAdminRoleId = userRoles::createUserRole($adminRoleData);
+      $newAdminRoleId = UserRoles::createUserRole($adminRoleData);
     }else{
       $newAdminRoleId = 0;
     }
@@ -110,7 +116,7 @@ class usersController extends Controller{
   public function updatePass($id){
     $pass = Request::get('pass', '');
     $newPass = Hash::make($pass);
-    users::updateUser($id, ['pass' => $newPass]);
+    Users::updateUser($id, ['pass' => $newPass]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -118,7 +124,7 @@ class usersController extends Controller{
   }
 
   public function activate($id){
-    users::updateUser($id, ['status' => 2]);
+    Users::updateUser($id, ['status' => 2]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -126,7 +132,7 @@ class usersController extends Controller{
   }
 
   public function disable($id){
-    users::updateUser($id, ['status' => 3]);
+    Users::updateUser($id, ['status' => 3]);
     return Response::json([
       'result' => [],
       'msg' => 'success'

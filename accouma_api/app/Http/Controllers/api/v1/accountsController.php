@@ -7,8 +7,8 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\accountsModel as accounts;
-use App\models\accountsUsersModel as accountsUsers;
+use App\models\accountsModel as Accounts;
+use App\models\accountsUsersModel as AccountsUsers;
 
 class accountsController extends Controller{
 
@@ -17,7 +17,7 @@ class accountsController extends Controller{
 	}
 
   public function index(){
-    $accounts = accounts::getAccounts();
+    $accounts = Accounts::getAccounts();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -27,7 +27,7 @@ class accountsController extends Controller{
   }
 
   public function edit($id){
-    $account = accounts::getAccount($id);
+    $account = Accounts::getAccount($id);
     if(count($account) == 1){
       return Response::json([
         'result' => [
@@ -51,7 +51,7 @@ class accountsController extends Controller{
       'name' => $name,
       'description' => $description
     ];
-    accounts::updateAccount($id, $data);
+    Accounts::updateAccount($id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -72,7 +72,7 @@ class accountsController extends Controller{
       'date_created' => $date_created,
       'status' => $status
     ];
-    $newAccountId = accounts::createAccount($accountData);
+    $newAccountId = Accounts::createAccount($accountData);
     $accountUserData = [
       'account_id' => $newAccountId,
       'user_id' => $user_id,
@@ -80,7 +80,7 @@ class accountsController extends Controller{
       'is_admin' => 1,
       'status' => $status
     ];
-    $newAccountUserId = accountsUsers::createAccountUser($accountUserData);
+    $newAccountUserId = AccountsUsers::createAccountUser($accountUserData);
     return Response::json([
       'result' => [
         'newAccountId' => $newAccountId,
@@ -91,7 +91,7 @@ class accountsController extends Controller{
   }
 
   public function activate($id){
-    accounts::updateAccount($id, ['status' => 2]);
+    Accounts::updateAccount($id, ['status' => 2]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -99,7 +99,7 @@ class accountsController extends Controller{
   }
 
   public function disable($id){
-    accounts::updateAccount($id, ['status' => 3]);
+    Accounts::updateAccount($id, ['status' => 3]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -109,7 +109,7 @@ class accountsController extends Controller{
   public function reasignAccountOwner($account_id){
     $user_id = Request::get('user_id', 0);
     $new_user_id = Request::get('new_user_id', 0);
-    accounts::where('id', '=', $account_id)
+    Accounts::where('id', '=', $account_id)
       ->where('user_id', '=', $user_id)
       ->where('status', '=', 2)
       ->update(['user_id' => $new_user_id]);
@@ -122,7 +122,7 @@ class accountsController extends Controller{
   public function getUsers($account_id){
     $status = Request::get('status', 0);
 
-    $users = accountsUsers::where('account_id', '=', $account_id)
+    $users = AccountsUsers::where('account_id', '=', $account_id)
       ->join('users', 'users.id', '=', 'accounts_users.user_id')
       ->get();
     return Response::json([
