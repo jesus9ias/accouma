@@ -4,11 +4,11 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class userRolesModel extends Model{
+class usersRolesModel extends Model{
   protected $table = 'user_roles';
   public $timestamps = false;
 
-  public function scopeGetUserRoles($query){
+  public function scopeGetUsersRoles($query){
     return $query->get();
   }
 

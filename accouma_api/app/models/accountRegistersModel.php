@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class accountsRegistersModel extends Model{
-  protected $table = 'accounts_registers';
+class accountRegistersModel extends Model{
+  protected $table = 'account_registers';
   public $timestamps = false;
 
   public function scopeGetAccountRegisters($query){

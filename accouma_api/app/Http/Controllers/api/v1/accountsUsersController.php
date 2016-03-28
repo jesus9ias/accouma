@@ -7,12 +7,12 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\accountsUsersModel as accountsUsers;
+use App\models\accountsUsersModel as AccountsUsers;
 
 class accountsUsersController extends Controller{
 
   public function index(){
-    $accounts = accountsUsers::getAccountUsers();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -22,7 +22,7 @@ class accountsUsersController extends Controller{
   }
 
   public function indexAccount($account){
-    $accounts = accountsUsers::getAccountUsers();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -32,7 +32,7 @@ class accountsUsersController extends Controller{
   }
 
   public function accountAccomulated($account){
-    $accounts = accountsUsers::getAccountUsers();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -42,7 +42,7 @@ class accountsUsersController extends Controller{
   }
 
   public function editAccountUser($account,$id){
-    $account = accountsUsers::getAccountUser($id);
+    $account = AccountsUsers::getAccountUser($id);
     if(count($account) == 1){
       return Response::json([
         'result' => [
@@ -72,7 +72,7 @@ class accountsUsersController extends Controller{
       'date_created' => $date_created,
       'status' => $status
     ];
-    accountsUsers::updateAccountUser($id, $data);
+    AccountsUsers::updateAccountUser($id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -90,7 +90,7 @@ class accountsUsersController extends Controller{
       'is_admin' => $is_admin,
       'status' => 2
     ];
-    $newId = accountsUsers::createAccountUser($data);
+    $newId = AccountsUsers::createAccountUser($data);
     return Response::json([
       'result' => [
         'newId' => $newId
@@ -100,7 +100,7 @@ class accountsUsersController extends Controller{
   }
 
   public function recoveAccountUser($account,$id){
-    accountsUsers::activateAccountUser($id);
+    AccountsUsers::activateAccountUser($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -108,7 +108,7 @@ class accountsUsersController extends Controller{
   }
 
   public function deleteAccountUser($account,$id){
-    accountsUsers::disableAccountUser($id);
+    AccountsUsers::disableAccountUser($id);
     return Response::json([
       'result' => [],
       'msg' => 'success'

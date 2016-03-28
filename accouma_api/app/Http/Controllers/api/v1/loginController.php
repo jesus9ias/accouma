@@ -8,15 +8,15 @@ use Response;
 use Hash;
 
 use App\Helpers\Helpers;
-use App\models\usersModel as users;
-use App\models\usersTokensModel as usersTokens;
+use App\models\usersModel as Users;
+use App\models\userTokensModel as Tokens;
 
 class loginController extends Controller{
     public function login(){
       $usr = Request::input('usr', '');
       $pass = Request::input('pass', '');
 
-      $user = users::where('user', '=', $usr)->get();
+      $user = Users::where('user', '=', $usr)->get();
       if(count($user) == 1){
         $apass = $user[0]->pass;
         $id= $user[0]->id;
@@ -24,7 +24,7 @@ class loginController extends Controller{
         if(Hash::check($pass, $apass)){
 
           $token = Helpers::random_txt(64);
-          users::updateUser($id, ['token' => $token]);
+          Users::updateUser($id, ['token' => $token]);
           return Response::json([
             'result' => [
               'id' => $id,
@@ -50,7 +50,7 @@ class loginController extends Controller{
       $id = Request::get('id', 0);
       $token = Request::get('token', '');
 
-      $user = users::where('id', '=', $id)
+      $user = Users::where('id', '=', $id)
         ->where('token', '=', $token)
         ->get();
       if(count($user) == 1){
@@ -74,11 +74,11 @@ class loginController extends Controller{
       $id = Request::get('id', 0);
       $token = Request::get('token', '');
 
-      $user = users::where('id', '=', $id)
+      $user = Users::where('id', '=', $id)
         ->where('token', '=', $token)
         ->get();
       if(count($user) == 1){
-        users::updateUser($id, ['token' => $token]);
+        Users::updateUser($id, ['token' => $token]);
         return Response::json([
           'result' => [],
           'msg' => 'Success',

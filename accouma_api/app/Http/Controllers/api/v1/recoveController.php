@@ -7,8 +7,8 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\usersModel as users;
-use App\models\usersTokensModel as usersTokens;
+use App\models\usersModel as Users;
+use App\models\usersTokensModel as Tokens;
 
 class recoveController extends Controller{
 
@@ -22,7 +22,7 @@ class recoveController extends Controller{
       'date_used' => Null,
       'status' => 1
     ];
-    usersTokens::createUserToken($data);
+    Tokens::createUserToken($data);
 
     return Response::json([
       'result' => [],
@@ -37,7 +37,7 @@ class recoveController extends Controller{
       'date_used' => date("Y-m-d H:i:s"),
       'status' => 2
     ];
-    usersTokens::updateUserToken($id, $data);
+    Tokens::updateUserToken($id, $data);
 
     return Response::json([
       'result' => [],

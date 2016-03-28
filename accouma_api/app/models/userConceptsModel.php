@@ -4,23 +4,23 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class conceptsModel extends Model{
+class userConceptsModel extends Model{
   protected $table = 'concepts';
   public $timestamps = false;
 
-  public function scopeGetConcepts($query){
+  public function scopeGetUserConcepts($query){
     return $query->get();
   }
 
-  public function scopeGetConcept($query, $id){
+  public function scopeGetUserConcept($query, $id){
     return $query->where('id', '=', $id)->get();
   }
 
-  public function scopeCreateConcept($query, $data = []){
+  public function scopeCreateUserConcept($query, $data = []){
     return $query->insertGetId($data);
   }
 
-  public function scopeUpdateConcept($query, $id, $data = []){
+  public function scopeUpdateUserConcept($query, $id, $data = []){
     return $query->where('id', '=', $id)->update($data);
   }
 }
