@@ -25,13 +25,18 @@ class usersController extends Controller{
     $skip = Request::get('skip', 0);
     $take = Request::get('take', 0);
     $order = Request::get('order', '');
+    $url = Request::get('url', '');
 
     $users = Users::getUsers();
     return Response::json([
       'result' => [
         'rows' => $users
       ],
-      'msg' => 'Success'
+      'msg' => 'Success',
+      'url' => $url,
+      'tot_pages' => Request::get('tot_pages', ''),
+      'skip' => Request::get('skip', ''),
+      'take' => Request::get('take', '')
     ], 200);
   }
 
