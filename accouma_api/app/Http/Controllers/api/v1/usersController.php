@@ -17,6 +17,7 @@ class usersController extends Controller{
 		$this->middleware('isLogued');
 		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
 		$this->middleware('pagination', ['only' => ['index']]);
+		$this->middleware('logger');
 	}
 
   public function index(){
