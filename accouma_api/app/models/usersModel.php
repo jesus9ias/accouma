@@ -8,8 +8,12 @@ class usersModel extends Model{
   protected $table = 'users';
   public $timestamps = false;
 
-  public function scopeGetUsers($query, $fields = [], $filters = []){
-    return $query->get();
+  public function scopeGetUsers($query, $params = []){
+    $q = $query;
+    if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
+      $q = $q->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+    }
+    return $q->get();
   }
 
   public function scopeGetUser($query, $id, $fields = []){
