@@ -21,22 +21,17 @@ class usersController extends Controller{
 	}
 
   public function index(){
-    $page = Request::get('page', 0);
     $skip = Request::get('skip', 0);
     $take = Request::get('take', 0);
     $order = Request::get('order', '');
-    $url = Request::get('url', '');
 
-    $users = Users::getUsers();
+    $users = Users::getUsers(['paginate' => ['skip' => $skip, 'take' => $take] ]);
     return Response::json([
       'result' => [
         'rows' => $users
       ],
       'msg' => 'Success',
-      'url' => $url,
-      'tot_pages' => Request::get('tot_pages', ''),
-      'skip' => Request::get('skip', ''),
-      'take' => Request::get('take', '')
+      'tot_pages' => Request::get('tot_pages', '')
     ], 200);
   }
 
