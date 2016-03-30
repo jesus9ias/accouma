@@ -8,8 +8,12 @@ class accountsModel extends Model{
   protected $table = 'accounts';
   public $timestamps = false;
 
-  public function scopeGetAccounts($query, $fields = [], $filters = []){
-    return $query->get();
+  public function scopeGetAccounts($query, $params = []){
+    $q = $query;
+    if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
+      $q = $q->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+    }
+    return $q->get();
   }
 
   public function scopeGetAccount($query, $id, $fields = []){

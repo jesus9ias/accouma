@@ -17,6 +17,9 @@ class paginationMiddleware{
 			if($segment == 'users'){
 				$q = DB::table('users')->count();
 			}
+			if($segment == 'accounts'){
+				$q = DB::table('accounts')->count();
+			}
 			$tot_pages = ($q - ($q % $per_page)) / $per_page;
 			$tot_pages = ($q % $per_page > 0)? ++$tot_pages : $tot_pages;
 			$tot_pages = ($q <= $per_page)? 1 : $tot_pages;

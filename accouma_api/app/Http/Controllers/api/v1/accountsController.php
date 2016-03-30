@@ -14,15 +14,21 @@ class accountsController extends Controller{
 
   public function __construct(){
 		$this->middleware('isLogued');
+    $this->middleware('pagination', ['only' => ['index']]);
 	}
 
   public function index(){
-    $accounts = Accounts::getAccounts();
+    $skip = Request::get('skip', 0);
+    $take = Request::get('take', 0);
+    $order = Request::get('order', '');
+
+    $accounts = Accounts::getAccounts(['paginate' => ['skip' => $skip, 'take' => $take] ]);
     return Response::json([
       'result' => [
         'rows' => $accounts
       ],
-      'msg' => 'Success'
+      'msg' => 'Success',
+      'tot_pages' => Request::get('tot_pages', '')
     ], 200);
   }
 
