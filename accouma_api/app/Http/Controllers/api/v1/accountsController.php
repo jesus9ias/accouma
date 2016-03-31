@@ -32,8 +32,8 @@ class accountsController extends Controller{
     ], 200);
   }
 
-  public function edit($id){
-    $account = Accounts::getAccount($id);
+  public function edit($account_id){
+    $account = Accounts::getAccount($account_id);
     if(count($account) == 1){
       return Response::json([
         'result' => [
@@ -49,7 +49,7 @@ class accountsController extends Controller{
     }
   }
 
-  public function update($id){
+  public function update($account_id){
     $name = Request::get('name', '');
     $description = Request::get('description', '');
 
@@ -57,7 +57,7 @@ class accountsController extends Controller{
       'name' => $name,
       'description' => $description
     ];
-    Accounts::updateAccount($id, $data);
+    Accounts::updateAccount($account_id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -96,16 +96,16 @@ class accountsController extends Controller{
     ], 200);
   }
 
-  public function activate($id){
-    Accounts::updateAccount($id, ['status' => 2]);
+  public function activate($account_id){
+    Accounts::updateAccount($account_id, ['status' => 2]);
     return Response::json([
       'result' => [],
       'msg' => 'success'
     ], 200);
   }
 
-  public function disable($id){
-    Accounts::updateAccount($id, ['status' => 3]);
+  public function disable($account_id){
+    Accounts::updateAccount($account_id, ['status' => 3]);
     return Response::json([
       'result' => [],
       'msg' => 'success'

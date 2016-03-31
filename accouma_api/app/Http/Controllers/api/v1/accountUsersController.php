@@ -7,12 +7,12 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\accountRegistersModel as Registers;
+use App\models\accountsUsersModel as AccountsUsers;
 
-class accountsRegistersController extends Controller{
+class accountsUsersController extends Controller{
 
   public function index(){
-    $accounts = Registers::getAccountRegisters();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -22,7 +22,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function indexAccount($account){
-    $accounts = Registers::getAccountRegisters();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -32,7 +32,7 @@ class accountsRegistersController extends Controller{
   }
 
   public function accountAccomulated($account){
-    $accounts = Registers::getAccountRegisters();
+    $accounts = AccountsUsers::getAccountUsers();
     return Response::json([
       'result' => [
         'rows' => $accounts
@@ -41,8 +41,8 @@ class accountsRegistersController extends Controller{
     ], 200);
   }
 
-  public function editAccountRegister($account,$id){
-    $account = Registers::getAccountRegister($id);
+  public function editAccountUser($account,$user_id){
+    $account = AccountsUsers::getAccountUser($user_id);
     if(count($account) == 1){
       return Response::json([
         'result' => [
@@ -58,7 +58,7 @@ class accountsRegistersController extends Controller{
     }
   }
 
-  public function updateAccountRegister($account,$id){
+  public function updateAccountUser($account,$user_id){
     $names = Request::input('names', '');
     $description = Request::input('description', '');
     $user_id = Request::input('user_id', '');
@@ -72,28 +72,24 @@ class accountsRegistersController extends Controller{
       'date_created' => $date_created,
       'status' => $status
     ];
-    Registers::updateAccountRegister($id, $data);
+    AccountsUsers::updateAccountUser($user_id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
     ], 200);
   }
 
-  public function createAccountRegister($account){
-    $names = Request::input('names', '');
-    $description = Request::input('description', '');
-    $user_id = Request::input('user_id', '');
-    $date_created = date("Y-m-d H:i:s");
-    $status = 2;
+  public function createAccountUser($account_id,$user_id){
+    $is_admin = Request::input('is_admin', 0);
 
     $data = [
-      'name' => $name,
-      'description' => $description,
+      'account_id' => $account_id,
       'user_id' => $user_id,
-      'date_created' => $date_created,
-      'status' => $status
+      'date_added' => date("Y-m-d H:i:s"),
+      'is_admin' => $is_admin,
+      'status' => 2
     ];
-    $newId = Registers::createAccountRegister($data);
+    $newId = AccountsUsers::createAccountUser($data);
     return Response::json([
       'result' => [
         'newId' => $newId
@@ -102,21 +98,20 @@ class accountsRegistersController extends Controller{
     ], 200);
   }
 
-
-
-  public function recoveAccountRegister($account,$id){
-    Registers::activateAccountRegister($id);
+  public function activateAccountUser($account,$user_id){
+    AccountsUsers::activateAccountUser($user_id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
     ], 200);
   }
 
-  public function deleteAccountRegister($account,$id){
-    Registers::disableAccountRegister($id);
+  public function deleteAccountUser($account,$user_id){
+    AccountsUsers::disableAccountUser($user_id);
     return Response::json([
       'result' => [],
       'msg' => 'success'
     ], 200);
   }
+
 }

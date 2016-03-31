@@ -5,7 +5,7 @@ namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 class usersRolesModel extends Model{
-  protected $table = 'user_roles';
+  protected $table = 'users_roles';
   public $timestamps = false;
 
   public function scopeGetUsersRoles($query){

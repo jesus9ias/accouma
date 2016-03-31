@@ -26,8 +26,8 @@ class conceptsController extends Controller{
     ], 200);
   }
 
-  public function edit($id){
-    $concept = Concepts::getConcept($id);
+  public function edit($concept_id){
+    $concept = Concepts::getConcept($concept_id);
     if(count($concept) == 1){
       return Response::json([
         'result' => [
@@ -43,13 +43,13 @@ class conceptsController extends Controller{
     }
   }
 
-  public function update($id){
+  public function update($concept_id){
     $concept = Request::get('concept', '');
 
     $data = [
       'concept' => $concept,
     ];
-    Concepts::updateConcept($id, $data);
+    Concepts::updateConcept($concept_id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -57,11 +57,11 @@ class conceptsController extends Controller{
   }
 
   public function create(){
-    $id = Request::get('id', 0);
+    $user_id = Request::get('id', 0);
     $concept = Request::input('concept', '');
 
     $data = [
-      'user_id' => $id,
+      'user_id' => $user_id,
       'concept' => $concept,
       'date_added' => date("Y-m-d H:i:s"),
     ];
