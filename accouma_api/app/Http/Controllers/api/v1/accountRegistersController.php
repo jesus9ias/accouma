@@ -11,6 +11,11 @@ use App\models\accountRegistersModel as Registers;
 
 class accountRegistersController extends Controller{
 
+  public function __construct(){
+		$this->middleware('isLogued');
+    $this->middleware('pagination', ['only' => ['index']]);
+	}
+
   public function index(){
     $accounts = Registers::getAccountRegisters();
     return Response::json([

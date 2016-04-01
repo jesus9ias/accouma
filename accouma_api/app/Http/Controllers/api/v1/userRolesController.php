@@ -13,6 +13,11 @@ use App\models\usersRolesModel as UsersRoles;
 class userRolesController extends Controller{
 
   public function __construct(){
+		$this->middleware('isLogued');
+    $this->middleware('pagination', ['only' => ['index']]);
+	}
+
+  public function __construct(){
     $this->middleware('isLogued');
     $this->middleware('isAdmin');
   }
