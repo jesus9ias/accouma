@@ -70,7 +70,3 @@ Route::get('api/v1/user_roles/', 'api\v1\userRolesController@index');
 Route::get('api/v1/user_roles/{user_id}', 'api\v1\userRolesController@get');
 Route::put('api/v1/user_roles/{user_id}/{role_slug}', 'api\v1\userRolesController@asign');
 Route::delete('api/v1/user_roles/{user_id}/{role_slug}', 'api\v1\userRolesController@remove');
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});

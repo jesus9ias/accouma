@@ -10,6 +10,11 @@ use App\Helpers\Helpers;
 use App\models\accountsUsersModel as AccountsUsers;
 
 class accountsUsersController extends Controller{
+  
+  public function __construct(){
+		$this->middleware('isLogued');
+    $this->middleware('pagination', ['only' => ['index']]);
+	}
 
   public function index(){
     $accounts = AccountsUsers::getAccountUsers();
