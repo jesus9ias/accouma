@@ -50,6 +50,15 @@ Route::patch('api/v1/accounts/{account_id}', 'api\v1\accountsController@activate
 Route::patch('api/v1/accounts/{account_id}/reasign', 'api\v1\accountsController@reasignAccountOwner');
 Route::get('api/v1/accounts/{account_id}/get_users', 'api\v1\accountsController@getUsers');
 
+Route::get('api/v1/account_registers', 'api\v1\accountRegistersController@index');
+Route::get('api/v1/account_registers/{account_id}', 'api\v1\accountRegistersController@get');
+Route::get('api/v1/account_registers/{account_id}/accountAccomulated', 'api\v1\accountRegistersController@accountAccomulated');
+Route::get('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@editAccountRegister');
+Route::put('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@updateAccountRegister');
+Route::patch('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@recoveAccountRegister');
+Route::delete('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@deleteAccountRegister');
+Route::post('api/v1/account_registers/{account_id}/create', 'api\v1\accountRegistersController@createAccountRegister');
+
 Route::post('api/v1/account_users/{account_id}/{user_id}', 'api\v1\accountUsersController@createAccountUser');
 
 Route::get('api/v1/concepts', 'api\v1\conceptsController@get');
