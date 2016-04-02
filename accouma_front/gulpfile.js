@@ -5,6 +5,7 @@ var browserify = require('browserify')
 var babelify = require('babelify')
 var source = require('vinyl-source-stream')
 var minify = require('gulp-minify-css')
+var php = require('gulp-connect-php')
 
 gulp.task('less', function() {
   gulp.src('./dev/style.less')
@@ -30,6 +31,16 @@ gulp.task('build', function() {
 gulp.task('watch', function() {
   gulp.watch('./dev/**/*.jsx', ['build'])
   gulp.watch(['./dev/**/*.less'], ['less'])
+})
+
+gulp.task('php', function() {
+
+    // start the php server
+    // make sure we use the public directory since this is Laravel
+    php.server({
+        base: '../accouma_api'
+    });
+
 })
 
 gulp.task('default', ['watch'])
