@@ -9,8 +9,8 @@ class Login extends React.Component {
         <Card className="login-form">
           <CardHeader title="Accouma - Login" />
           <CardMedia>
-            <TextField className="login-field" style={InputP()} hintText="User" />
-            <TextField className="login-field" style={InputP()} hintText="Password" />
+            <TextField className="login-field" style={InputP(1,2)} hintText="User" />
+            <TextField className="login-field" style={InputP(1,2)} hintText="Password" />
 
             <RaisedButton label="Login" fullWidth={false} />
           </CardMedia>

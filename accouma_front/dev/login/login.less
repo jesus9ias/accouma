@@ -1,13 +1,16 @@
 .login{
   flex: 1;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
+  .flexColumn;
   justify-content: center;
-  background: url('../images/main/background.jpg') no-repeat center;
+  background: url('../images/main/background.jpg') fixed center no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
   .login-form{
-    width: 50%;
-    margin: 0px 25%;
+    max-width: 300px;
+    margin: 0px auto;
     .login-field{
       margin-top: 10px;
       margin-bottom: 10px;
