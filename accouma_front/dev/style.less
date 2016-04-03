@@ -5,14 +5,25 @@ body{
   margin: 0px;
 }
 
-#general{
-  min-height: 100%;
-  display: block;
+.flexRow{
   display: flex;
-  flex-direction: column;
-  #menus{
-    background: blue;
-  }
+  flex-direction: row;
 }
 
+.flexColumn{
+  display: flex;
+  flex-direction: column;;
+}
+
+.flex(@f: 1){
+  flex: @f;
+}
+
+.rounded(@r: 5px){
+  -webkit-border-radius: @r;
+  -moz-border-radius: @r;
+  border-radius: @r;
+}
+
+@import "common/general.less";
 @import "login/login.less";
