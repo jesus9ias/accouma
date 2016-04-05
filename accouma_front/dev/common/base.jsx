@@ -1,5 +1,5 @@
 import React from 'react'
-import {AppBar, RaisedButton} from 'material-ui';
+import {AppBar, IconButton, RaisedButton, FlatButton, NavigationClose} from 'material-ui';
 import SideNav from '../common/sideNav'
 
 class Base extends React.Component {
@@ -10,8 +10,7 @@ class Base extends React.Component {
   }
 
   toggleSideNav(){
-    alert('ok');
-    //this.setState({isSideNavOpen: !this.state.isSideNavOpen});
+    this.setState({isSideNavOpen: !this.state.isSideNavOpen});
   }
 
   handleTouchTap(){
@@ -21,7 +20,10 @@ class Base extends React.Component {
   render() {
     return (
       <section className={this.props.section}>
-        <AppBar title="Accouma" onLeftIconButtonTouchTap={this.toggleSideNav.bind(this)} onTitleTouchTap={this.handleTouchTap} iconClassNameRight="muidocs-icon-navigation-expand-more"></AppBar>
+        <AppBar title="Accouma" iconElementRight={<FlatButton onClick={this.toggleSideNav.bind(this)} label="SideNav" />} >
+
+        </AppBar>
+        <IconButton iconClassName="muidocs-icon-navigation-expand-more" onClick={this.toggleSideNav.bind(this)} />
         <SideNav isSideNavOpen={this.state.isSideNavOpen} toggleSideNav={this.toggleSideNav.bind(this)} />
         <section className="content">
           {this.props.children}
