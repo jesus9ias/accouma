@@ -14,13 +14,14 @@ class Base extends React.Component {
   }
 
   handleTouchTap(){
-    alert('yes');
+    alert('onTouchTap triggered on the title component');
   }
 
   render() {
     return (
       <section className={this.props.section}>
-        <AppBar title="Accouma" iconElementRight={<FlatButton onClick={this.toggleSideNav.bind(this)} label="SideNav" />} >
+        <AppBar title="Accouma"
+          iconElementRight={<FlatButton onClick={this.toggleSideNav.bind(this)} label="SideNav" />} >
 
         </AppBar>
         <IconButton iconClassName="muidocs-icon-navigation-expand-more" onClick={this.toggleSideNav.bind(this)} />
