@@ -1,9 +1,9 @@
 {
   "private": true,
   "dependencies": {
+    "belle": "^2.0.7",
     "express": "^4.13.4",
     "immutable": "^3.7.6",
-    "material-ui": "^0.15.0-alpha.2",
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
