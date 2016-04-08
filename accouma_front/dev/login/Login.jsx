@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, Card, CardHeader, CardMedia, TextField} from 'material-ui';
+import {Card, TextInput, Button} from 'Belle'
 import {InputP} from '../common/reactMaterialProperties'
 
 class Login extends React.Component {
@@ -7,13 +7,10 @@ class Login extends React.Component {
     return (
       <section className="login">
         <Card className="login-form">
-          <CardHeader title="Accouma - Login" />
-          <CardMedia>
-            <TextField className="login-field" style={InputP(1,2)} hintText="User" />
-            <TextField className="login-field" style={InputP(1,2)} hintText="Password" />
-
-            <RaisedButton label="Login" fullWidth={false} />
-          </CardMedia>
+          <h2>Accouma - Login</h2>
+          <TextInput className="login-field" placeholder="User" />
+          <TextInput className="login-field" placeholder="Password" />
+          <Button primary>Login</Button>
         </Card>
       </section>
     )
