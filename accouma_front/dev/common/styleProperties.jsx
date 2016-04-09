@@ -4,8 +4,15 @@ function InputP(w = 1, m = 1){
   return {
     width: wh + '%',
     margin: '10px ' + m + '%',
-    minWidth: '0px'
+    minWidth: '0px',
+    padding: '10px'
   }
 }
 
-export {InputP}
+function CardP(){
+  return {
+    padding: '10px',
+  }
+}
+
+export {InputP, CardP}
