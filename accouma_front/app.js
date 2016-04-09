@@ -3,10 +3,19 @@ var app = express();
 
 var html_dir = 'views/';
 
+var options = {
+  root: __dirname + '/views/',
+  dotfiles: 'deny',
+  headers: {
+    'x-timestamp': Date.now(),
+    'x-sent': true
+  }
+};
+
 app.use(express.static('build'));
 
 app.get('*', function (req, res) {
-  res.sendfile(html_dir + 'index.html');
+  res.sendFile('index.html', options);
 });
 
 app.listen(3000, function () {
