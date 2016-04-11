@@ -15,6 +15,7 @@
   "devDependencies": {
     "babelify": "^6",
     "browserify": "^13.0.0",
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-connect-php": "0.0.7",
     "gulp-less": "^3.0.5",
