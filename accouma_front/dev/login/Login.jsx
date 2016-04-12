@@ -1,7 +1,8 @@
 import React from 'react'
 import {Card, TextInput, Button} from 'Belle'
 import {InputP, CardP} from '../common/styleProperties'
-import $ from 'jquery'
+import {ajax} from '../common/ajax'
+//import $ from 'jquery'
 
 class Login extends React.Component {
 
@@ -11,19 +12,11 @@ class Login extends React.Component {
   }
 
   makeLogin(){
-    $.ajax({
-      url: 'http://localhost:8000/api/v1/login',
-      dataType: 'json',
-      method: 'POST',
-      cache: false,
-      data: {'usr': this.state.valueUser, 'pass': this.state.valuePass},
-      success: function(data) {
-        console.log(data);
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(xhr);
-      }.bind(this)
-    });
+    ajax('http://localhost:8000/api/v1/login', 'POST', {'usr': this.state.valueUser, 'pass': this.state.valuePass}, function(data) {
+      console.log(data);
+    }.bind(this), function(xhr, status, err){
+      console.error(xhr);
+    }.bind(this));
   }
 
   handleUser(obj){
