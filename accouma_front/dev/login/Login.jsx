@@ -2,7 +2,6 @@ import React from 'react'
 import {Card, TextInput, Button} from 'Belle'
 import {InputP, CardP} from '../common/styleProperties'
 import {ajax} from '../common/ajax'
-//import $ from 'jquery'
 
 class Login extends React.Component {
 
