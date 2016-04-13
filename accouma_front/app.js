@@ -14,6 +14,10 @@ var options = {
 
 app.use(express.static('build'));
 
+/**app.get('/api', function (req, res) {
+  res.json({'a': 22});
+});*/
+
 app.get('*', function (req, res) {
   res.sendFile('index.html', options);
 });
