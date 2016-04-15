@@ -1,3 +1,4 @@
 node_modules
 .DS_Store
-accouma_front/build/js/bundle.js
+bundle
+style
