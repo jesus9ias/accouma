@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "api": "cd accouma_api; php artisan serve",
+    "make": "cd accouma_front; gulp build & gulp less"
+  }
+}
