@@ -1,5 +1,5 @@
 # accouma
-An Account Manager system for personal finances
+An Account Manager system for personal finances.
 
 ## Motivation
 
