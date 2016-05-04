@@ -1,11 +1,11 @@
 import { VIEW_ALL, DELETE_ONE, ADD_ONE } from '../actionTypes/usersTypes'
-import IS from '../INITIAL_STATE'
+import * as IS from '../INITIAL_STATE'
 
 const initialState = {
   users: IS.users
 }
 
-export default function(state = initialState, action) {
+function myUsers(state = initialState, action) {
   switch (action.type) {
     case ADD_ONE:
       action.data.id = state.users.length + 1;
@@ -30,3 +30,6 @@ export default function(state = initialState, action) {
       return state
   }
 }
+
+
+export default myUsers;
