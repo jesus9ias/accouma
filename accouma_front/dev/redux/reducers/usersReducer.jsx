@@ -1,4 +1,4 @@
-import { VIEW_ALL, DELETE_ONE, ADD_ONE } from '../actionTypes/usersTypes'
+import { VIEW_ALL, DELETE_ONE, ADD_ONE, GET_ALL } from '../actionTypes/usersTypes'
 import * as IS from '../INITIAL_STATE'
 
 const initialState = {
@@ -25,6 +25,10 @@ function myUsers(state = initialState, action) {
           }
           return p
         })
+      })
+    case GET_ALL:
+      return Object.assign({}, state, {
+        users: action.data
       })
     default:
       return state

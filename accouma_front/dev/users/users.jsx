@@ -1,17 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Base from '../common/base'
+import {getAll} from '../redux/actions/usersActions';
+import {ajax} from '../common/ajax'
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
+    this.getUsers();
+  }
+
+  getUsers(){
+    ajax('http://localhost:8000/api/v1/users', 'GET', {}, function(data) {
+      console.log(data);
+      this.props.getAllUsers(data.result.rows);
+    }.bind(this), function(xhr, status, err){
+      console.error(xhr);
+    }.bind(this));
   }
 
   render() {
     return (
       <Base section="users" >
         <p>Users</p>
-        <div>{this.props.listado[0].id}</div>
+        {
+          this.props.listado.map((user, i) => {
+            return (<p key={i}>{user.names}</p>)
+          })
+        }
       </Base>
     )
   }
@@ -24,14 +40,12 @@ function mapStateToProps(state){
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getAllUsers: (data) => {
+      dispatch(getAll(data))
+    }
+  }
 }
-
-//export default Users
-
-//export {Users}
-//export const UsersContainer = connect( mapStateToProps , mapDispatchToProps )(Users);
-
 
 let UsersContainer = connect( mapStateToProps , mapDispatchToProps )(Users);
 UsersContainer.displayName = "Users";

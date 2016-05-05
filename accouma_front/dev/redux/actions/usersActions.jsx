@@ -1,4 +1,4 @@
-import { VIEW_ALL, DELETE_ONE, ADD_ONE } from '../actionTypes'
+import { VIEW_ALL, DELETE_ONE, ADD_ONE, GET_ALL } from '../actionTypes/usersTypes'
 
 export function viewAll() {
   return {
@@ -17,6 +17,13 @@ export function deleteOne(index) {
 export function addOne(data) {
   return {
     type: ADD_ONE,
+    data: data
+  }
+}
+
+export function getAll(data) {
+  return {
+    type: GET_ALL,
     data: data
   }
 }
