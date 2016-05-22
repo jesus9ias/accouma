@@ -1,8 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import Base from '../common/base'
-import {getAll} from '../redux/actions/usersActions';
-import {ajax} from '../common/ajax'
+import {getAll} from '../redux/actions/usersActions'
+import UsersServices from '../services/UsersServices'
+//import {ajax} from '../common/ajax'
 
 class Users extends React.Component {
   constructor(props) {
@@ -11,12 +12,12 @@ class Users extends React.Component {
   }
 
   getUsers(){
-    ajax('http://localhost:8000/api/v1/users', 'GET', {}, function(data) {
-      console.log(data);
-      this.props.getAllUsers(data.result.rows);
-    }.bind(this), function(xhr, status, err){
-      console.error(xhr);
-    }.bind(this));
+    UsersServices.getUsers().then((response)=>{
+      console.log(response);
+      this.props.getAllUsers(response.data.result.rows);
+    }).catch((error)=>{
+
+    });
   }
 
   render() {
