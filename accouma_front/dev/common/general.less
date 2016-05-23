@@ -3,7 +3,18 @@
   min-width: 300px;
   display: block;
   .flexColumn;
-  #menus{
-    background: blue;
+  .general-content{
+    .flexColumn;
+    .general-block{
+      .flexColumn;
+      .general-cards{
+        .flexRow;
+        flex-wrap: wrap;
+        .general-card{
+          .flex(1 1 ~"calc(33% - 20px)");
+          margin: 10px;
+        }
+      }
+    }
   }
 }

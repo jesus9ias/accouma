@@ -17,6 +17,10 @@ body{
 }
 
 .flex(@f: 1){
+  -webkit-box-flex: @f;
+  -moz-box-flex: @f;
+  -webkit-flex: @f;
+  -ms-flex: @f;
   flex: @f;
 }
 

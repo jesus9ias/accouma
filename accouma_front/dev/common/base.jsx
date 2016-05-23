@@ -10,7 +10,7 @@ class Base extends React.Component {
         <Card style={CardP()}>
           <h1>Accouma</h1>
         </Card>
-        <section className="content">
+        <section className="general-content">
           {this.props.children}
         </section>
       </section>
