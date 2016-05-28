@@ -1,15 +1,13 @@
 import React from 'react'
-import {Card, TextInput, Button} from 'Belle'
-import {CardP} from '../common/styleProperties'
+
+import NavBar from '../navBar/NavBar'
 
 class Base extends React.Component {
 
   render() {
     return (
       <section className={this.props.section}>
-        <Card style={CardP()}>
-          <h1>Accouma</h1>
-        </Card>
+        <NavBar />
         <section className="general-content">
           {this.props.children}
         </section>

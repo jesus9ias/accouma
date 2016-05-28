@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-import {Card, TextInput, Button} from 'Belle'
+
 import MdArrowForward from 'react-icons/lib/md/arrow-forward'
 
 import Base from '../common/base'

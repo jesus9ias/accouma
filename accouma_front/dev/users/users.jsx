@@ -2,9 +2,10 @@ import React from 'react'
 import {Link} from 'react-router'
 import { connect } from 'react-redux'
 
+import {Row, Col, Card} from 'react-materialize'
+
 import {getAll} from '../redux/actions/usersActions'
 
-import {Card, TextInput, Button} from 'Belle'
 import MdArrowForward from 'react-icons/lib/md/arrow-forward'
 import MdEdit from 'react-icons/lib/md/edit'
 import MdDelete from 'react-icons/lib/md/delete'
@@ -35,17 +36,24 @@ class Users extends React.Component {
         <div className="general-block">
           <p>Users</p>
           <div className="general-cards">
-            {
-              this.props.listado.map((user, i) => {
-                return (
-                  <Card key={i} className="general-card" style={CardS}>
-                    <h2 className="general-cardTitle">{user.names}</h2>
-                    <Link className="general-cardLink" to={'/users'}><MdEdit /></Link>
-                    <Link className="general-cardLink" to={'/users'}><MdDelete /></Link>
-                  </Card>
-                )
-              })
-            }
+            <Row>
+              {
+                this.props.listado.map((user, i) => {
+                  return (
+                    <Col key={i} s={12} m={4}>
+                      <Card className='blue-grey darken-1 general-card' textClassName='white-text' title={user.names} actions={[
+                          <Link key={1} className="general-cardIconButton waves-effect btn-flat" to={'/users'}><MdEdit size={30} /></Link>,
+                          <Link key={2} className="general-cardIconButton waves-effect btn-flat" to={'/users'}><MdDelete size={30} /></Link>
+                        ]}>
+                        <span className="card-content">
+                          Hola
+                        </span>
+                      </Card>
+                    </Col>
+                  )
+                })
+              }
+            </Row>
           </div>
         </div>
       </Base>

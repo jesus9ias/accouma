@@ -1,9 +1,15 @@
+@import "common/vendor/materialize/css/materialize.min.less";
+
 html, body{
   height: 100%;
 }
 body{
   margin: 0px;
   font-family: Arial;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0px;
 }
 
 .flexRow{
@@ -30,6 +36,10 @@ body{
   border-radius: @r;
 }
 
+@white: #ffffff;
+@black: #323232;
+
 @import "common/general.less";
 @import "home/home.less";
+@import "navBar/navBar.less";
 @import "login/login.less";
