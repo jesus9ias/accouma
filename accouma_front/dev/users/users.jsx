@@ -8,7 +8,6 @@ import {getAll} from '../redux/actions/usersActions'
 
 import Base from '../common/base'
 import UsersServices from '../services/UsersServices'
-import {InputP, CardP} from '../common/styleProperties'
 
 class Users extends React.Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class Users extends React.Component {
   }
 
   render() {
-    //let CardS = CardP();
     return (
       <Base section="users" >
         <div className="general-block">

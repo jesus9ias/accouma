@@ -4,11 +4,9 @@ import {Link} from 'react-router'
 import {Row, Col, Card} from 'react-materialize'
 
 import Base from '../common/base'
-import {InputP, CardP} from '../common/styleProperties'
 
 class Home extends React.Component {
   render() {
-    //let CardS = CardP();
     return (
       <Base section="home" >
         <div className="general-block">
