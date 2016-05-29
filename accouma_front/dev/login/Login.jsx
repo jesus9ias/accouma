@@ -1,6 +1,5 @@
 import React from 'react'
-import {Card, TextInput, Button} from 'Belle'
-import {InputP, CardP} from '../common/styleProperties'
+import {} from 'react-materialize'
 import {ajax} from '../common/ajax'
 
 class Login extends React.Component {
@@ -28,12 +27,22 @@ class Login extends React.Component {
   render() {
     return (
       <section className="login">
-        <Card className="login-form" style={CardP()}>
+        <div className="login-form z-depth-2">
           <h2 className="login-title">Accouma - Login</h2>
-          <TextInput id="user" value={this.state.valueUser} className="login-field" style={InputP()} placeholder="User" onUpdate={this.handleUser.bind(this)} />
-          <TextInput id="Password" value={this.state.valuePass} className="login-field" style={InputP()} placeholder="Password" onUpdate={this.handlePass.bind(this)} />
-          <Button primary submit onClick={this.makeLogin.bind(this)}>Login</Button>
-        </Card>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="user" value={this.state.valueUser} onUpdate={this.handleUser.bind(this)} type="text" className="validate login-field" />
+              <label htmlFor="user">User</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="password" value={this.state.valuePass} onUpdate={this.handlePass.bind(this)} type="password" className="validate login-field" />
+              <label htmlFor="pass">Password</label>
+            </div>
+          </div>
+          <a className="waves-effect waves-light btn" onClick={this.makeLogin.bind(this)}>Login</a>
+        </div>
       </section>
     )
   }
