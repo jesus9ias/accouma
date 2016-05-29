@@ -3,17 +3,22 @@
   min-width: 300px;
   display: block;
   .flexColumn;
-  .general-content{
-    .flexColumn;
-    .general-block{
+  .general-section{
+    .flexRow;
+    .calcMinHeight(100vh, 64px);
+    .general-content{
       .flexColumn;
-      .general-cards{
-        .general-card{
-          .card-action{
-            padding: 10px;
-          }
-          .general-cardIconButton{
-            padding: 0px;
+      .flex();
+      .general-block{
+        .flexColumn;
+        .general-cards{
+          .general-card{
+            .card-action{
+              padding: 10px;
+            }
+            .general-cardIconButton{
+              padding: 0px 5px;
+            }
           }
         }
       }

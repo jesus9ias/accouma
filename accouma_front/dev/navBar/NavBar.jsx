@@ -1,7 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router'
 import {Navbar, NavItem, Row, Col} from 'react-materialize'
-
-import MdMenu from 'react-icons/lib/md/menu'
 
 class NavBar extends React.Component {
 
@@ -9,13 +8,13 @@ class NavBar extends React.Component {
     return (
       <nav className="navBar">
         <div className="navBar-iconContainer">
-          <MdMenu size={30} />
+          <i className="material-icons large">more_horiz</i>
         </div>
         <div className="navBar-titleContainer">
-          <h1 className="navBar-title">Accouma</h1>
+          <Link to={'/'}><h1 className="navBar-title">Accouma</h1></Link>
         </div>
         <div className="navBar-optionsContainer">
-          <img src="" />
+          <Link className="sideBar-icon" to={'/me'}><i className="material-icons">face</i></Link>
         </div>
       </nav>
     )

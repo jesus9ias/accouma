@@ -30,6 +30,38 @@ h1, h2, h3, h4, h5, h6, p{
   flex: @f;
 }
 
+.calcLeft(@i, @j){
+  left: ~"calc(@{i} - @{j})";
+}
+
+.calcTop(@i, @j){
+  top: ~"calc(@{i} - @{j})";
+}
+
+.calcWidth(@i, @j){
+  width: ~"calc(@{i} - @{j})";
+}
+
+.calcHeight(@i, @j){
+  height: ~"calc(@{i} - @{j})";
+}
+
+.calcMinWidth(@i, @j){
+  min-width: ~"calc(@{i} - @{j})";
+}
+
+.calcMinHeight(@i, @j){
+  min-height: ~"calc(@{i} - @{j})";
+}
+
+
+.calcBackgroundSize(@i, @j){
+  -webkit-background-size: ~"calc(@{i} - @{j})";
+  -moz-background-size: ~"calc(@{i} - @{j})";
+  -o-background-size: ~"calc(@{i} - @{j})";
+  background-size: ~"calc(@{i} - @{j})";
+}
+
 .rounded(@r: 5px){
   -webkit-border-radius: @r;
   -moz-border-radius: @r;
@@ -37,9 +69,12 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 @white: #ffffff;
+@greenDark: #273238;
+@dark: #292929;
 @black: #323232;
 
 @import "common/general.less";
 @import "home/home.less";
 @import "navBar/navBar.less";
+@import "sideBar/sideBar.less";
 @import "login/login.less";
