@@ -13,7 +13,7 @@ gulp.task('less', function() {
       'include css': true,
     }))
     .pipe(minify())
-    .pipe(gulp.dest('./build/css/'))
+    .pipe(gulp.dest('./app/build/css/'))
 })
 
 gulp.task('build', function() {
@@ -25,7 +25,7 @@ gulp.task('build', function() {
   .transform(babelify)
   .bundle()
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./build/js'))
+  .pipe(gulp.dest('./app/build/js'))
 })
 
 gulp.task('watch', function() {

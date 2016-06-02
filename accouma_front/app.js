@@ -12,7 +12,7 @@ var options = {
   }
 };
 
-app.use(express.static('build'));
+app.use(express.static('app'));
 
 /**app.get('/api', function (req, res) {
   res.json({'a': 22});
