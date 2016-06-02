@@ -17,7 +17,7 @@ class accountsController extends Controller{
     $this->middleware('pagination', ['only' => ['index']]);
 	}
 
-  public function index(){
+  public function get(){
     $skip = Request::get('skip', 0);
     $take = Request::get('take', 0);
     $order = Request::get('order', '');
