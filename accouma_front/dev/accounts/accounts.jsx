@@ -6,7 +6,6 @@ import {Row, Col, Card} from 'react-materialize'
 
 import {getAll} from '../redux/actions/accountsActions'
 
-import Base from '../common/base'
 import AccountsServices from '../services/AccountsServices'
 
 class Accounts extends React.Component {
@@ -25,31 +24,36 @@ class Accounts extends React.Component {
   }
 
   render() {
+    const currentChild = (this.props.children != null) ? this.props.children.type.displayName : 'undefined';
     return (
-      <Base section="accounts" >
-        <div className="general-block">
-          <div className="general-cards">
-            <Row>
-              {
-                this.props.listado.map((account, i) => {
-                  return (
-                    <Col key={i} s={12} m={4}>
-                      <Card className='blue-grey darken-1 general-card' textClassName='white-text' title={account.name} actions={[
-                          <Link key={1} className="general-cardIconButton waves-effect btn-flat" to={'/accounts'}><i className="material-icons">mode_edit</i></Link>,
-                          <Link key={2} className="general-cardIconButton waves-effect btn-flat" to={'/accounts'}><i className="material-icons">delete</i></Link>
-                        ]}>
-                        <span className="card-content">
-                          Hi!
-                        </span>
-                      </Card>
-                    </Col>
-                  )
-                })
-              }
-            </Row>
-          </div>
+      <div className="general-block">
+        <div>
+          {currentChild == 'NewRegister' ? this.props.children : null}
         </div>
-      </Base>
+        <div className="general-cards">
+          <Row>
+            {
+              this.props.listado.map((account, i) => {
+                return (
+                  <Col key={i} s={12} m={4}>
+                    <Card className='blue-grey darken-1 general-card' textClassName='white-text' title={account.name} actions={[
+                        <Link key={1} className="general-cardIconButton waves-effect btn-flat" to={'/accounts/' + account.id}><i className="material-icons">mode_edit</i></Link>,
+                        <Link key={2} className="general-cardIconButton waves-effect btn-flat" to={'/accounts'}><i className="material-icons">delete</i></Link>
+                      ]}>
+                      <span className="card-content">
+                        Hi!
+                      </span>
+                    </Card>
+                  </Col>
+                )
+              })
+            }
+          </Row>
+        </div>
+        <div>
+          {currentChild == 'Registers' ? this.props.children : null}
+        </div>
+      </div>
     )
   }
 }
