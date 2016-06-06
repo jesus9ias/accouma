@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './app'
 import Login from './login/login'
 import Home from './home/home'
+import Me from './me/me'
 import Users from './users/users'
 import Accounts from './accounts/accounts'
 import Registers from './registers/registers'
@@ -20,6 +21,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
+        <Route path="me" component={Me} />
         <Route path="users" component={Users} />
         <Route path="accounts" component={Accounts}>
           <Route path="new" component={NewRegister} />
