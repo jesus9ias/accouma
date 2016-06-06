@@ -17,6 +17,6 @@ Accouma is a new system for taking control of your personal finances. Of course,
  
 ## On the Front End
 
-After using a lot of programing tecnologies, we need a Ui framework, or doing from cero, I decided the first and search for something compatible with react.
+After using a lot of programing tecnologies, we need an Ui framework, or doing from cero, I decided the first and search for something compatible with react.
 
-Material design, but, I didn't find and stable framwork... bootstrap is ok, but it's from another school, so I prefered an UI framework, simple and different: Belle.
+Material design was my first option, but, I didn't find a stable framework... I found a bootstrap version from React that looks good, but it's from another school, for a momento I try a simple and different framework: Belle, but was too simple. Finally I returned for my first option with an specific Ui library that looks enough for me, materialize.
