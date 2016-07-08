@@ -1,0 +1,80 @@
+@import "common/vendor/materialize/css/materialize.min";
+
+html, body{
+  height: 100%;
+}
+body{
+  margin: 0px;
+  font-family: Arial;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0px;
+}
+
+@mixin flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flexColumn{
+  display: flex;
+  flex-direction: column;;
+}
+
+@mixin flex($f: 1){
+  -webkit-box-flex: $f;
+  -moz-box-flex: $f;
+  -webkit-flex: $f;
+  -ms-flex: $f;
+  flex: $f;
+}
+
+@mixin calcLeft($i, $j){
+  left: calc(#{$i} - #{$j});
+}
+
+@mixin calcTop($i, $j){
+  top: calc(#{$i} - #{$j});
+}
+
+@mixin calcWidth($i, $j){
+  width: calc(#{$i} - #{$j});
+}
+
+@mixin calcHeight($i, $j){
+  height: calc(#{$i} - #{$j});
+}
+
+@mixin calcMinWidth($i, $j){
+  min-width: calc(#{$i} - #{$j});
+}
+
+@mixin calcMinHeight($i, $j){
+  min-height: calc(#{$i} - #{$j});
+}
+
+
+@mixin calcBackgroundSize($i, $j){
+  -webkit-background-size: calc(#{$i} - #{$j});
+  -moz-background-size: calc(#{$i} - #{$j});
+  -o-background-size: calc(#{$i} - #{$j});
+  background-size: calc(#{$i} - #{$j});
+}
+
+@mixin rounded($r: 5px){
+  -webkit-border-radius: $r;
+  -moz-border-radius: $r;
+  border-radius: $r;
+}
+
+$white: #ffffff;
+$greenDark: #273238;
+$dark: #292929;
+$black: #323232;
+
+@import "common/general";
+@import "home/home";
+@import "navBar/navBar";
+@import "sideBar/sideBar";
+@import "login/login";

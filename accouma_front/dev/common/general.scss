@@ -2,15 +2,15 @@
   min-height: 100%;
   min-width: 300px;
   display: block;
-  .flexColumn;
+  @include flexColumn;
   .general-section{
-    .flexRow;
-    .calcMinHeight(100vh, 64px);
+    @include flexRow;
+    @include calcMinHeight(100vh, 64px);
     .general-content{
-      .flexColumn;
-      .flex();
+      @include flexColumn;
+      @include flex();
       .general-block{
-        .flexColumn;
+        @include flexColumn;
         .general-cards{
           .general-card{
             .card-action{

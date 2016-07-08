@@ -1,7 +1,7 @@
 .login{
-  flex: 1;
+  @include flex();
   padding: 10px;
-  .flexColumn;
+  @include flexColumn;
   justify-content: center;
   background: url('../../images/main/background.jpg') fixed center no-repeat;
 	-webkit-background-size: cover;
@@ -9,7 +9,7 @@
 	-o-background-size: cover;
 	background-size: cover;
   .login-form{
-    background: @white;
+    background: $white;
     min-width: 250px;
     max-width: 300px;
     margin: 0px auto;

@@ -1,12 +1,12 @@
 .navBar{
-  .flexRow;
-  background: @greenDark;
-  color: @white;
+  @include flexRow;
+  background: $greenDark;
+  color: $white;
   .navBar-iconContainer{
     padding: 0px 10px;
   }
   .navBar-titleContainer{
-    .flex();
+    @include flex();
     padding: 0px 10px;
     .navBar-title{
       font-size: 32px;
@@ -15,6 +15,6 @@
   }
   .navBar-optionsContainer{
     padding: 0px 10px;
-    .flexRow;
+    @include flexRow;
   }
 }
