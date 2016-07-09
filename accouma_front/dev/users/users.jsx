@@ -58,17 +58,17 @@ class Users extends React.Component {
                       </span>
                     </Card>
                   </Col>
-                )
+                );
               })
             }
           </Row>
         </div>
       </div>
-    )
+    );
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     listado: state.myUsers.users
   };

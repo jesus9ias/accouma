@@ -5,22 +5,18 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { valueUser: '', valuePass: '' };
+    this.makeLogin = this.makeLogin.bind(this);
   }
 
   makeLogin() {
-    ajax('http://localhost:8000/api/v1/login', 'POST', { 'usr': this.state.valueUser, 'pass': this.state.valuePass }, function(data) {
+    ajax('http://localhost:8000/api/v1/login', 'POST', {
+      'usr': this.refs.user.value,
+      'pass': this.refs.password.value
+    }, function(data) {
       console.log(data);
     }.bind(this), function(xhr, status, err) {
       console.error(xhr);
     }.bind(this));
-  }
-
-  handleUser(obj) {
-    this.setState({ valueUser: obj.value });
-  }
-  handlePass(obj) {
-    this.setState({ valuePass: obj.value });
   }
 
   render() {
@@ -32,8 +28,7 @@ class Login extends React.Component {
             <div className="input-field col s12">
               <input
                 id="user"
-                value={this.state.valueUser}
-                onUpdate={this.handleUser.bind(this)}
+                ref="user"
                 type="text"
                 className="validate login-field"
               />
@@ -44,20 +39,23 @@ class Login extends React.Component {
             <div className="input-field col s12">
               <input
                 id="password"
-                value={this.state.valuePass}
-                onUpdate={this.handlePass.bind(this)}
+                ref="password"
                 type="password"
                 className="validate login-field"
               />
               <label htmlFor="pass">Password</label>
             </div>
           </div>
-          <a
-            className="waves-effect waves-light btn"
-            onClick={this.makeLogin.bind(this)}
-          >
-            Login
-          </a>
+          <div className="row">
+            <div className="col s12">
+              <a
+                className="waves-effect waves-light btn"
+                onClick={this.makeLogin}
+              >
+                Continue
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     );
