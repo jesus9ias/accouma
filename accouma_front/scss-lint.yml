@@ -1,0 +1,8 @@
+linters:
+  VendorPrefix:
+    enabled: false
+  HexLength:
+    enabled: true
+    style: long
+  MixinNameFormat:
+    enabled: false

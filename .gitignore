@@ -1,3 +1,4 @@
 node_modules
 .DS_Store
 accouma_front/app/build
+*.log

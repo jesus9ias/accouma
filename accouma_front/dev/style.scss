@@ -6,8 +6,8 @@ body {
 }
 
 body {
-  margin: 0px;
   font-family: Arial;
+  margin: 0;
 }
 
 h1,
@@ -17,7 +17,7 @@ h4,
 h5,
 h6,
 p {
-  margin: 0px;
+  margin: 0;
 }
 
 @mixin flexRow {
@@ -27,7 +27,7 @@ p {
 
 @mixin flexColumn {
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
 }
 
 @mixin flex($f: 1) {
@@ -81,8 +81,9 @@ $greenDark: #273238;
 $dark: #292929;
 $black: #323232;
 
-@import "common/general";
-@import "home/home";
-@import "navBar/navBar";
-@import "sideBar/sideBar";
-@import "login/login";
+@import 'common/general';
+@import 'common/cards';
+@import 'home/home';
+@import 'navBar/navBar';
+@import 'sideBar/sideBar';
+@import 'login/login';

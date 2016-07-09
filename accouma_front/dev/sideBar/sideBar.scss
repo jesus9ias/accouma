@@ -1,12 +1,13 @@
-.sideBar{
+.sidebar {
   @include flexColumn;
   background: $black;
   color: $white;
   width: 50px;
-  .sideBar-icon{
-    display: block;
-    text-align: center;
-    padding: 5px 0px;
+
+  .sidebar-icon {
     color: $white;
+    display: block;
+    padding: 5px 0;
+    text-align: center;
   }
 }

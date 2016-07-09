@@ -20,6 +20,7 @@ gulp.task('sass', function() {
 gulp.task('sassLint', function() {
   gulp.src(['dev/**/*.scss', '!./dev/common/vendor/**/*.scss'])
     .pipe(scsslint())
+    .pipe(scsslint('scss-lint.yml'))
     .pipe(scsslint.reporter());
 });
 

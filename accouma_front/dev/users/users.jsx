@@ -26,15 +26,15 @@ class Users extends React.Component {
   render() {
     return (
       <div className="general-block">
-        <div className="general-cards">
+        <div className="cards">
           <Row>
             {
               this.props.listado.map((user, i) => {
                 return (
                   <Col key={i} s={12} m={4}>
-                    <Card className='blue-grey darken-1 general-card' textClassName='white-text' title={user.names} actions={[
-                        <Link key={1} className="general-cardIconButton waves-effect btn-flat" to={'/users'}><i className="material-icons">mode_edit</i></Link>,
-                        <Link key={2} className="general-cardIconButton waves-effect btn-flat" to={'/users'}><i className="material-icons">delete</i></Link>
+                    <Card className='blue-grey darken-1 card' textClassName='white-text' title={user.names} actions={[
+                        <Link key={1} className="card-icon-button waves-effect btn-flat" to={'/users'}><i className="material-icons">mode_edit</i></Link>,
+                        <Link key={2} className="card-icon-button waves-effect btn-flat" to={'/users'}><i className="material-icons">delete</i></Link>
                       ]}>
                       <span className="card-content">
                         Hi!

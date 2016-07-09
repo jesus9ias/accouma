@@ -6,21 +6,21 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className="navBar">
-        <div className="navBar-iconContainer">
+      <nav className="navbar">
+        <div className="navbar-icon-container">
           <i className="material-icons large">more_horiz</i>
         </div>
-        <div className="navBar-titleContainer">
-          <Link to={'/'}><h1 className="navBar-title">Accouma</h1></Link>
+        <div className="navbar-title-container">
+          <Link to={'/'}><h1 className="navbar-title">Accouma</h1></Link>
         </div>
-        <div className="navBar-optionsContainer">
-          <Dropdown className="navBar-icon navBar-menu" overorigin={false} trigger={
+        <div className="navbar-options-container">
+          <Dropdown className="navbar-icon navbar-menu" overorigin={false} trigger={
             <a><i className="material-icons">add</i></a>
           }>
             <NavItem>User</NavItem>
             <NavItem href="accounts/new">Account</NavItem>
           </Dropdown>
-          <Link className="navBar-icon" to={'/me'}><i className="material-icons">face</i></Link>
+          <Link className="navbar-icon" to={'/me'}><i className="material-icons">face</i></Link>
         </div>
       </nav>
     )

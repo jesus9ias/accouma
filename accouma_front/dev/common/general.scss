@@ -1,27 +1,20 @@
-#general{
+.general {
+  @include flexColumn;
+  display: block;
   min-height: 100%;
   min-width: 300px;
-  display: block;
-  @include flexColumn;
-  .general-section{
+
+  .general-section {
     @include flexRow;
     @include calcMinHeight(100vh, 64px);
-    .general-content{
+
+    .general-content {
       @include flexColumn;
       @include flex();
-      .general-block{
-        @include flexColumn;
-        .general-cards{
-          .general-card{
-            .card-action{
-              padding: 10px;
-            }
-            .general-cardIconButton{
-              padding: 0px 5px;
-            }
-          }
-        }
-      }
+    }
+
+    .general-block {
+      @include flexColumn;
     }
   }
 }
