@@ -20,6 +20,7 @@
     "babelify": "^6",
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
+    "eslint": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-connect-php": "0.0.7",
     "gulp-minify-css": "^1.2.3",
@@ -32,6 +33,7 @@
   "scripts": {
     "dev": "node app.js",
     "make": "gulp build & gulp sass",
-    "sassLint": "gulp sassLint"
+    "sasslint": "gulp sassLint",
+    "eslint": "eslint dev/ --ext .js --ext .jsx"
   }
 }
