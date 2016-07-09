@@ -1,8 +1,6 @@
-import React from 'react'
-import {Link} from 'react-router'
-
-import Base from './common/base'
-
+import React from 'react';
+import { Link } from 'react-router';
+import Base from './common/base';
 
 class App extends React.Component {
 
@@ -12,7 +10,7 @@ class App extends React.Component {
       <Base section={currentComponent} >
         {this.props.children}
       </Base>
-    )
+    );
   }
 }
 

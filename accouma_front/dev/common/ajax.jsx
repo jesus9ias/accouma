@@ -1,6 +1,6 @@
-import $ from 'jquery'
+import $ from 'jquery';
 
-function ajax(url, method, data, success, error){
+function ajax(url, method, data, success, error) {
   $.ajax({
     url: url,
     dataType: 'json',
@@ -12,4 +12,4 @@ function ajax(url, method, data, success, error){
   });
 }
 
-export {ajax};
+export { ajax };

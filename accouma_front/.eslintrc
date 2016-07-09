@@ -15,5 +15,8 @@
     "node": true,
     "es6": true
   },
+  "rules": {
+    "comma-dangle": 0
+  },
   "extends": "airbnb"
 }

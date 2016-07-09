@@ -1,9 +1,11 @@
-import React from 'react'
-import {Link} from 'react-router'
-
-import {Row, Col, Card} from 'react-materialize'
-
-import Base from '../common/base'
+import React from 'react';
+import { Link } from 'react-router';
+import {
+  Row,
+  Col,
+  Card
+} from 'react-materialize';
+import Base from '../common/base';
 
 class Home extends React.Component {
   render() {
@@ -12,8 +14,35 @@ class Home extends React.Component {
         <div className="cards">
           <Row>
             <Col s={12} m={4}>
-              <Card className='blue-grey darken-1 card' textClassName='white-text' title="Users" actions={[
-                  <Link key={1} className="card-icon-button waves-effect btn-flat" to={'/users'}><i className="material-icons">arrow_forward</i></Link>
+              <Card
+                className="blue-grey darken-1 card"
+                textClassName="white-text"
+                title="Users"
+                actions={[
+                  <Link
+                    key={1}
+                    className="card-icon-button waves-effect btn-flat"
+                    to={'/users'}
+                  >
+                    <i className="material-icons">arrow_forward</i>
+                  </Link>
+                ]}>
+                <span className="card-content">Hi!</span>
+              </Card>
+            </Col>
+            <Col s={12} m={4}>
+              <Card
+                className="blue-grey darken-1 card"
+                textClassName="white-text"
+                title="Accounts"
+                actions={[
+                  <Link
+                    key={1}
+                    className="card-icon-button waves-effect btn-flat"
+                    to={'/accounts'}
+                  >
+                    <i className="material-icons">arrow_forward</i>
+                  </Link>
                 ]}>
                 <span className="card-content">
                   Hi!
@@ -21,27 +50,27 @@ class Home extends React.Component {
               </Card>
             </Col>
             <Col s={12} m={4}>
-              <Card className='blue-grey darken-1 card' textClassName='white-text' title="Accounts" actions={[
-                  <Link key={1} className="card-icon-button waves-effect btn-flat" to={'/accounts'}><i className="material-icons">arrow_forward</i></Link>
-                ]}>
-                <span className="card-content">
-                  Hi!
-                </span>
-              </Card>
-            </Col>
-            <Col s={12} m={4}>
-              <Card className='blue-grey darken-1 card' textClassName='white-text' title="Registers" actions={[
-                  <Link key={1} className="card-icon-button waves-effect btn-flat" to={'/registers'}><i className="material-icons">arrow_forward</i></Link>
-                ]}>
-                <span className="card-content">
-                  Hi!
-                </span>
+              <Card
+                className="blue-grey darken-1 card"
+                textClassName="white-text"
+                title="Registers"
+                actions={[
+                  <Link
+                    key={1}
+                    className="card-icon-button waves-effect btn-flat"
+                    to={'/registers'}
+                  >
+                    <i className="material-icons">arrow_forward</i>
+                  </Link>
+                ]}
+              >
+                <span className="card-content">Hi!</span>
               </Card>
             </Col>
           </Row>
         </div>
       </div>
-    )
+    );
   }
 }
 

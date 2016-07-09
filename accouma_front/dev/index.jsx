@@ -1,20 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './app'
-import Login from './login/login'
-import Home from './home/home'
-import Me from './me/me'
-import Users from './users/users'
-import Accounts from './accounts/accounts'
-import Registers from './registers/registers'
-import NewRegister from './registers/newRegister'
-import { Router, Route, Link, browserHistory, IndexRoute, Redirect } from 'react-router'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
+import Login from './login/login';
+import Home from './home/home';
+import Me from './me/me';
+import Users from './users/users';
+import Accounts from './accounts/accounts';
+import Registers from './registers/registers';
+import NewRegister from './registers/newRegister';
+import {
+  Router,
+  Route,
+  Link,
+  browserHistory,
+  IndexRoute,
+  Redirect
+} from 'react-router';
 
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import theApp from './redux/reducers'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import theApp from './redux/reducers';
 
-let store = createStore(theApp)
+let store = createStore(theApp);
 
 ReactDOM.render(
   <Provider store={store} >
@@ -33,4 +40,4 @@ ReactDOM.render(
     </Router>
   </Provider>,
   document.getElementById('general')
-)
+);

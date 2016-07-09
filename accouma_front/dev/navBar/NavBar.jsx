@@ -1,6 +1,13 @@
-import React from 'react'
-import {Link} from 'react-router'
-import {Navbar, NavItem, Row, Col, Dropdown, Button} from 'react-materialize'
+import React from 'react';
+import { Link } from 'react-router';
+import {
+  Navbar,
+  NavItem,
+  Row,
+  Col,
+  Dropdown,
+  Button
+} from 'react-materialize';
 
 class NavBar extends React.Component {
 
@@ -14,17 +21,26 @@ class NavBar extends React.Component {
           <Link to={'/'}><h1 className="navbar-title">Accouma</h1></Link>
         </div>
         <div className="navbar-options-container">
-          <Dropdown className="navbar-icon navbar-menu" overorigin={false} trigger={
-            <a><i className="material-icons">add</i></a>
-          }>
+          <Dropdown
+            className="navbar-icon navbar-menu"
+            overorigin={false}
+            trigger={
+              <a><i className="material-icons">add</i></a>
+            }
+          >
             <NavItem>User</NavItem>
             <NavItem href="accounts/new">Account</NavItem>
           </Dropdown>
-          <Link className="navbar-icon" to={'/me'}><i className="material-icons">face</i></Link>
+          <Link
+            className="navbar-icon"
+            to={'/me'}
+          >
+            <i className="material-icons">face</i>
+          </Link>
         </div>
       </nav>
-    )
+    );
   }
 }
 
-export default NavBar
+export default NavBar;

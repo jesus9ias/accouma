@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 class UsersServices {
-  getUsers(){
+  getUsers() {
     return axios({
-      method : 'GET',
-      url : 'http://localhost:8000/api/v1/users',
-      data : {}
+      method: 'GET',
+      url: 'http://localhost:8000/api/v1/users',
+      data: {}
     });
   }
 }

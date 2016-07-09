@@ -1,7 +1,6 @@
-import React from 'react'
-
-import NavBar from '../navBar/NavBar'
-import SideBar from '../sideBar/SideBar'
+import React from 'react';
+import NavBar from '../navBar/NavBar';
+import SideBar from '../sideBar/SideBar';
 
 class Base extends React.Component {
 
@@ -16,8 +15,8 @@ class Base extends React.Component {
           </section>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default Base
+export default Base;

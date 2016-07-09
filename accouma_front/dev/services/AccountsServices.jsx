@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 class AccountsServices {
-  getAccounts(){
+  getAccounts() {
     return axios({
-      method : 'GET',
-      url : 'http://localhost:8000/api/v1/accounts',
-      data : {}
+      method: 'GET',
+      url: 'http://localhost:8000/api/v1/accounts',
+      data: {}
     });
   }
 }
