@@ -1,6 +1,8 @@
 import React from 'react';
 //  import {} from 'react-materialize'
 import { ajax } from '../common/ajax';
+import storage from 'key-storage';
+
 class Login extends React.Component {
 
   constructor(props) {
@@ -14,6 +16,7 @@ class Login extends React.Component {
       'pass': this.refs.password.value
     }, function(data) {
       console.log(data);
+      storage.set('token', data.result.token);
     }.bind(this), function(xhr, status, err) {
       console.error(xhr);
     }.bind(this));

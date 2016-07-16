@@ -11,6 +11,9 @@ use App\Helpers\Helpers;
 use App\models\usersModel as Users;
 use App\models\userTokensModel as Tokens;
 
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 class loginController extends Controller{
     public function login(){
       $usr = Request::input('usr', '');
@@ -23,7 +26,9 @@ class loginController extends Controller{
 
         if(Hash::check($pass, $apass)){
 
-          $token = Helpers::random_txt(64);
+          $token = JWTAuth::fromUser($user[0]);
+
+          //$token = Helpers::random_txt(64);
           Users::updateUser($id, ['token' => $token]);
           return Response::json([
             'result' => [
