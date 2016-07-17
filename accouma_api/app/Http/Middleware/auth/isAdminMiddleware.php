@@ -10,9 +10,9 @@ class isAdminMiddleware{
 
 	public function handle($request, Closure $next){
 		$use_auth = env('USE_AUTH',true);
-		$id = $request->get('id', 0);
+		$user = $request->get('user');
 		if($use_auth == true){
-			$roles = usersRoles::getRoleByUser($id, 'admin', 2);
+			$roles = usersRoles::getRoleByUser($user->id, 'ADMIN', 2);
 			if(count($roles) >= 1){
 				return $next($request);
 			}else{

@@ -51,6 +51,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isLogued' => \App\Http\Middleware\auth\isLoguedMiddleware::class,
         'isAdmin' => \App\Http\Middleware\auth\isAdminMiddleware::class,
+        'whatRole' => \App\Http\Middleware\auth\whatRoleMiddleware::class,
         'pagination' => \App\Http\Middleware\basic\paginationMiddleware::class,
         'logger' => \App\Http\Middleware\basic\loggerMiddleware::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',

@@ -13,30 +13,64 @@ use App\models\usersRolesModel as UsersRoles;
 
 class usersController extends Controller{
 
+  protected $fields = [
+    'USER' => [
+      'id',
+      'names',
+      'last_names',
+      'email',
+      'status'
+    ],
+    'ADMIN' => [
+      'id',
+      'names',
+      'last_names',
+      'email',
+      'date_created',
+      'date_updated',
+      'status'
+    ]
+  ];
+
   public function __construct(){
 		$this->middleware('isLogued');
+		$this->middleware('whatRole');
 		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
 		$this->middleware('pagination', ['only' => ['get']]);
 		$this->middleware('logger');
 	}
 
   public function get(){
-    $skip = Request::get('skip', 0);
-    $take = Request::get('take', 0);
     $order = Request::get('order', '');
+    $fields = $this->getFields('get', Request::get('filteredRoles', []));
 
-    $users = Users::getUsers(['paginate' => ['skip' => $skip, 'take' => $take] ]);
+    $users = Users::getUsers([
+      'paginate' => [
+        'skip' => Request::get('skip', 0),
+        'take' => Request::get('take', 0)
+      ],
+      'fields' => $fields
+    ]);
+
     return Response::json([
       'result' => [
         'rows' => $users
       ],
       'msg' => 'Success',
-      'tot_pages' => Request::get('tot_pages', '')
+      'tot_pages' => Request::get('tot_pages', 0),
+      'tot_rows' => Request::get('tot_rows', 0)
     ], 200);
   }
 
   public function edit($user_id){
-    $user = Users::getUser($user_id);
+    $fields = $this->getFields('edit', Request::get('filteredRoles', []));
+    $user = Users::getUser(
+      $user_id,
+      [
+        'fields' => $fields
+      ]
+    );
+
     if(count($user) == 1){
       return Response::json([
         'result' => [
@@ -114,16 +148,6 @@ class usersController extends Controller{
     ], 200);
   }
 
-  public function updatePass($user_id){
-    $pass = Request::get('pass', '');
-    $newPass = Hash::make($pass);
-    Users::updateUser($user_id, ['pass' => $newPass]);
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
-  }
-
   public function activate($user_id){
     Users::updateUser($user_id, ['status' => 2]);
     return Response::json([
@@ -138,6 +162,18 @@ class usersController extends Controller{
       'result' => [],
       'msg' => 'success'
     ], 200);
+  }
+
+  protected function getFields($method, $roles){
+    $r = $this->fields['USER'];
+
+    if(($method == 'get' || $method == 'edit' ) && in_array('ADMIN', $roles)){
+      $r = $this->fields['ADMIN'];
+    }else{
+      $r = $this->fields['USER'];
+    }
+
+    return $r;
   }
 
 

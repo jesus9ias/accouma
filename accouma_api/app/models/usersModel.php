@@ -9,14 +9,19 @@ class usersModel extends Model{
   public $timestamps = false;
 
   public function scopeGetUsers($query, $params = []){
-    $q = $query;
-    if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
-      $q = $q->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+    if(array_key_exists('fields', $params)){
+      $query = $query->select($params['fields']);
     }
-    return $q->get();
+    if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
+      $query = $query->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+    }
+    return $query->get();
   }
 
-  public function scopeGetUser($query, $id, $fields = []){
+  public function scopeGetUser($query, $id, $params = []){
+    if(array_key_exists('fields', $params)){
+      $query = $query->select($params['fields']);
+    }
     return $query->where('id', '=', $id)->get();
   }
 

@@ -51,6 +51,7 @@ class isLoguedMiddleware{
 			}
 
 			if($user->token == $token){
+				$request->attributes->add(['user' => $user]);
 				return $next($request);
 			}else{
 				return Response::json([
