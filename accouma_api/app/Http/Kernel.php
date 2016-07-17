@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
         'isLogued' => \App\Http\Middleware\auth\isLoguedMiddleware::class,
         'isAdmin' => \App\Http\Middleware\auth\isAdminMiddleware::class,
         'whatRole' => \App\Http\Middleware\auth\whatRoleMiddleware::class,
+        'selfUser' => \App\Http\Middleware\auth\selfUserMiddleware::class,
         'pagination' => \App\Http\Middleware\basic\paginationMiddleware::class,
         'logger' => \App\Http\Middleware\basic\loggerMiddleware::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',

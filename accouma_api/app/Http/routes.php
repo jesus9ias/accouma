@@ -39,7 +39,8 @@ Route::get('api/v1/users/{user_id}', 'api\v1\usersController@edit');
 Route::put('api/v1/users/{user_id}', 'api\v1\usersController@update');
 Route::delete('api/v1/users/{user_id}', 'api\v1\usersController@disable');
 Route::patch('api/v1/users/{user_id}', 'api\v1\usersController@activate');
-Route::put('api/v1/users/{user_id}/update_pass', 'api\v1\usersController@updatePass');
+
+Route::put('api/v1/me/update_pass', 'api\v1\meController@updatePass');
 
 Route::get('api/v1/accounts', 'api\v1\accountsController@get');
 Route::post('api/v1/accounts/create', 'api\v1\accountsController@create');
