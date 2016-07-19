@@ -11,6 +11,9 @@ use App\Helpers\Helpers;
 use App\models\usersModel as Users;
 use App\models\usersRolesModel as UsersRoles;
 
+use Event;
+use App\Events\userCreated;
+
 class usersController extends Controller{
 
   protected $fields = [
@@ -98,51 +101,37 @@ class usersController extends Controller{
   }
 
   public function create(){
-    $names = Request::input('names', '');
-    $last_names = Request::input('last_names', '');
-    $user = Request::input('user', '');
-    $email = Request::input('email', '');
-    $make_admin = Request::input('make_admin', 0);
+    $names = Request::get('names', '');
+    $last_names = Request::get('last_names', '');
+    $user = Request::get('user_name', '');
+    $email = Request::get('email', '');
+    $pass = Hash::make(Helpers::random_txt(8));
+    $date_created = date("Y-m-d h:i:s");
+    $date_updated = Null;
+    $status = 1;
 
-    $pass = Helpers::random_txt(8);
-    $hpass = Hash::make($pass);
+    $userData = compact(
+      'names',
+      'last_names',
+      'user',
+      'email',
+      'pass',
+      'date_created',
+      'date_updated',
+      'status'
+    );
 
-    $userData = [
-      'names' => $names,
-      'last_names' => $last_names,
-      'user' => $user,
-      'email' => $email,
-      'pass' => $hpass,
-      'date_created' => date("Y-m-d h:i:s"),
-      'date_updated' => Null,
-      'status' => 1
-    ];
     $newUserId = Users::createUser($userData);
-    $userRoleData = [
-      'user_id' => $newUserId,
-      'role_slug' => 'user',
-      'date_created' => date("Y-m-d h:i:s"),
-      'date_removed' => Null,
-      'status' => 2
-    ];
-    $newUserRoleId = UsersRoles::createUserRole($userRoleData);
-    if($make_admin == 1){
-      $adminRoleData = [
-        'user_id' => $newUserId,
-        'role_slug' => 'admin',
-        'date_created' => date("Y-m-d h:i:s"),
-        'date_removed' => Null,
-        'status' => 2
-      ];
-      $newAdminRoleId = UsersRoles::createUserRole($adminRoleData);
-    }else{
-      $newAdminRoleId = 0;
-    }
+
+    $make_admin = Request::get('make_admin', 0);
+
+    $userCreated = Event::fire(new userCreated($newUserId, $make_admin));
+
     return Response::json([
       'result' => [
         'newUserId' => $newUserId,
-        'newUserRoleId' => $newUserRoleId,
-        'newAdminRoleId' => $newAdminRoleId
+        'newUserRoleId' => $userCreated[0]['newUserRoleId'],
+        'newAdminRoleId' => $userCreated[0]['newAdminRoleId']
       ],
       'msg' => 'success'
     ], 200);
