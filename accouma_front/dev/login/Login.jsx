@@ -1,7 +1,9 @@
 import React from 'react';
 //  import {} from 'react-materialize'
+import { browserHistory } from 'react-router'
 import { ajax } from '../common/ajax';
 import storage from 'key-storage';
+import LoginServices from '../services/LoginServices';
 
 class Login extends React.Component {
 
@@ -10,16 +12,28 @@ class Login extends React.Component {
     this.makeLogin = this.makeLogin.bind(this);
   }
 
+  componentWillMount(){
+    LoginServices.isLogued().then((response) => {
+      if(response.data.result.logued == true){
+        browserHistory.push('/');
+      }
+    }).catch((error) => {
+      //console.error(error);
+    });;
+  }
+
   makeLogin() {
-    ajax('http://localhost:8000/api/v1/login', 'POST', {
-      'usr': this.refs.user.value,
-      'pass': this.refs.password.value
-    }, function(data) {
-      console.log(data);
-      storage.set('token', data.result.token);
-    }.bind(this), function(xhr, status, err) {
-      console.error(xhr);
-    }.bind(this));
+    LoginServices.makeLogin(
+      this.refs.user.value,
+      this.refs.password.value
+    ).then((response) => {
+      if(response.data.result && response.data.result.token){
+        storage.set('token', response.data.result.token);
+        browserHistory.push('/');
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   render() {

@@ -1,12 +1,19 @@
 import axios from 'axios';
+import storage from 'key-storage';
+import config from '../config.json';
 
 class AccountsServices {
   getAccounts() {
-    return axios({
-      method: 'GET',
-      url: 'http://localhost:8000/api/v1/accounts',
-      data: {}
-    });
+    const token = storage.get('token');
+    if(token === null){
+      return axios();
+    }else{
+      return axios({
+        method: 'GET',
+        url: config.apiUrl + '/accounts?token=' + token,
+        data: {}
+      });
+    }
   }
 }
 

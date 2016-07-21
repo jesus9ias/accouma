@@ -13,22 +13,30 @@ use App\models\accountsUsersModel as AccountsUsers;
 class accountsController extends Controller{
 
   public function __construct(){
-		$this->middleware('isLogued');
-    $this->middleware('pagination', ['only' => ['index']]);
+    $this->middleware('isLogued');
+		$this->middleware('whatRole');
+		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
+		$this->middleware('pagination', ['only' => ['get']]);
+		$this->middleware('logger');
 	}
 
   public function get(){
-    $skip = Request::get('skip', 0);
-    $take = Request::get('take', 0);
     $order = Request::get('order', '');
 
-    $accounts = Accounts::getAccounts(['paginate' => ['skip' => $skip, 'take' => $take] ]);
+    $accounts = Accounts::getAccounts([
+      'paginate' => [
+        'skip' => Request::get('skip', 0),
+        'take' => Request::get('take', 0)
+      ]
+    ]);
+
     return Response::json([
       'result' => [
         'rows' => $accounts
       ],
       'msg' => 'Success',
-      'tot_pages' => Request::get('tot_pages', '')
+      'tot_pages' => Request::get('tot_pages', 0),
+      'tot_rows' => Request::get('tot_rows', 0)
     ], 200);
   }
 

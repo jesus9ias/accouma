@@ -16,7 +16,6 @@ class isLoguedMiddleware{
 
 	public function handle($request, Closure $next){
 		$use_auth = env('USE_AUTH',true);
-		$id = $request->get('id', 0);
 		$token = $request->get('token', '');
 
 		if($use_auth == true){
@@ -52,6 +51,7 @@ class isLoguedMiddleware{
 
 			if($user->token == $token){
 				$request->attributes->add(['user' => $user]);
+				$request->attributes->add(['logued' => true]);
 				return $next($request);
 			}else{
 				return Response::json([

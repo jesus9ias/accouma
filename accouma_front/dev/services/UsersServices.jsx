@@ -1,5 +1,6 @@
 import axios from 'axios';
 import storage from 'key-storage';
+import config from '../config.json';
 
 class UsersServices {
   getUsers() {
@@ -9,7 +10,7 @@ class UsersServices {
     }else{
       return axios({
         method: 'GET',
-        url: 'http://localhost:8000/api/v1/users?token=' +token,
+        url: config.apiUrl + '/users?token=' + token,
         data: {}
       });
     }

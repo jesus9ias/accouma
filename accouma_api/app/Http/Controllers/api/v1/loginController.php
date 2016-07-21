@@ -15,78 +15,30 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class loginController extends Controller{
-    public function login(){
-      $usr = Request::input('usr', '');
-      $pass = Request::input('pass', '');
+  public function __construct(){
+		$this->middleware('isLogued', ['only' => ['isLogued']]);
+	}
 
-      $user = Users::where('user', '=', $usr)->get();
-      if(count($user) == 1){
-        $apass = $user[0]->pass;
-        $id= $user[0]->id;
+  public function login(){
+    $usr = Request::input('usr', '');
+    $pass = Request::input('pass', '');
 
-        if(Hash::check($pass, $apass)){
+    $user = Users::where('user', '=', $usr)->get();
+    if(count($user) == 1){
+      $apass = $user[0]->pass;
+      $id= $user[0]->id;
 
-          $token = JWTAuth::fromUser($user[0]);
+      if(Hash::check($pass, $apass)){
 
-          //$token = Helpers::random_txt(64);
-          Users::updateUser($id, ['token' => $token]);
-          return Response::json([
-            'result' => [
-              'id' => $id,
-              'token' => $token
-            ],
-            'msg' => 'Success'
-          ], 200);
-        }else{
-          return Response::json([
-            'result' => [],
-            'msg' => 'Not Found'
-          ], 404);
-        }
-      }else{
-        return Response::json([
-          'result' => [],
-          'msg' => 'Not Found'
-        ], 404);
-      }
-    }
+        $token = JWTAuth::fromUser($user[0]);
 
-    public function isLogued(){
-      $id = Request::get('id', 0);
-      $token = Request::get('token', '');
-
-      $user = Users::where('id', '=', $id)
-        ->where('token', '=', $token)
-        ->get();
-      if(count($user) == 1){
-        return Response::json([
-          'result' => [
-            'logued' => true
-          ],
-          'msg' => 'Is logued',
-        ], 200);
-      }else{
-        return Response::json([
-          'result' => [
-            'logued' => false
-          ],
-          'msg' => 'Not logued'
-        ], 200);
-      }
-    }
-
-    public function close(){
-      $id = Request::get('id', 0);
-      $token = Request::get('token', '');
-
-      $user = Users::where('id', '=', $id)
-        ->where('token', '=', $token)
-        ->get();
-      if(count($user) == 1){
+        //$token = Helpers::random_txt(64);
         Users::updateUser($id, ['token' => $token]);
         return Response::json([
-          'result' => [],
-          'msg' => 'Success',
+          'result' => [
+            'token' => $token
+          ],
+          'msg' => 'Success'
         ], 200);
       }else{
         return Response::json([
@@ -94,6 +46,51 @@ class loginController extends Controller{
           'msg' => 'Not Found'
         ], 404);
       }
+    }else{
+      return Response::json([
+        'result' => [],
+        'msg' => 'Not Found'
+      ], 404);
     }
+  }
 
+  public function isLogued(){
+    $logued = Request::get('logued', false);
+    if($logued == true){
+      return Response::json([
+        'result' => [
+          'logued' => true
+        ],
+        'msg' => 'logued'
+      ], 200);
+    }else{
+      return Response::json([
+        'result' => [
+          'logued' => false
+        ],
+        'msg' => 'Not logued'
+      ], 200);
+    }
+  }
+
+  public function close(){
+    $id = Request::get('id', 0);
+    $token = Request::get('token', '');
+
+    $user = Users::where('id', '=', $id)
+      ->where('token', '=', $token)
+      ->get();
+    if(count($user) == 1){
+      Users::updateUser($id, ['token' => $token]);
+      return Response::json([
+        'result' => [],
+        'msg' => 'Success',
+      ], 200);
+    }else{
+      return Response::json([
+        'result' => [],
+        'msg' => 'Not Found'
+      ], 404);
+    }
+  }
 }
