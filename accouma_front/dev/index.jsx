@@ -17,6 +17,8 @@ import {
   Redirect
 } from 'react-router';
 
+import IsLogued from './common/IsLogued';
+
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import theApp from './redux/reducers';
@@ -26,7 +28,7 @@ let store = createStore(theApp);
 ReactDOM.render(
   <Provider store={store} >
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={IsLogued(App)}>
         <IndexRoute component={Home} />
         <Route path="me" component={Me} />
         <Route path="users" component={Users} />
