@@ -10,10 +10,15 @@ class usersModel extends Model{
 
   public function scopeGetUsers($query, $params = []){
     if(array_key_exists('fields', $params)){
-      $query = $query->select($params['fields']);
+      $query->select($params['fields']);
     }
     if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
-      $query = $query->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+      $query->skip($params['paginate']['skip'])->take($params['paginate']['take']);
+    }
+    if($params['order_by'] != [] && is_array($params['order_by'])){
+      foreach($params['order_by'] as $n => $v){
+        $query->orderBy($n, $v);
+      }
     }
     return $query->get();
   }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Request;
 use Response;
 use Hash;
+use DB;
 
 use App\Helpers\Helpers;
 use App\models\usersModel as Users;
@@ -39,7 +40,6 @@ class usersController extends Controller{
 		$this->middleware('isLogued');
 		$this->middleware('whatRole');
 		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
-		$this->middleware('pagination', ['only' => ['get']]);
 		$this->middleware('logger');
 	}
 
@@ -47,12 +47,20 @@ class usersController extends Controller{
     $order = Request::get('order', '');
     $fields = $this->getFields('get', Request::get('filteredRoles', []));
 
+    $pagination = $this->paginate(
+                        Request::get('page', 0),
+                        Request::get('per_page', 0)
+                      );
+
+    $order_by = $this->ordering(Request::get('order_by', ''));
+
     $users = Users::getUsers([
       'paginate' => [
-        'skip' => Request::get('skip', 0),
-        'take' => Request::get('take', 0)
+        'skip' => $pagination['skip'],
+        'take' => $pagination['per_page']
       ],
-      'fields' => $fields
+      'fields' => $fields,
+      'order_by' => $order_by
     ]);
 
     return Response::json([
@@ -60,8 +68,8 @@ class usersController extends Controller{
         'rows' => $users
       ],
       'msg' => 'Success',
-      'tot_pages' => Request::get('tot_pages', 0),
-      'tot_rows' => Request::get('tot_rows', 0)
+      'tot_pages' => $pagination['tot_pages'],
+      'tot_rows' => $pagination['tot_rows']
     ], 200);
   }
 
@@ -163,6 +171,34 @@ class usersController extends Controller{
     }
 
     return $r;
+  }
+
+  protected function paginate($page, $per_page){
+    $skip = 0;
+    $tot_pages = 0;
+    $tot_rows = 0;
+
+		if($page > 0 && $per_page > 0){
+			$tot_rows = DB::table('users')->count();
+			$tot_pages = ($tot_rows - ($tot_rows % $per_page)) / $per_page;
+			$tot_pages = ($tot_rows % $per_page > 0)? ++$tot_pages : $tot_pages;
+			$tot_pages = ($tot_rows <= $per_page)? 1 : $tot_pages;
+			$skip = ($page * $per_page) - $per_page;
+		}
+
+		return compact('skip', 'tot_pages', 'tot_rows', 'per_page');
+  }
+
+  protected function ordering($order_by){
+    $order = [];
+
+    $orders = explode(',', $order_by);
+    foreach($orders as $n => $v){
+      $order_dir = explode(':', $v);
+      $order[$order_dir[0]] = $order_dir[1];
+    }
+
+    return $order;
   }
 
 
