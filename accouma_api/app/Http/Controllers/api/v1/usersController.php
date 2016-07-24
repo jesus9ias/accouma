@@ -12,6 +12,7 @@ use App\Helpers\Helpers;
 use App\models\usersModel as Users;
 use App\models\usersRolesModel as UsersRoles;
 
+use Redis;
 use Event;
 use App\Events\userCreated;
 
@@ -174,19 +175,33 @@ class usersController extends Controller{
   }
 
   protected function paginate($page, $per_page){
-    $skip = 0;
-    $tot_pages = 0;
     $tot_rows = 0;
+    $tot_pages = 0;
+    $skip = 0;
 
-		if($page > 0 && $per_page > 0){
-			$tot_rows = DB::table('users')->count();
-			$tot_pages = ($tot_rows - ($tot_rows % $per_page)) / $per_page;
-			$tot_pages = ($tot_rows % $per_page > 0)? ++$tot_pages : $tot_pages;
-			$tot_pages = ($tot_rows <= $per_page)? 1 : $tot_pages;
-			$skip = ($page * $per_page) - $per_page;
-		}
+    if($page > 0 && $per_page > 0){
 
-		return compact('skip', 'tot_pages', 'tot_rows', 'per_page');
+      $redis_hash = md5(Request::get('user')->id.':filters');
+
+      if(Redis::hexists('paginate:users', $redis_hash)){
+        $redis_paginate = json_decode(Redis::hget('paginate:users', $redis_hash), 1);
+        $tot_rows = $redis_paginate['tot_rows'];
+        $tot_pages = $redis_paginate['tot_pages'];
+        $skip = ($page * $per_page) - $per_page;
+      }else{
+        $tot_rows = DB::table('users')->count();
+  			$tot_pages = ($tot_rows - ($tot_rows % $per_page)) / $per_page;
+  			$tot_pages = ($tot_rows % $per_page > 0)? ++$tot_pages : $tot_pages;
+  			$tot_pages = ($tot_rows <= $per_page)? 1 : $tot_pages;
+  			$skip = ($page * $per_page) - $per_page;
+
+        $redis_paginate = json_encode(compact('tot_rows', 'tot_pages'));
+
+        Redis::hset('paginate:users', $redis_hash, $redis_paginate);
+      }
+    }
+
+		return compact('tot_rows', 'tot_pages', 'skip', 'per_page');
   }
 
   protected function ordering($order_by){
