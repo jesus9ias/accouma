@@ -15,6 +15,7 @@ use App\models\usersRolesModel as UsersRoles;
 use Redis;
 use Event;
 use App\Events\userCreated;
+use App\Events\userActions;
 
 class usersController extends Controller{
 
@@ -103,6 +104,7 @@ class usersController extends Controller{
     $last_names = Request::get('last_names', '');
     $data = ['names' => $names, 'last_names' => $last_names];
     Users::updateUser($user_id, $data);
+    Event::fire(new userActions('users'));
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -136,6 +138,8 @@ class usersController extends Controller{
 
     $userCreated = Event::fire(new userCreated($newUserId, $make_admin));
 
+    Event::fire(new userActions('users'));
+
     return Response::json([
       'result' => [
         'newUserId' => $newUserId,
@@ -148,6 +152,7 @@ class usersController extends Controller{
 
   public function activate($user_id){
     Users::updateUser($user_id, ['status' => 2]);
+    Event::fire(new userActions('users'));
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -156,6 +161,7 @@ class usersController extends Controller{
 
   public function disable($user_id){
     Users::updateUser($user_id, ['status' => 3]);
+    Event::fire(new userActions('users'));
     return Response::json([
       'result' => [],
       'msg' => 'success'

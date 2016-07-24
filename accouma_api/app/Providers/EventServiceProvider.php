@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\userCreated' => [
             'App\Listeners\rolesForNewUser',
         ],
+        'App\Events\userActions' => [
+            'App\Listeners\updateRedis',
+        ],
     ];
 
     /**
