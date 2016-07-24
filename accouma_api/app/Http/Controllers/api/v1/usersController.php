@@ -46,15 +46,15 @@ class usersController extends Controller{
 	}
 
   public function get(){
-    $order = Request::get('order', '');
+    $order_by = Request::get('order_by', '');
+    $filters = Request::get('filters', '');
+    $page = Request::get('page', 0);
+    $per_page = Request::get('per_page', 0);
+
     $fields = $this->getFields('get', Request::get('filteredRoles', []));
-
-    $pagination = $this->paginate(
-                        Request::get('page', 0),
-                        Request::get('per_page', 0)
-                      );
-
-    $order_by = $this->ordering(Request::get('order_by', ''));
+    $calc_filters = $this->filtering($filters);
+    $pagination = $this->paginate($page, $per_page, $filters, $calc_filters);
+    $order_by = $this->ordering($order_by);
 
     $users = Users::getUsers([
       'paginate' => [
@@ -62,7 +62,8 @@ class usersController extends Controller{
         'take' => $pagination['per_page']
       ],
       'fields' => $fields,
-      'order_by' => $order_by
+      'order_by' => $order_by,
+      'filters' => $calc_filters
     ]);
 
     return Response::json([
@@ -71,7 +72,8 @@ class usersController extends Controller{
       ],
       'msg' => 'Success',
       'tot_pages' => $pagination['tot_pages'],
-      'tot_rows' => $pagination['tot_rows']
+      'tot_rows' => $pagination['tot_rows'],
+      'filters' => $filters
     ], 200);
   }
 
@@ -180,14 +182,14 @@ class usersController extends Controller{
     return $r;
   }
 
-  protected function paginate($page, $per_page){
+  protected function paginate($page, $per_page, $filters, $calc_filters){
     $tot_rows = 0;
     $tot_pages = 0;
     $skip = 0;
 
     if($page > 0 && $per_page > 0){
 
-      $redis_hash = md5(Request::get('user')->id.':filters');
+      $redis_hash = md5(Request::get('user')->id.':'.$per_page.':'.$filters);
 
       if(Redis::hexists('paginate:users', $redis_hash)){
         $redis_paginate = json_decode(Redis::hget('paginate:users', $redis_hash), 1);
@@ -195,7 +197,9 @@ class usersController extends Controller{
         $tot_pages = $redis_paginate['tot_pages'];
         $skip = ($page * $per_page) - $per_page;
       }else{
-        $tot_rows = DB::table('users')->count();
+        $tot_rows = Users::countUsers([
+          'filters' => $calc_filters
+        ]);
   			$tot_pages = ($tot_rows - ($tot_rows % $per_page)) / $per_page;
   			$tot_pages = ($tot_rows % $per_page > 0)? ++$tot_pages : $tot_pages;
   			$tot_pages = ($tot_rows <= $per_page)? 1 : $tot_pages;
@@ -220,6 +224,18 @@ class usersController extends Controller{
     }
 
     return $order;
+  }
+
+  protected function filtering($filters){
+    $filter = [];
+
+    $filters = explode(',', $filters);
+    foreach($filters as $n => $v){
+      $f = explode(':', $v);
+      $filter[array_shift($f)] = $f;
+    }
+
+    return $filter;
   }
 
 

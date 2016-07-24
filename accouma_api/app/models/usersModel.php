@@ -12,6 +12,9 @@ class usersModel extends Model{
     if(array_key_exists('fields', $params)){
       $query->select($params['fields']);
     }
+    if(array_key_exists('filters', $params)){
+      $query = $this->filtering($query, $params['filters']);
+    }
     if(array_key_exists('paginate', $params) && $params['paginate']['take'] > 0){
       $query->skip($params['paginate']['skip'])->take($params['paginate']['take']);
     }
@@ -21,6 +24,13 @@ class usersModel extends Model{
       }
     }
     return $query->get();
+  }
+
+  public function scopeCountUsers($query, $params = []){
+    if(array_key_exists('filters', $params)){
+      $query = $this->filtering($query, $params['filters']);
+    }
+    return $query->count();
   }
 
   public function scopeGetUser($query, $id, $params = []){
@@ -36,6 +46,17 @@ class usersModel extends Model{
 
   public function scopeUpdateUser($query, $id, $data = []){
     return $query->where('id', '=', $id)->update($data);
+  }
+
+
+  protected function filtering($query, $filters){
+    if(array_key_exists('names', $filters)){
+      $query->where('names', 'like', '%'.$filters['names'][0].'%');
+    }
+    if(array_key_exists('status', $filters)){
+      $query->whereIn('status', $filters['status']);
+    }
+    return $query;
   }
 
 }
