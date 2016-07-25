@@ -4,7 +4,7 @@ import App from './app';
 import Login from './login/login';
 import Home from './home/home';
 import Me from './me/me';
-import Users from './users/users';
+import Users from './users/UsersContainer';
 import Accounts from './accounts/accounts';
 import Registers from './registers/registers';
 import NewRegister from './registers/newRegister';
@@ -19,11 +19,13 @@ import {
 
 import IsLogued from './common/IsLogued';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import theApp from './redux/reducers';
 
-let store = createStore(theApp);
+//let store = createStore(theApp);
+let store =  applyMiddleware(thunk)(createStore)(theApp);
 
 ReactDOM.render(
   <Provider store={store} >

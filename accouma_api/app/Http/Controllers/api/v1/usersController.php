@@ -72,8 +72,7 @@ class usersController extends Controller{
       ],
       'msg' => 'Success',
       'tot_pages' => $pagination['tot_pages'],
-      'tot_rows' => $pagination['tot_rows'],
-      'filters' => $filters
+      'tot_rows' => $pagination['tot_rows']
     ], 200);
   }
 
@@ -217,10 +216,12 @@ class usersController extends Controller{
   protected function ordering($order_by){
     $order = [];
 
-    $orders = explode(',', $order_by);
-    foreach($orders as $n => $v){
-      $order_dir = explode(':', $v);
-      $order[$order_dir[0]] = $order_dir[1];
+    if($order_by != ''){
+      $orders = explode(',', $order_by);
+      foreach($orders as $n => $v){
+        $order_dir = explode(':', $v);
+        $order[$order_dir[0]] = $order_dir[1];
+      }
     }
 
     return $order;
@@ -229,10 +230,12 @@ class usersController extends Controller{
   protected function filtering($filters){
     $filter = [];
 
-    $filters = explode(',', $filters);
-    foreach($filters as $n => $v){
-      $f = explode(':', $v);
-      $filter[array_shift($f)] = $f;
+    if($filters != ''){
+      $filters = explode(',', $filters);
+      foreach($filters as $n => $v){
+        $f = explode(':', $v);
+        $filter[array_shift($f)] = $f;
+      }
     }
 
     return $filter;

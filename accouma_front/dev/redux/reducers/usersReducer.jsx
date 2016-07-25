@@ -5,7 +5,7 @@ const initialState = {
   users: IS.users
 }
 
-function myUsers(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ONE:
       action.data.id = state.users.length + 1;
@@ -27,13 +27,10 @@ function myUsers(state = initialState, action) {
         })
       })
     case GET_ALL:
-      return Object.assign({}, state, {
+      return {
         users: action.data
-      })
+      }
     default:
       return state
   }
-}
-
-
-export default myUsers;
+};

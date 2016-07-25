@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import myUsers from './usersReducer';
+import users from './usersReducer';
 import myAccounts from './accountsReducer';
 
 const theApp = combineReducers({
-  myUsers,
+  users,
   myAccounts
 })
 
