@@ -6,8 +6,8 @@ import {
   Col,
   Card
 } from 'react-materialize';
-import { getAll } from '../redux/actions/accountsActions';
-import AccountsServices from '../services/AccountsServices';
+import { getAll } from '../../redux/actions/accountsActions';
+import AccountsServices from '../../services/AccountsServices';
 
 class Accounts extends React.Component {
   constructor(props) {

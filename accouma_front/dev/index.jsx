@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
-import Login from './login/login';
-import Home from './home/home';
-import Me from './me/me';
-import Users from './users/UsersContainer';
-import Accounts from './accounts/accounts';
-import Registers from './registers/registers';
-import NewRegister from './registers/newRegister';
+import Login from './components/login/login';
+import Home from './components/home/home';
+import Me from './components/me/me';
+import Users from './components/users/UsersContainer';
+import Accounts from './components/accounts/accounts';
+import Registers from './components/registers/registers';
+import NewRegister from './components/registers/newRegister';
 import {
   Router,
   Route,

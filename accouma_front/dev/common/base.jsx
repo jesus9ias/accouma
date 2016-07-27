@@ -1,6 +1,6 @@
 import React from 'react';
-import NavBar from '../navBar/NavBar';
-import SideBar from '../sideBar/SideBar';
+import NavBar from '../components/navBar/NavBar';
+import SideBar from '../components/sideBar/SideBar';
 
 class Base extends React.Component {
 

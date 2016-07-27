@@ -1,6 +1,6 @@
 import Users from './Users';
 import { connect } from 'react-redux';
-import { usersActions } from '../redux/actions';
+import { usersActions } from '../../redux/actions';
 
 const allActions = Object.assign({}, usersActions);
 
