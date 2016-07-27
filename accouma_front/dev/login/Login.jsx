@@ -22,7 +22,8 @@ class Login extends React.Component {
     });;
   }
 
-  makeLogin() {
+  makeLogin(e) {
+    e.preventDefault();
     LoginServices.makeLogin(
       this.refs.user.value,
       this.refs.password.value
@@ -39,7 +40,7 @@ class Login extends React.Component {
   render() {
     return (
       <section className="login">
-        <div className="login-form z-depth-2">
+        <form className="login-form z-depth-2" onSubmit={this.makeLogin}>
           <h2 className="login-title">Accouma - Login</h2>
           <div className="row">
             <div className="input-field col s12">
@@ -65,15 +66,14 @@ class Login extends React.Component {
           </div>
           <div className="row">
             <div className="col s12">
-              <a
+              <input
+                type="submit"
                 className="waves-effect waves-light btn"
-                onClick={this.makeLogin}
-              >
-                Continue
-              </a>
+                value="Contunue"
+              />
             </div>
           </div>
-        </div>
+        </form>
       </section>
     );
   }
