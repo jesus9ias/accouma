@@ -1,10 +1,10 @@
 var express = require('express');
 var app = express();
 
-var html_dir = 'views/';
+var html_dir = 'app/build/';
 
 var options = {
-  root: __dirname + '/views/',
+  root: __dirname + '/app/build/',
   dotfiles: 'deny',
   headers: {
     'x-timestamp': Date.now(),
@@ -12,16 +12,12 @@ var options = {
   }
 };
 
-app.use(express.static('app'));
-
-/**app.get('/api', function (req, res) {
-  res.json({'a': 22});
-});*/
+app.use(express.static('app/build/'));
 
 app.get('*', function (req, res) {
   res.sendFile('index.html', options);
 });
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Accouma running on port 3000!');
 });

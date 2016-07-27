@@ -33,7 +33,9 @@ gulp.task('build', function() {
   .transform(babelify)
   .bundle()
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./app/build/js'))
+  .pipe(gulp.dest('./app/build/js'));
+  gulp.src(['dev/views/index.html'],{})
+  .pipe(gulp.dest('app/build'));
 })
 
 gulp.task('watch', function() {
