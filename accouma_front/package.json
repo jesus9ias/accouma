@@ -32,11 +32,20 @@
     "gulp-scsslint": "0.0.5",
     "gulp-webserver": "^0.9.1",
     "sass-lint": "^1.8.2",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^4.8.1"
   },
   "scripts": {
     "dev": "node app.js",
-    "make": "gulp build & gulp sass",
+    "prod": "node app.js prod",
+    "build": "gulp build",
+    "build:prod": "gulp build -e=prod",
+    "sass": "gulp sass",
+    "sass:prod": "gulp sass -e=prod",
+    "vendor": "gulp vendor",
+    "vendor:prod": "gulp vendor -e=prod",
+    "make": "gulp build & gulp sass & gulp vendor",
+    "make:prod": "gulp build -e=prod & gulp sass -e=prod & gulp vendor -e=prod",
     "sasslint": "gulp sassLint",
     "eslint": "eslint dev/ --ext .js --ext .jsx"
   }

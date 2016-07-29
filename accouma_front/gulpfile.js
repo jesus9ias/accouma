@@ -6,7 +6,9 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var minify = require('gulp-minify-css');
-var php = require('gulp-connect-php');
+var argv = require('yargs').argv;
+
+var env = (argv.e == 'prod')? 'prod' : 'dev';
 
 gulp.task('sass', function() {
   gulp.src(['./dev/style.scss'])
@@ -14,7 +16,7 @@ gulp.task('sass', function() {
       'include css': true,
     }))
     .pipe(minify())
-    .pipe(gulp.dest('./app/build/css/'))
+    .pipe(gulp.dest('./app/' + env + '/css/'));
 })
 
 gulp.task('sassLint', function() {
@@ -33,14 +35,19 @@ gulp.task('build', function() {
   .transform(babelify)
   .bundle()
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./app/build/js'));
+  .pipe(gulp.dest('./app/' + env + '/js'));
   gulp.src(['dev/views/index.html'],{})
-  .pipe(gulp.dest('app/build'));
-})
+  .pipe(gulp.dest('app/' + env));
+});
+
+gulp.task('vendor', function() {
+  gulp.src(['dev/vendor/**/*'],{base: './dev/vendor/'})
+  .pipe(gulp.dest('app/' + env + '/vendor/'));
+});
 
 gulp.task('watch', function() {
-  gulp.watch('./dev/**/*.jsx', ['build'])
-  gulp.watch(['./dev/**/*.scss'], ['sass'])
+  gulp.watch('./dev/**/*.jsx', ['build']);
+  gulp.watch(['./dev/**/*.scss'], ['sass']);
 })
 
 gulp.task('default', ['watch'])

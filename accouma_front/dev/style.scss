@@ -1,4 +1,4 @@
-@import 'common/vendor/materialize/css/materialize.min';
+@import 'vendor/css/materialize.min';
 
 html,
 body {
@@ -83,7 +83,7 @@ $black: #323232;
 
 @import 'common/general';
 @import 'common/cards';
-@import 'home/home';
-@import 'navBar/navBar';
-@import 'sideBar/sideBar';
-@import 'login/login';
+@import 'components/home/home';
+@import 'components/navBar/navBar';
+@import 'components/sideBar/sideBar';
+@import 'components/login/login';
