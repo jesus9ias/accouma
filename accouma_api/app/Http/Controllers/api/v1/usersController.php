@@ -189,8 +189,9 @@ class usersController extends Controller{
     if($page > 0 && $per_page > 0){
 
       $redis_hash = md5(Request::get('user')->id.':'.$per_page.':'.$filters);
+      $exists_redis_hash = Redis::hexists('paginate:users', $redis_hash);
 
-      if(Redis::hexists('paginate:users', $redis_hash)){
+      if($exists_redis_hash){
         $redis_paginate = json_decode(Redis::hget('paginate:users', $redis_hash), 1);
         $tot_rows = $redis_paginate['tot_rows'];
         $tot_pages = $redis_paginate['tot_pages'];
@@ -199,6 +200,7 @@ class usersController extends Controller{
         $tot_rows = Users::countUsers([
           'filters' => $calc_filters
         ]);
+        $tot_rows = (is_numeric($tot_rows))? $tot_rows : 0;
   			$tot_pages = ($tot_rows - ($tot_rows % $per_page)) / $per_page;
   			$tot_pages = ($tot_rows % $per_page > 0)? ++$tot_pages : $tot_pages;
   			$tot_pages = ($tot_rows <= $per_page)? 1 : $tot_pages;
