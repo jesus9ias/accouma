@@ -43,6 +43,8 @@ gulp.task('build', function() {
 gulp.task('vendor', function() {
   gulp.src(['dev/vendor/**/*'],{base: './dev/vendor/'})
   .pipe(gulp.dest('app/' + env + '/vendor/'));
+  gulp.src(['dev/images/**/*'],{base: './dev/images/'})
+  .pipe(gulp.dest('app/' + env + '/images/'));
 });
 
 gulp.task('watch', function() {

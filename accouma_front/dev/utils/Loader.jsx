@@ -5,9 +5,7 @@ class Loader extends React.Component {
   render() {
     if(this.props.loading){
       return (
-        <div className="loader">
-          hi!
-        </div>
+        <div className="loader"></div>
       );
     }else{
       return null;
