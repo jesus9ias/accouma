@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Base from './common/base';
 import Loader from './utils/Loader';
 
@@ -17,5 +16,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.element.isRequired
+};
 
 export default App;
