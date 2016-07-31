@@ -1,4 +1,4 @@
-import { VIEW_ALL, DELETE_ONE, ADD_ONE, GET_ALL } from '../actionTypes/usersTypes';
+import * as actions from '../allTypes';
 import UsersServices from '../../services/UsersServices';
 
 /*export function viewAll() {
@@ -23,9 +23,11 @@ export function addOne(data) {
 }*/
 
 export default {
-  getAll: () => (dispatch) => {
+  getAllUsers: () => (dispatch) => {
+    dispatch({ type: actions.LOADING, data: true });
     UsersServices.getUsers().then((response) => {
-      dispatch({ type: GET_ALL, data: response.data.result.rows });
+      dispatch({ type: actions.GET_ALL_USERS, data: response.data.result.rows });
+      dispatch({ type: actions.LOADING, data: false });
     }).catch((error) => {
 
     });

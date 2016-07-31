@@ -12,7 +12,7 @@ class Users extends React.Component {
   }
 
   componentWillMount(){
-    this.props.getAll();
+    this.props.getAllUsers();
   }
 
   render() {

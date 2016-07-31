@@ -1,27 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import {
   Row,
   Col,
   Card
 } from 'react-materialize';
-import { getAll } from '../../redux/actions/accountsActions';
-import AccountsServices from '../../services/AccountsServices';
 
 class Accounts extends React.Component {
   constructor(props) {
     super(props);
-    this.getAccounts();
   }
 
-  getAccounts() {
-    AccountsServices.getAccounts().then((response) => {
-      console.log(response);
-      this.props.getAllAccounts(response.data.result.rows);
-    }).catch((error) => {
-
-    });
+  componentWillMount(){
+    this.props.getAllAccounts();
   }
 
   render() {
@@ -31,13 +22,10 @@ class Accounts extends React.Component {
       'undefined';
     return (
       <div className="general-block">
-        <div>
-          {currentChild === 'NewRegister' ? this.props.children : null}
-        </div>
-        <div className="general-cards">
+        <div className="cards">
           <Row>
             {
-              this.props.listado.map((account, i) => {
+              this.props.accounts.map((account, i) => {
                 return (
                   <Col key={i} s={12} m={4}>
                     <Card
@@ -75,22 +63,6 @@ class Accounts extends React.Component {
       </div>
     );
   }
-}
-
-function mapStateToProps(state) {
-  return {
-    listado: state.myAccounts.accounts
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAllAccounts: (data) => {
-      dispatch(getAll(data));
-    }
-  };
 };
 
-const AccountsContainer = connect(mapStateToProps, mapDispatchToProps)(Accounts);
-AccountsContainer.displayName = 'Accounts';
-export default AccountsContainer;
+export default Accounts;

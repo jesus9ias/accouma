@@ -1,13 +1,13 @@
-import { VIEW_ALL, DELETE_ONE, ADD_ONE, GET_ALL } from '../actionTypes/accountsTypes'
+import * as actions from '../allTypes'
 import * as IS from '../INITIAL_STATE'
 
 const initialState = {
   accounts: IS.accounts
 }
 
-function myAccounts(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_ONE:
+    case actions.ADD_ONE_ACCOUNT:
       action.data.id = state.accounts.length + 1;
       return Object.assign({}, state, {
         accounts: [
@@ -15,7 +15,7 @@ function myAccounts(state = initialState, action) {
           action.data
         ]
       })
-    case DELETE_ONE:
+    case actions.DELETE_ONE_ACCOUNT:
       return Object.assign({}, state, {
         accounts: state.accounts.map((p) => {
           if(p.id === action.index) {
@@ -26,14 +26,11 @@ function myAccounts(state = initialState, action) {
           return p
         })
       })
-    case GET_ALL:
-      return Object.assign({}, state, {
+    case actions.GET_ALL_ACCOUNTS:
+      return {
         accounts: action.data
-      })
+      }
     default:
       return state
   }
 }
-
-
-export default myAccounts;

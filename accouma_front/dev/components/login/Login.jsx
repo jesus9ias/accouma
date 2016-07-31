@@ -1,7 +1,6 @@
 import React from 'react';
 //  import {} from 'react-materialize'
 import { browserHistory } from 'react-router'
-import { ajax } from '../../common/ajax';
 import storage from 'key-storage';
 import LoginServices from '../../services/LoginServices';
 
@@ -69,7 +68,7 @@ class Login extends React.Component {
               <input
                 type="submit"
                 className="waves-effect waves-light btn"
-                value="Contunue"
+                value="Continue"
               />
             </div>
           </div>

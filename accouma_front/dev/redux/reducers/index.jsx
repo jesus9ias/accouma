@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
+import general from './generalReducer';
 import users from './usersReducer';
-import myAccounts from './accountsReducer';
+import accounts from './accountsReducer';
 
 const theApp = combineReducers({
+  general,
   users,
-  myAccounts
+  accounts
 })
 
 export default theApp

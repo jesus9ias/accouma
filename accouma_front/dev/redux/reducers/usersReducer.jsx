@@ -1,4 +1,4 @@
-import { VIEW_ALL, DELETE_ONE, ADD_ONE, GET_ALL } from '../actionTypes/usersTypes'
+import * as actions from '../allTypes'
 import * as IS from '../INITIAL_STATE'
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_ONE:
+    case actions.ADD_ONE_USER:
       action.data.id = state.users.length + 1;
       return Object.assign({}, state, {
         users: [
@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
           action.data
         ]
       })
-    case DELETE_ONE:
+    case actions.DELETE_ONE_USER:
       return Object.assign({}, state, {
         users: state.users.map((p) => {
           if(p.id === action.index) {
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
           return p
         })
       })
-    case GET_ALL:
+    case actions.GET_ALL_USERS:
       return {
         users: action.data
       }
