@@ -2,6 +2,9 @@
   @include flexRow;
   background: $greenDark;
   color: $white;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
 
   .navbar-icon-container {
     padding: 0 10px;
@@ -10,6 +13,7 @@
   .navbar-title-container {
     @include flex();
     padding: 0 10px;
+    z-index: 100;
 
     .navbar-title {
       font-size: 32px;

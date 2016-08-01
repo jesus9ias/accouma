@@ -6,15 +6,21 @@
 
   .general-section {
     @include flexRow;
-    @include calcMinHeight(100vh, 64px);
+    @include calcMinHeight(100vh, 0px);
+    margin-top: 64px;
 
     .general-content {
       @include flexColumn;
       @include flex();
+      margin-left: 50px;
     }
 
     .general-block {
       @include flexColumn;
+    }
+
+    .general-cardicon-button i{
+      color: #273238;
     }
   }
 }

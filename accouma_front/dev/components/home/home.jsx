@@ -15,13 +15,13 @@ class Home extends React.Component {
           <Row>
             <Col s={12} m={4}>
               <Card
-                className="blue-grey darken-1 card"
+                className=" darken-1 card"
                 textClassName="white-text"
                 title="Users"
                 actions={[
                   <Link
                     key={1}
-                    className="card-icon-button waves-effect btn-flat"
+                    className="general-cardicon-button waves-effect btn-flat"
                     to={'/users'}
                   >
                     <i className="material-icons">arrow_forward</i>
@@ -32,13 +32,13 @@ class Home extends React.Component {
             </Col>
             <Col s={12} m={4}>
               <Card
-                className="blue-grey darken-1 card"
+                className="darken-1 card"
                 textClassName="white-text"
                 title="Accounts"
                 actions={[
                   <Link
                     key={1}
-                    className="card-icon-button waves-effect btn-flat"
+                    className="general-cardicon-button waves-effect btn-flat"
                     to={'/accounts'}
                   >
                     <i className="material-icons">arrow_forward</i>
@@ -51,13 +51,13 @@ class Home extends React.Component {
             </Col>
             <Col s={12} m={4}>
               <Card
-                className="blue-grey darken-1 card"
+                className="darken-1 card"
                 textClassName="white-text"
                 title="Registers"
                 actions={[
                   <Link
                     key={1}
-                    className="card-icon-button waves-effect btn-flat"
+                    className="general-cardicon-button waves-effect btn-flat"
                     to={'/registers'}
                   >
                     <i className="material-icons">arrow_forward</i>

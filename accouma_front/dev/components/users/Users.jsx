@@ -25,20 +25,20 @@ class Users extends React.Component {
                 return (
                   <Col key={i} s={12} m={4}>
                     <Card
-                      className="blue-grey darken-1 card"
+                      className=" darken-1 card"
                       textClassName="white-text"
                       title={user.names}
                       actions={[
                         <Link
                           key={1}
-                          className="card-icon-button waves-effect btn-flat"
+                          className="general-cardicon-button waves-effect btn-flat"
                           to={'/users'}
                         >
                           <i className="material-icons">mode_edit</i>
                         </Link>,
                         <Link
                           key={2}
-                          className="card-icon-button waves-effect btn-flat"
+                          className="general-cardicon-button waves-effect btn-flat"
                           to={'/users'}
                         >
                           <i className="material-icons">delete</i>

@@ -29,20 +29,20 @@ class Accounts extends React.Component {
                 return (
                   <Col key={i} s={12} m={4}>
                     <Card
-                      className="blue-grey darken-1 general-card"
+                      className="darken-1 general-card"
                       textClassName="white-text"
                       title={account.name}
                       actions={[
                         <Link
                           key={1}
-                          className="general-cardIconButton waves-effect btn-flat"
+                          className="general-cardicon-button waves-effect btn-flat"
                           to={'/accounts/${account.id}'}
                         >
                           <i className="material-icons">mode_edit</i>
                         </Link>,
                         <Link
                           key={2}
-                          className="general-cardIconButton waves-effect btn-flat"
+                          className="general-cardicon-button waves-effect btn-flat"
                           to={'/accounts'}
                         >
                           <i className="material-icons">delete</i>
