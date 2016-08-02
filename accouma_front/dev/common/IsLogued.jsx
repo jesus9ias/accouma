@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import LoginServices from '../services/LoginServices';
+import BackLoader from '../utils/BackLoader';
 
 export default function IsLogued(Component) {
   class LoguedComponent extends React.Component {
@@ -28,7 +29,7 @@ export default function IsLogued(Component) {
       if (this.state.logued) {
         return <Component {...this.props} />;
       }
-      return null;
+      return <BackLoader />;
     }
   }
 
