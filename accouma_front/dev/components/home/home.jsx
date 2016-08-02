@@ -74,4 +74,5 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+Home.displayName = 'home';
+export default Home;

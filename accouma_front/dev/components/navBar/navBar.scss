@@ -5,6 +5,7 @@
   position: fixed;
   z-index: 100;
   top: 0px;
+  height: $navHeight + 1;
 
   .navbar-icon-container {
     padding: 0 10px;
@@ -17,7 +18,7 @@
 
     .navbar-title {
       font-size: 32px;
-      line-height: 64px;
+      line-height: $navHeight;
     }
   }
 

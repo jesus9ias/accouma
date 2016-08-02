@@ -1,0 +1,19 @@
+html,
+body {
+  height: calc(100% - $navHeight);
+}
+
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}

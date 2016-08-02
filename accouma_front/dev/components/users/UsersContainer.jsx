@@ -11,4 +11,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 const UsersContainer = connect(mapStateToProps, allActions)(Users);
+UsersContainer.displayName = 'users';
 export default UsersContainer;

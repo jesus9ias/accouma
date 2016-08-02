@@ -6,7 +6,7 @@
 
   .general-section {
     @include flexRow;
-    @include calcMinHeight(100vh, 0px);
+    @include calcMinHeight(100vh, $navHeight);
     margin-top: 64px;
 
     .general-content {

@@ -1,6 +1,6 @@
 .sidebar {
   @include flexColumn;
-  @include calcHeight(100%, 64px);
+  @include calcHeight(100%, $navHeight);
   background: $black;
   color: $white;
   width: 50px;
@@ -11,7 +11,13 @@
   .sidebar-icon {
     color: $white;
     display: block;
-    padding: 5px 0;
+    padding: 10px 0;
     text-align: center;
+    &:first-child{
+      margin-top: 10px;
+    }
+    &:last-child{
+      margin-bottom: 10px;
+    }
   }
 }
