@@ -16,12 +16,9 @@ class Accounts extends React.Component {
   }
 
   render() {
-    const currentChild = (this.props.children != null) ?
-      this.props.children.type.displayName
-    :
-      'undefined';
     return (
       <div className="general-block">
+        {this.props.new}
         <div className="cards">
           <Row>
             {
@@ -36,7 +33,7 @@ class Accounts extends React.Component {
                         <Link
                           key={1}
                           className="general-cardicon-button waves-effect btn-flat"
-                          to={'/accounts/${account.id}'}
+                          to={`/accounts/${account.id}`}
                         >
                           <i className="material-icons">mode_edit</i>
                         </Link>,
@@ -58,7 +55,7 @@ class Accounts extends React.Component {
           </Row>
         </div>
         <div>
-          {currentChild === 'Registers' ? this.props.children : null}
+          {this.props.edit}
         </div>
       </div>
     );

@@ -5,7 +5,11 @@ import Login from './components/login/login';
 import Home from './components/home/home';
 import Me from './components/me/me';
 import Users from './components/users/UsersContainer';
+import NewUser from './components/users/NewUser';
+import EditUser from './components/users/EditUser';
 import Accounts from './components/accounts/AccountsContainer';
+import NewAccount from './components/accounts/NewAccount';
+import EditAccount from './components/accounts/EditAccount';
 import Registers from './components/registers/registers';
 import NewRegister from './components/registers/newRegister';
 import {
@@ -33,10 +37,13 @@ ReactDOM.render(
       <Route path="/" component={IsLogued(App)}>
         <IndexRoute component={Home} />
         <Route path="me" component={Me} />
-        <Route path="users" component={Users} />
+        <Route path="users" component={Users}>
+          <Route path="new" components={{new: NewUser}} />
+          <Route path=":id" components={{edit: EditUser}} />
+        </Route>
         <Route path="accounts" component={Accounts}>
-          <Route path="new" component={NewRegister} />
-          <Route path=":id" component={Registers} />
+          <Route path="new" components={{new: NewAccount}} />
+          <Route path=":id" components={{edit: EditAccount}} />
         </Route>
       </Route>
       <Route path="/login" component={Login} />

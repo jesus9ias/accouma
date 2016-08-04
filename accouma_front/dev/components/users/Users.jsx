@@ -18,6 +18,7 @@ class Users extends React.Component {
   render() {
     return (
       <div className="general-block">
+        {this.props.new}
         <div className="cards">
           <Row>
             {
@@ -32,7 +33,7 @@ class Users extends React.Component {
                         <Link
                           key={1}
                           className="general-cardicon-button waves-effect btn-flat"
-                          to={'/users'}
+                          to={`/users/${user.id}`}
                         >
                           <i className="material-icons">mode_edit</i>
                         </Link>,
@@ -55,6 +56,7 @@ class Users extends React.Component {
             }
           </Row>
         </div>
+        {this.props.edit}
       </div>
     );
   }
