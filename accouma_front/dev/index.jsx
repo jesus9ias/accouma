@@ -27,9 +27,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import theApp from './redux/reducers';
+import logger from './redux/middleware/logger';
 
 //let store = createStore(theApp);
-let store =  applyMiddleware(thunk)(createStore)(theApp);
+let store =  applyMiddleware(
+  thunk,
+  logger
+)(createStore)(theApp);
 
 ReactDOM.render(
   <Provider store={store} >
