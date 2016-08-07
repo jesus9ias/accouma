@@ -1,7 +1,7 @@
 .back-loader{
-  background: #454F79;
+  background: $mainBackground;
   min-height: 100vh;
-  color: white;
+  color: $white;
   display: flex;
   flex-direction: column;
   justify-content: center;

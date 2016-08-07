@@ -1,6 +1,6 @@
 html,
 body {
-  height: calc(100% - $navHeight);
+  @include calcHeight(100%, $navHeight);
 }
 
 body {
