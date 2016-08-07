@@ -74,6 +74,11 @@ class NewUser extends React.Component {
                 className="waves-effect waves-light btn"
                 value="Save"
               />
+              <input
+                type="submit"
+                className="waves-effect waves-light btn"
+                value="Save and create new"
+              />
             </div>
           </div>
         </div>

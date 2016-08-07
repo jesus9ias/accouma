@@ -47,9 +47,10 @@ gulp.task('vendor', function() {
   .pipe(gulp.dest('app/' + env + '/images/'));
 });
 
-gulp.task('watch', function() {
+gulp.task('serve', function() {
   gulp.watch('./dev/**/*.jsx', ['build']);
   gulp.watch(['./dev/**/*.scss'], ['sass']);
+  gulp.watch(['./dev/vendor/**/*'], ['vendor']);
 })
 
-gulp.task('default', ['watch'])
+gulp.task('default', ['serve'])

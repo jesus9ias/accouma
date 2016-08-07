@@ -47,6 +47,7 @@
     "make": "gulp build & gulp sass & gulp vendor",
     "make:prod": "gulp build -e=prod & gulp sass -e=prod & gulp vendor -e=prod",
     "sasslint": "gulp sassLint",
-    "eslint": "eslint dev/ --ext .js --ext .jsx"
+    "eslint": "eslint dev/ --ext .js --ext .jsx",
+    "serve": "gulp serve"
   }
 }
