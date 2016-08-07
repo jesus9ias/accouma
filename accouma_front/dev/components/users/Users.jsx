@@ -55,6 +55,12 @@ class Users extends React.Component {
               })
             }
           </Row>
+          <Link
+            to={'/users/new'}
+            className="button button-add btn-floating btn-large waves-effect waves-light red"
+          >
+            <i className="material-icons">add</i>
+          </Link>
         </div>
         {this.props.edit}
       </div>
