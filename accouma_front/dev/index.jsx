@@ -21,7 +21,7 @@ import {
   Redirect
 } from 'react-router';
 
-import IsLogued from './common/IsLogued';
+import IsLogued from './utils/IsLogued';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';

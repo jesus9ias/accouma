@@ -1,6 +1,6 @@
 import React from 'react';
 import Base from './common/base';
-import Loader from './utils/Loader';
+import Loader from './common/Loader';
 
 class App extends React.Component {
 
