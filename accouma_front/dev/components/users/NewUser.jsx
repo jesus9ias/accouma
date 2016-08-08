@@ -14,11 +14,11 @@ class NewUser extends React.Component {
   render() {
     return (
       <section className="section-overlay user-new">
-        <div className="section-overlay-header">
-          <Link to={'/users'}>
-            <i className="material-icons">close</i>
+        <div className="section-overlay-head">
+          <h2 className="section-overlay-title">New user</h2>
+          <Link className="section-overlay-close" to={'/users'}>
+            <i className="material-icons medium">close</i>
           </Link>
-          <h2>New user</h2>
         </div>
         <div className="section-overlay-body ">
           <div className="row">

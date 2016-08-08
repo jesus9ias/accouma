@@ -4,6 +4,8 @@ import { usersActions } from '../../redux/actions';
 
 const allActions = Object.assign({}, usersActions);
 
+allActions.getAllUsers();
+
 function mapStateToProps(state, ownProps) {
   return {
     users: state.users.users
