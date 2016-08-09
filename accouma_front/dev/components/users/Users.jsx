@@ -5,14 +5,24 @@ import {
   Col,
   Card
 } from 'react-materialize';
+import VoidState from '../../common/VoidState';
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {'voidState': false};
   }
 
   componentWillMount(){
     this.props.getAllUsers();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.users.length == 0) {
+      this.setState({'voidState': true});
+    }else{
+        this.setState({'voidState': false});
+    }
   }
 
   render() {
@@ -54,6 +64,14 @@ class Users extends React.Component {
                 );
               })
             }
+            <VoidState show={this.state.voidState} message="There is no users">
+              <Link
+                to={'/users/new'}
+                className="btn-large waves-effect waves-light red"
+              >
+                Add one User
+              </Link>
+            </VoidState>
           </Row>
           <Link
             to={'/users/new'}
