@@ -11,7 +11,7 @@ class Accounts extends React.Component {
     super(props);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.props.getAllAccounts();
   }
 
@@ -22,8 +22,8 @@ class Accounts extends React.Component {
         <div className="cards">
           <Row>
             {
-              this.props.accounts.map((account, i) => {
-                return (
+              this.props.accounts.map(
+                (account, i) => (
                   <Col key={i} s={12} m={4}>
                     <Card
                       className="darken-1 general-card"
@@ -49,8 +49,8 @@ class Accounts extends React.Component {
                       <span className="card-content">Hi!</span>
                     </Card>
                   </Col>
-                );
-              })
+                )
+              )
             }
           </Row>
         </div>
@@ -60,6 +60,13 @@ class Accounts extends React.Component {
       </div>
     );
   }
+}
+
+Accounts.propTypes = {
+  getAllAccounts: React.PropTypes.func.isRequired,
+  new: React.PropTypes.element,
+  edit: React.PropTypes.element,
+  accounts: React.PropTypes.array
 };
 
 export default Accounts;

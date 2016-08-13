@@ -1,7 +1,7 @@
 import * as actions from '../allTypes';
 import UsersServices from '../../services/UsersServices';
 
-/*export function viewAll() {
+/*  export function viewAll() {
   return {
     type: VIEW_ALL,
     list: []

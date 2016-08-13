@@ -7,9 +7,6 @@ import {
 } from 'react-materialize';
 
 class NewUser extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

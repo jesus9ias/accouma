@@ -5,12 +5,12 @@ import config from '../config.json';
 class LginServices {
   isLogued() {
     const token = storage.get('token');
-    if(token === null){
+    if (token === null) {
       return axios();
-    }else{
+    } else {
       return axios({
         method: 'GET',
-        url: config.apiUrl + '/login?token=' + token,
+        url: `${config.apiUrl}/login?token=${token}`,
         data: {}
       });
     }
@@ -19,10 +19,10 @@ class LginServices {
   makeLogin(usr, pass) {
     return axios({
       method: 'POST',
-      url: config.apiUrl + '/login',
+      url: `${config.apiUrl}/login`,
       data: {
-        'usr': usr,
-        'pass': pass
+        usr,
+        pass
       }
     });
   }

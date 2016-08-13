@@ -5,12 +5,12 @@ import config from '../config.json';
 class UsersServices {
   getUsers() {
     const token = storage.get('token');
-    if(token === null){
+    if (token === null) {
       return axios();
-    }else{
+    } else {
       return axios({
         method: 'GET',
-        url: config.apiUrl + '/users?token=' + token,
+        url: `${config.apiUrl}/users?token=${token}`,
         data: {}
       });
     }

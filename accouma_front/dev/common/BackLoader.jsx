@@ -9,6 +9,6 @@ class BackLoader extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default BackLoader;

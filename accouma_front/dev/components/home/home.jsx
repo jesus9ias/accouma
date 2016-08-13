@@ -26,7 +26,8 @@ class Home extends React.Component {
                   >
                     <i className="material-icons">arrow_forward</i>
                   </Link>
-                ]}>
+                ]}
+              >
                 <span className="card-content">Hi!</span>
               </Card>
             </Col>
@@ -43,7 +44,8 @@ class Home extends React.Component {
                   >
                     <i className="material-icons">arrow_forward</i>
                   </Link>
-                ]}>
+                ]}
+              >
                 <span className="card-content">
                   Hi!
                 </span>

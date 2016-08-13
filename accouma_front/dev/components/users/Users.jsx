@@ -10,18 +10,18 @@ import VoidState from '../../common/VoidState';
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {'voidState': false};
+    this.state = { voidState: false };
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.props.getAllUsers();
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.users.length == 0) {
-      this.setState({'voidState': true});
-    }else{
-        this.setState({'voidState': false});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.users.length === 0) {
+      this.setState({ voidState: true });
+    } else {
+      this.setState({ voidState: false });
     }
   }
 
@@ -32,8 +32,8 @@ class Users extends React.Component {
         <div className="cards">
           <Row>
             {
-              this.props.users.map((user, i) => {
-                return (
+              this.props.users.map(
+                (user, i) => (
                   <Col key={i} s={12} m={4}>
                     <Card
                       className=" darken-1 card"
@@ -61,8 +61,8 @@ class Users extends React.Component {
                       </span>
                     </Card>
                   </Col>
-                );
-              })
+                )
+              )
             }
             <VoidState show={this.state.voidState} message="There is no users">
               <Link
@@ -85,5 +85,12 @@ class Users extends React.Component {
     );
   }
 }
+
+Users.propTypes = {
+  getAllUsers: React.PropTypes.func.isRequired,
+  new: React.PropTypes.element,
+  edit: React.PropTypes.element,
+  users: React.PropTypes.array
+};
 
 export default Users;

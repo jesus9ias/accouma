@@ -4,7 +4,7 @@ import { accountsActions } from '../../redux/actions';
 
 const allActions = Object.assign({}, accountsActions);
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     accounts: state.accounts.accounts
   };

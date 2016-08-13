@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 
 class Loader extends React.Component {
   render() {
-    if(this.props.loading){
+    if (this.props.loading) {
       return (
         <div className="loader"></div>
       );
-    }else{
+    } else {
       return null;
     }
   }
-};
+}
 
 Loader.propTypes = {
   loading: React.PropTypes.bool.isRequired

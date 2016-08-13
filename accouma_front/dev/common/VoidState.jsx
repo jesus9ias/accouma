@@ -19,7 +19,7 @@ class VoidState extends React.Component {
 VoidState.propTypes = {
   message: React.PropTypes.string,
   children: React.PropTypes.element,
-  show: React.PropTypes.element.isRequired
+  show: React.PropTypes.bool.isRequired
 };
 
 export default VoidState;

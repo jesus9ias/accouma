@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
-import Login from './components/login/login';
-import Home from './components/home/home';
+import Login from './components/login/Login';
+import Home from './components/home/Home';
 import Me from './components/me/me';
 import Users from './components/users/UsersContainer';
 import NewUser from './components/users/NewUser';
@@ -10,12 +10,11 @@ import EditUser from './components/users/EditUser';
 import Accounts from './components/accounts/AccountsContainer';
 import NewAccount from './components/accounts/NewAccount';
 import EditAccount from './components/accounts/EditAccount';
-import Registers from './components/registers/registers';
-import NewRegister from './components/registers/newRegister';
+//  import Registers from './components/registers/registers';
+//  import NewRegister from './components/registers/newRegister';
 import {
   Router,
   Route,
-  Link,
   browserHistory,
   IndexRoute,
   Redirect
@@ -29,8 +28,8 @@ import { Provider } from 'react-redux';
 import theApp from './redux/reducers';
 import logger from './redux/middleware/logger';
 
-//let store = createStore(theApp);
-let store =  applyMiddleware(
+//  let store = createStore(theApp);
+let store = applyMiddleware(
   thunk,
   logger
 )(createStore)(theApp);
@@ -42,12 +41,12 @@ ReactDOM.render(
         <IndexRoute component={Home} />
         <Route path="me" component={Me} />
         <Route path="users" component={Users}>
-          <Route path="new" components={{new: NewUser}} />
-          <Route path=":id" components={{edit: EditUser}} />
+          <Route path="new" components={{ new: NewUser }} />
+          <Route path=":id" components={{ edit: EditUser }} />
         </Route>
         <Route path="accounts" component={Accounts}>
-          <Route path="new" components={{new: NewAccount}} />
-          <Route path=":id" components={{edit: EditAccount}} />
+          <Route path="new" components={{ new: NewAccount }} />
+          <Route path=":id" components={{ edit: EditAccount }} />
         </Route>
       </Route>
       <Route path="/login" component={Login} />

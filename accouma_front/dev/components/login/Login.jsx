@@ -1,6 +1,6 @@
 import React from 'react';
 //  import {} from 'react-materialize'
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 import storage from 'key-storage';
 import LoginServices from '../../services/LoginServices';
 
@@ -11,14 +11,14 @@ class Login extends React.Component {
     this.makeLogin = this.makeLogin.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     LoginServices.isLogued().then((response) => {
-      if(response.data.result.logued == true){
+      if (response.data.result.logued === true){
         browserHistory.push('/');
       }
     }).catch((error) => {
-      //console.error(error);
-    });;
+      //  console.error(error);
+    });
   }
 
   makeLogin(e) {
@@ -27,7 +27,7 @@ class Login extends React.Component {
       this.refs.user.value,
       this.refs.password.value
     ).then((response) => {
-      if(response.data.result && response.data.result.token){
+      if (response.data.result && response.data.result.token) {
         storage.set('token', response.data.result.token);
         browserHistory.push('/');
       }
