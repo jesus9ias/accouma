@@ -1,15 +1,17 @@
 .section-overlay{
   @include flexColumn;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: $mainAlphaBackground;
-  overflow-y: auto;
+  @include backFixed;
+  background: transparent;
   z-index: 101;
+  .section-overlay-content{
+    @include flexColumn;
+    min-height: 100%;
+    overflow-y: auto;
+    z-index: 1;
+  }
   .section-overlay-head{
     @include flexRow;
+    flex-shrink: 0;
     .section-overlay-title{
       @include flex();
     }

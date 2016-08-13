@@ -29,7 +29,7 @@ class NavBar extends React.Component {
             }
           >
             <NavItem>User</NavItem>
-            <NavItem href="accounts/new">Account</NavItem>
+            <NavItem>Account</NavItem>
           </Dropdown>
           <Link
             className="navbar-icon"

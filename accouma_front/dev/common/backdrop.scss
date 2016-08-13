@@ -1,0 +1,4 @@
+.section-backdrop {
+  @include backFixed;
+  background: $mainAlphaBackground;
+}
