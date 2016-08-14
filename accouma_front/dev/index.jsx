@@ -39,7 +39,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={IsLogued(App)}>
         <IndexRoute component={Home} />
-        <Route path="new" component={Home} />
+        <Route path="new" component={Home}>
+          <Route path="user" components={{ new: NewUser }} />
+        </Route>
         <Route path="me" component={Me} />
         <Route path="users" component={Users}>
           <Route path="new" components={{ new: NewUser }} />

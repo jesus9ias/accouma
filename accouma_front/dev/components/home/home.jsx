@@ -5,12 +5,12 @@ import {
   Col,
   Card
 } from 'react-materialize';
-import Base from '../../common/base';
 
 class Home extends React.Component {
   render() {
     return (
       <div className="general-block">
+        {this.props.new}
         <div className="cards">
           <Row>
             <Col s={12} m={4}>

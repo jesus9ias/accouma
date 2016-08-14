@@ -28,8 +28,8 @@ class NavBar extends React.Component {
               <a><i className="material-icons">add</i></a>
             }
           >
-            <NavItem>User</NavItem>
-            <NavItem>Account</NavItem>
+            <Link to={'/new/user'}>User</Link>
+            <Link to={'/new/account'}>Account</Link>
           </Dropdown>
           <Link
             className="navbar-icon"
