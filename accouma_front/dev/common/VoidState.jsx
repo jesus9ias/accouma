@@ -6,7 +6,7 @@ class VoidState extends React.Component {
     if (this.props.show) {
       return (
         <section className="voidState">
-          <p>{this.props.message}</p>
+          <p className="voidState-title">{this.props.message}</p>
           {this.props.children}
         </section>
       );

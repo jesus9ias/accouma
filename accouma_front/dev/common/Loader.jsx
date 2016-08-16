@@ -19,7 +19,7 @@ Loader.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    loading: state.general.loading
+    loading: false
   };
 }
 

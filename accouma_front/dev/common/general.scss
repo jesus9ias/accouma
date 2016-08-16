@@ -17,6 +17,7 @@
 
     .general-block {
       @include flexColumn;
+      position: relative;
     }
 
     .general-cardicon-button i{

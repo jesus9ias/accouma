@@ -6,6 +6,7 @@ import {
   Card
 } from 'react-materialize';
 import VoidState from '../../common/VoidState';
+import InnerLoader from '../../common/InnerLoader';
 
 class Users extends React.Component {
   constructor(props) {
@@ -81,6 +82,7 @@ class Users extends React.Component {
           </Link>
         </div>
         {this.props.edit}
+        <InnerLoader />
       </div>
     );
   }

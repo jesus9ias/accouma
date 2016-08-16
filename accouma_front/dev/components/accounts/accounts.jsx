@@ -5,14 +5,25 @@ import {
   Col,
   Card
 } from 'react-materialize';
+import VoidState from '../../common/VoidState';
+import InnerLoader from '../../common/InnerLoader';
 
 class Accounts extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { voidState: false };
   }
 
   componentWillMount() {
     this.props.getAllAccounts();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.accounts.length === 0) {
+      this.setState({ voidState: true });
+    } else {
+      this.setState({ voidState: false });
+    }
   }
 
   render() {
@@ -52,11 +63,20 @@ class Accounts extends React.Component {
                 )
               )
             }
+            <VoidState show={this.state.voidState} message="There is no accounts">
+              <Link
+                to={'/accounts/new'}
+                className="btn-large waves-effect waves-light red"
+              >
+                Add one Account
+              </Link>
+            </VoidState>
           </Row>
         </div>
         <div>
           {this.props.edit}
         </div>
+        <InnerLoader />
       </div>
     );
   }

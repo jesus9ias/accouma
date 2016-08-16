@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 accouma_front/app
 *.log
+*.log.*

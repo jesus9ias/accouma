@@ -1,0 +1,9 @@
+.voidState{
+  @include flexColumn;
+  @include calcHeight(100vh, 65px);
+  justify-content: center;
+  .voidState-title{
+    text-align: center;
+    font-size: 16px;
+  }
+}
