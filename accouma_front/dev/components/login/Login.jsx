@@ -9,6 +9,9 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.makeLogin = this.makeLogin.bind(this);
+    this.state = {
+      login: false
+    }
   }
 
   componentWillMount() {
@@ -23,6 +26,7 @@ class Login extends React.Component {
 
   makeLogin(e) {
     e.preventDefault();
+    this.setState({ login: true});
     LoginServices.makeLogin(
       this.refs.user.value,
       this.refs.password.value
@@ -30,8 +34,11 @@ class Login extends React.Component {
       if (response.data.result && response.data.result.token) {
         storage.set('token', response.data.result.token);
         browserHistory.push('/');
+      } else {
+        this.setState({ login: false});
       }
     }).catch((error) => {
+      this.setState({ login: false});
       console.error(error);
     });
   }
@@ -65,11 +72,22 @@ class Login extends React.Component {
           </div>
           <div className="row">
             <div className="col s12">
-              <input
-                type="submit"
-                className="waves-effect waves-light btn"
-                value="Continue"
-              />
+              {
+                this.state.login ?
+                  <button
+                    type="button"
+                    className="waves-effect waves-light btn button"
+                  >
+                    <img className="button-icon" src="images/main/loading.gif" />
+                  </button>
+                :
+                  <button
+                    type="submit"
+                    className="waves-effect waves-light btn"
+                  >
+                    Continue
+                  </button>
+              }
             </div>
           </div>
         </form>
