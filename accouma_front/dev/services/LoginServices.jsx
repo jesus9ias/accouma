@@ -16,12 +16,12 @@ class LginServices {
     }
   }
 
-  makeLogin(usr, pass) {
+  makeLogin(nick, pass) {
     return axios({
       method: 'POST',
       url: `${config.apiUrl}/login`,
       data: {
-        usr,
+        nick,
         pass
       }
     });

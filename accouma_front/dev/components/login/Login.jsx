@@ -28,7 +28,7 @@ class Login extends React.Component {
     e.preventDefault();
     this.setState({ login: true});
     LoginServices.makeLogin(
-      this.refs.user.value,
+      this.refs.nick.value,
       this.refs.password.value
     ).then((response) => {
       if (response.data.result && response.data.result.token) {
@@ -51,12 +51,12 @@ class Login extends React.Component {
           <div className="row">
             <div className="input-field col s12">
               <input
-                id="user"
-                ref="user"
+                id="nick"
+                ref="nick"
                 type="text"
                 className="validate login-field"
               />
-              <label htmlFor="user">User</label>
+            <label htmlFor="nick">User</label>
             </div>
           </div>
           <div className="row">

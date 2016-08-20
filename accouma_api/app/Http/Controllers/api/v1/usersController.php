@@ -115,7 +115,7 @@ class usersController extends Controller{
   public function create(){
     $names = Request::get('names', '');
     $last_names = Request::get('last_names', '');
-    $user = Request::get('user_name', '');
+    $nick = Request::get('nick', '');
     $email = Request::get('email', '');
     $pass = Hash::make(Helpers::random_txt(8));
     $date_created = date("Y-m-d h:i:s");
@@ -125,7 +125,7 @@ class usersController extends Controller{
     $userData = compact(
       'names',
       'last_names',
-      'user',
+      'nick',
       'email',
       'pass',
       'date_created',

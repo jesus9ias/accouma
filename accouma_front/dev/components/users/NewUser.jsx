@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import {
   Row,
   Col,
@@ -9,6 +9,39 @@ import {
 import Backdrop from '../../common/Backdrop';
 
 class NewUser extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.createUser = this.createUser.bind(this);
+    this.createUserAndStay = this.createUserAndStay.bind(this);
+  }
+
+  clearForm() {
+    this.refs.newNick.value = '';
+    this.refs.newNames.value = '';
+    this.refs.newLastNames.value = '';
+    this.refs.newEmail.value = '';
+  }
+
+  makeUserData() {
+    let userData = {
+      nick: this.refs.newNick.value,
+      names: this.refs.newNames.value,
+      lastNames: this.refs.newLastNames.value,
+      email: this.refs.newEmail.value
+    }
+    return userData;
+  }
+
+  createUser() {
+    this.props.cretaeUser(this.makeUserData());
+    browserHistory.push('/users');
+  }
+
+  createUserAndStay() {
+    this.props.cretaeUser(this.makeUserData());
+    this.clearForm();
+  }
 
   render() {
     return (
@@ -25,34 +58,34 @@ class NewUser extends React.Component {
             <div className="row">
               <div className="input-field col s12">
                 <input
-                  id="newUser"
-                  ref="newUser"
+                  id="newNick"
+                  ref="newNick"
                   type="text"
                   className="validate login-field"
                 />
-                <label htmlFor="newUser">User</label>
+              <label htmlFor="newNick">User</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input
-                  id="newName"
-                  ref="newName"
+                  id="newNames"
+                  ref="newNames"
                   type="text"
                   className="validate login-field"
                 />
-                <label htmlFor="newName">Names</label>
+              <label htmlFor="newNames">Names</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input
-                  id="newLastName"
-                  ref="newLastName"
+                  id="newLastNames"
+                  ref="newLastNames"
                   type="text"
                   className="validate login-field"
                 />
-                <label htmlFor="newLastName">Last Name</label>
+              <label htmlFor="newLastNames">Last Name</label>
               </div>
             </div>
             <div className="row">
@@ -70,16 +103,20 @@ class NewUser extends React.Component {
           <div className="section-overlay-footer">
             <div className="row">
               <div className="col s12">
-                <input
-                  type="submit"
+                <button
+                  type="button"
                   className="waves-effect waves-light btn"
-                  value="Save"
-                />
-                <input
-                  type="submit"
+                  onClick={this.createUser}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
                   className="waves-effect waves-light btn"
-                  value="Save and create new"
-                />
+                  onClick={this.createUserAndStay}
+                >
+                  Save and create new
+                </button>
               </div>
             </div>
           </div>

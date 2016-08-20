@@ -20,10 +20,10 @@ class loginController extends Controller{
 	}
 
   public function login(){
-    $usr = Request::input('usr', '');
+    $nick = Request::input('nick', '');
     $pass = Request::input('pass', '');
 
-    $user = Users::where('user', '=', $usr)->get();
+    $user = Users::where('nick', '=', $nick)->get();
     if(count($user) == 1){
       $apass = $user[0]->pass;
       $id= $user[0]->id;
