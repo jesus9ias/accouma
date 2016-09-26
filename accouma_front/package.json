@@ -13,6 +13,7 @@
     "react-addons-shallow-compare": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-materialize": "^0.16.4",
+    "react-mega-sidenav": "0.0.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-tap-event-plugin": "^1.0.0",
