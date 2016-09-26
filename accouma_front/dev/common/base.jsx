@@ -21,7 +21,7 @@ class Base extends React.Component {
 
 Base.propTypes = {
   section: React.PropTypes.string.isRequired,
-  children: React.PropTypes.element.isRequired
+  children: React.PropTypes.element
 };
 
 export default Base;

@@ -21,16 +21,7 @@ class NavBar extends React.Component {
           <Link to={'/'}><h1 className="navbar-title">Accouma</h1></Link>
         </div>
         <div className="navbar-options-container">
-          <Dropdown
-            className="navbar-icon navbar-menu"
-            overorigin={false}
-            trigger={
-              <a><i className="material-icons">add</i></a>
-            }
-          >
-            <Link to={'/new/user'}>User</Link>
-            <Link to={'/new/account'}>Account</Link>
-          </Dropdown>
+          <a><i className="material-icons">add</i></a>
           <Link
             className="navbar-icon"
             to={'/me'}
