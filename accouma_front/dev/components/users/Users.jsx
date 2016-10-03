@@ -6,25 +6,24 @@ import {
   Card
 } from 'react-materialize';
 import VoidState from '../../common/VoidState';
-import InnerLoader from '../../common/InnerLoader';
+import UsersLoader from './UsersLoader';
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { voidState: false };
   }
 
   componentWillMount() {
     this.props.getAllUsers();
   }
 
-  componentWillReceiveProps(nextProps) {
+  /*componentWillReceiveProps(nextProps) {
     if (nextProps.users.length === 0) {
       this.setState({ voidState: true });
     } else {
       this.setState({ voidState: false });
     }
-  }
+  }*/
 
   render() {
     return (
@@ -65,7 +64,7 @@ class Users extends React.Component {
                 )
               )
             }
-            <VoidState show={this.state.voidState} message="There is no users">
+            <VoidState show={this.props.voidState} message="There is no users">
               <Link
                 to={'/users/new'}
                 className="btn-large waves-effect waves-light red"
@@ -82,7 +81,7 @@ class Users extends React.Component {
           </Link>
         </div>
         {this.props.edit}
-        <InnerLoader />
+        <UsersLoader />
       </div>
     );
   }
@@ -90,6 +89,7 @@ class Users extends React.Component {
 
 Users.propTypes = {
   getAllUsers: React.PropTypes.func.isRequired,
+  voidState: React.PropTypes.bool.isRequired,
   new: React.PropTypes.element,
   edit: React.PropTypes.element,
   users: React.PropTypes.array

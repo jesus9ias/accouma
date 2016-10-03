@@ -20,6 +20,37 @@ class UsersServices {
     }
   }
 
+  getUser(id) {
+    const token = storage.get('token');
+    if (token === null) {
+      return axios();
+    } else {
+      const query_sring = queryString({
+        token: token
+      });
+      return axios({
+        method: 'GET',
+        url: `${config.apiUrl}/users/${id}?${query_sring}`,
+        data: {}
+      });
+    }
+  }
+
+  updateUser(id, user) {
+    const token = storage.get('token');
+    if (token === null) {
+      return axios();
+    } else {
+      user['token'] = token;
+      const query_sring = queryString(user);
+      return axios({
+        method: 'PUT',
+        url: `${config.apiUrl}/users/${id}?${query_sring}`,
+        data: {}
+      });
+    }
+  }
+
   cretaeUser(userData) {
     const token = storage.get('token');
     if (token === null) {

@@ -6,7 +6,7 @@ import Home from './components/home/Home';
 import Me from './components/me/me';
 import Users from './components/users/UsersContainer';
 import NewUser from './components/users/NewUserContainer';
-import EditUser from './components/users/EditUser';
+import EditUser from './components/users/EditUserContainer';
 import Accounts from './components/accounts/AccountsContainer';
 import NewAccount from './components/accounts/NewAccount';
 import EditAccount from './components/accounts/EditAccount';

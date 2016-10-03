@@ -73,7 +73,7 @@ class NavBar extends React.Component {
             className="navbar-icon"
             to={'/me'}
           >
-            <p><i className="material-icons">face</i>
+            <p><i className="material-icons">face</i></p>
           </Link>
         </div>
       </nav>

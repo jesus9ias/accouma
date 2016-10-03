@@ -3,10 +3,8 @@ import general from './generalReducer';
 import users from './usersReducer';
 import accounts from './accountsReducer';
 
-const theApp = combineReducers({
+export default combineReducers({
   general,
   users,
   accounts
 });
-
-export default theApp;

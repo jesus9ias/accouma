@@ -9,5 +9,5 @@ function mapStateToProps(state) {
 }
 
 const NewUserContainer = connect(mapStateToProps, allActions)(NewUser);
-NewUserContainer.displayName = 'newUsers';
+NewUserContainer.displayName = 'newUser';
 export default NewUserContainer;
