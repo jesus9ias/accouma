@@ -17,14 +17,6 @@ class Users extends React.Component {
     this.props.getAllUsers();
   }
 
-  /*componentWillReceiveProps(nextProps) {
-    if (nextProps.users.length === 0) {
-      this.setState({ voidState: true });
-    } else {
-      this.setState({ voidState: false });
-    }
-  }*/
-
   render() {
     return (
       <div className="general-block">

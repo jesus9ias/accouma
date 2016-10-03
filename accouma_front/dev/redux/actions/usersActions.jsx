@@ -22,8 +22,7 @@ export default {
   },
   updateOneUser: (id, user) => (dispatch) => {
     UsersServices.updateUser(id, user).then((response) => {
-      console.log(response);
-      dispatch({ type: actions.UPDATE_ONE_USER });
+      dispatch({ type: actions.UPDATE_ONE_USER, user: user });
     }).catch((error) => {
 
     });

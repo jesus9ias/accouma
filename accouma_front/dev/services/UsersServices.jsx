@@ -41,6 +41,7 @@ class UsersServices {
     if (token === null) {
       return axios();
     } else {
+      user['id'] = id;
       user['token'] = token;
       const query_sring = queryString(user);
       return axios({

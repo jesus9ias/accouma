@@ -16,6 +16,16 @@ export default (state = initialState, action) => {
       return state.update('users', value => action.users);
     case actions.GET_ONE_USER:
       return state.update('user', value => action.user);
+    case actions.UPDATE_ONE_USER:
+      return state.update('users', (value) => {
+        let users = state.get('users');
+        users.forEach( (usr, index) => {
+          if (users[index].id == action.user.id) {
+            users[index] = action.user;
+          }
+        });
+        return users;
+      });
     default:
       return state;
   }
