@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'key-storage';
-import config from '../config.json';
+import config from '../config';
 
 class LginServices {
   isLogued() {
@@ -10,7 +10,7 @@ class LginServices {
     } else {
       return axios({
         method: 'GET',
-        url: `${config.apiUrl}/login?token=${token}`,
+        url: `${config.API_URL}/login?token=${token}`,
         data: {}
       });
     }
@@ -19,7 +19,7 @@ class LginServices {
   makeLogin(nick, pass) {
     return axios({
       method: 'POST',
-      url: `${config.apiUrl}/login`,
+      url: `${config.API_URL}/login`,
       data: {
         nick,
         pass

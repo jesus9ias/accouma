@@ -1,5 +1,8 @@
 @import 'vendor/css/materialize.min';
 
+@import 'config/config';
+@import 'config/localConfig';
+
 @import 'common/globals';
 @import 'common/colors';
 @import 'common/mixins';

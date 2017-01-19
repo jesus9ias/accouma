@@ -3,3 +3,5 @@ node_modules
 accouma_front/app
 *.log
 *.log.*
+localConfig.json
+localConfig.scss

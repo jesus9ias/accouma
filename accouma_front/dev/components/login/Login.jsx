@@ -3,6 +3,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import storage from 'key-storage';
 import LoginServices from '../../services/LoginServices';
+import { IMAGES_URL } from '../../config';
 
 class Login extends React.Component {
 
@@ -78,7 +79,10 @@ class Login extends React.Component {
                     type="button"
                     className="waves-effect waves-light btn button"
                   >
-                    <img className="button-icon" src="images/main/loading.gif" />
+                    <img
+                      className="button-icon"
+                      src={`${IMAGES_URL}/main/loading.gif`}
+                    />
                   </button>
                 :
                   <button

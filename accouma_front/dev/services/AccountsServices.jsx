@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'key-storage';
-import config from '../config.json';
+import config from '../config';
 
 class AccountsServices {
   getAccounts() {
@@ -10,7 +10,7 @@ class AccountsServices {
     } else {
       return axios({
         method: 'GET',
-        url: `${config.apiUrl}/accounts?token=${token}`,
+        url: `${config.API_URL}/accounts?token=${token}`,
         data: {}
       });
     }

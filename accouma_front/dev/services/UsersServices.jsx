@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'key-storage';
-import config from '../config.json';
+import config from '../config';
 import { queryString } from '../utils/Utils';
 
 class UsersServices {
@@ -14,7 +14,7 @@ class UsersServices {
       });
       return axios({
         method: 'GET',
-        url: `${config.apiUrl}/users?${query_sring}`,
+        url: `${config.API_URL}/users?${query_sring}`,
         data: {}
       });
     }
@@ -30,7 +30,7 @@ class UsersServices {
       });
       return axios({
         method: 'GET',
-        url: `${config.apiUrl}/users/${id}?${query_sring}`,
+        url: `${config.API_URL}/users/${id}?${query_sring}`,
         data: {}
       });
     }
@@ -46,7 +46,7 @@ class UsersServices {
       const query_sring = queryString(user);
       return axios({
         method: 'PUT',
-        url: `${config.apiUrl}/users/${id}?${query_sring}`,
+        url: `${config.API_URL}/users/${id}?${query_sring}`,
         data: {}
       });
     }
@@ -66,7 +66,7 @@ class UsersServices {
       });
       return axios({
         method: 'POST',
-        url: `${config.apiUrl}/users/create?${query_sring}`,
+        url: `${config.API_URL}/users/create?${query_sring}`,
         data: {}
       });
     }

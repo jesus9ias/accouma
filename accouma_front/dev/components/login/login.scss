@@ -2,7 +2,7 @@
   @include flex();
   @include flexColumn;
   @include calcMinHeight(100vh, 0px);
-  background: url('../images/main/background.jpg') fixed center no-repeat;
+  background: url('#{getImageUrl()}/main/background.jpg') fixed center no-repeat;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
