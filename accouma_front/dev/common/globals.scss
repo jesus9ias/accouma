@@ -1,9 +1,0 @@
-$navHeight: 64px;
-
-@function getImageUrl() {
-  @if $useLocalConfig == 0 {
-    @return $IMAGES_URL;
-  } @else {
-    @return $LOCAL_IMAGES_URL;
-  }
-}

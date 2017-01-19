@@ -1,7 +1,9 @@
+/vendor
+/public/storage
+Homestead.yaml
+Homestead.json
+.env
 node_modules
 .DS_Store
-accouma_front/app
 *.log
 *.log.*
-localConfig.json
-localConfig.scss

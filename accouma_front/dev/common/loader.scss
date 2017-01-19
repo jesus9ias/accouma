@@ -1,5 +1,0 @@
-.loader{
-  @include backFixed;
-  background: url('#{getImageUrl()}/main/loading.gif') no-repeat center center $loderAlphaBackground;
-  z-index: 200;
-}
