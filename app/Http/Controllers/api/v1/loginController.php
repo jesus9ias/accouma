@@ -32,8 +32,8 @@ class loginController extends Controller{
 
         $token = JWTAuth::fromUser($user[0]);
 
-        //$token = Helpers::random_txt(64);
-        Users::updateUser($id, ['token' => $token]);
+        Users::where('id', '=', $id)->update(['token' => $token]);
+        //Users::updateUser($id, ['token' => $token]);
         return Response::json([
           'result' => [
             'token' => $token
@@ -81,7 +81,8 @@ class loginController extends Controller{
       ->where('token', '=', $token)
       ->get();
     if(count($user) == 1){
-      Users::updateUser($id, ['token' => $token]);
+      Users::where('id', '=', $id)->update(['token' => $token]);
+      //Users::updateUser($id, ['token' => $token]);
       return Response::json([
         'result' => [],
         'msg' => 'Success',

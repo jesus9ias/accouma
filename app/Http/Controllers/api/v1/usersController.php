@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller\api\v1;
 use Request;
 use Response;
 use Hash;
@@ -12,31 +13,14 @@ use App\Helpers\Helpers;
 use App\models\usersModel as Users;
 use App\models\usersRolesModel as UsersRoles;
 
+use App\ModelServices\userServices as UserServices;
+
 use Redis;
 use Event;
 use App\Events\userCreated;
 use App\Events\userActions;
 
-class usersController extends Controller{
-
-  protected $fields = [
-    'USER' => [
-      'id',
-      'names',
-      'last_names',
-      'email',
-      'status'
-    ],
-    'ADMIN' => [
-      'id',
-      'names',
-      'last_names',
-      'email',
-      'date_created',
-      'date_updated',
-      'status'
-    ]
-  ];
+class usersController extends baseController{
 
   public function __construct(){
 		$this->middleware('isLogued');
@@ -45,8 +29,8 @@ class usersController extends Controller{
 		$this->middleware('logger');
 	}
 
-  public function get(){
-    $order_by = Request::get('order_by', '');
+  public function get(Request $request){
+    /*$order_by = Request::get('order_by', '');
     $filters = Request::get('filters', '');
     $page = Request::get('page', 0);
     $per_page = Request::get('per_page', 0);
@@ -64,15 +48,19 @@ class usersController extends Controller{
       'fields' => $fields,
       'order_by' => $order_by,
       'filters' => $calc_filters
-    ]);
+    ]);*/
+
+    $userService = new UserServices($request);
+
+    $users = $userService->getUsers();
 
     return Response::json([
       'result' => [
         'rows' => $users
       ],
-      'msg' => 'Success',
-      'tot_pages' => $pagination['tot_pages'],
-      'tot_rows' => $pagination['tot_rows']
+      'msg' => 'Success'
+      //'tot_pages' => $pagination['tot_pages'],
+      //'tot_rows' => $pagination['tot_rows']
     ], 200);
   }
 

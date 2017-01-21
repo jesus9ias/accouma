@@ -8,7 +8,7 @@ class usersModel extends Model{
   protected $table = 'users';
   public $timestamps = false;
 
-  public function scopeGetUsers($query, $params = []){
+  /*public function scopeGetUsers($query, $params = []){
     if(array_key_exists('fields', $params)){
       $query->select($params['fields']);
     }
@@ -57,6 +57,6 @@ class usersModel extends Model{
       $query->whereIn('status', $filters['status']);
     }
     return $query;
-  }
+  }*/
 
 }
