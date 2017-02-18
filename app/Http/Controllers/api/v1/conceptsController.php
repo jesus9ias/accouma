@@ -7,68 +7,48 @@ use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\userConceptsModel as Concepts;
 
-class conceptsController extends Controller{
+use App\ModelServices\conceptServices;
 
-  public function __construct(){
+class conceptsController extends Controller {
+
+  public function __construct() {
     $this->middleware('isLogued');
-    $this->middleware('isAdmin', ['only' => ['update']]);
+    $this->middleware('whatRole');
   }
 
-  public function index(){
-    $concepts = Concepts::getConcepts();
+  public function get() {
+    $data = [
+      'order_by' => Request::get('order_by', ''),
+      'filters' => Request::get('filters', ''),
+      'page' => Request::get('page', 0),
+      'per_page' => Request::get('per_page', 0),
+      'roles' => Request::get('roles', []),
+      'user_id' => Request::get('user')->id
+    ];
+
+    $conceptService = new conceptServices();
+    $concepts = $conceptService->getConcepts($data);
+
     return Response::json([
-      'result' => [
-        'rows' => $concepts
-      ],
+      'result' => $concepts,
       'msg' => 'Success'
     ], 200);
   }
 
-  public function edit($concept_id){
-    $concept = Concepts::getConcept($concept_id);
-    if(count($concept) == 1){
-      return Response::json([
-        'result' => [
-          'row' => $concept[0]
-        ],
-        'msg' => 'success'
-      ], 200);
-    }else{
-      return Response::json([
-        'result' => [],
-        'msg' => 'Not Found'
-      ], 404);
-    }
-  }
-
-  public function update($concept_id){
-    $concept = Request::get('concept', '');
-
+  public function create() {
     $data = [
-      'concept' => $concept,
+      'concept' => Request::get('concept', ''),
+      'created_by' => Request::get('user')->id,
+      'created_at' => date("Y-m-d h:i:s"),
     ];
-    Concepts::updateConcept($concept_id, $data);
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
-  }
 
-  public function create(){
-    $user_id = Request::get('id', 0);
-    $concept = Request::input('concept', '');
+    $conceptService = new conceptServices();
+    $newConceptId = $conceptService->createConcept($data);
 
-    $data = [
-      'user_id' => $user_id,
-      'concept' => $concept,
-      'date_added' => date("Y-m-d H:i:s"),
-    ];
-    $newId = Concepts::createConcept($data);
     return Response::json([
       'result' => [
-        'newId' => $newId
+        'newConceptId' => $newConceptId,
       ],
       'msg' => 'success'
     ], 200);

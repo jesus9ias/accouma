@@ -61,6 +61,9 @@ class baseServices {
 
         Redis::hset('paginate:'.$table, $redis_hash, $redis_paginate);
       }
+    } else {
+      $tot_rows = $rows->count();
+      $tot_pages = 1;
     }
 
     return compact('tot_rows', 'tot_pages', 'skip');

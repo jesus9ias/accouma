@@ -47,7 +47,9 @@ class userServices extends baseServices {
 
     if (array_key_exists('page', $data) && array_key_exists('per_page', $data)) {
       $pagination = $this->paginate($data['page'], $data['per_page'], $data['user_id'], $data['filters'], $rows, 'users');
-      $rows = $rows->skip($pagination['skip'])->take($data['per_page']);
+      if ($data['page'] > 0 && $data['per_page'] > 0) {
+        $rows = $rows->skip($pagination['skip'])->take($data['per_page']);
+      }
     }
 
     $rows = $rows->get();
