@@ -2,51 +2,53 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller\api\v1;
 use Request;
 use Response;
 
 use App\Helpers\Helpers;
-use App\models\accountsModel as Accounts;
-use App\models\accountsUsersModel as AccountsUsers;
 
-class accountsController extends Controller{
+use App\ModelServices\accountServices;
 
-  public function __construct(){
-    $this->middleware('isLogued');
+class accountsController extends apiBaseController {
+
+  public function __construct() {
+		$this->middleware('isLogued');
 		$this->middleware('whatRole');
-		$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
-		$this->middleware('pagination', ['only' => ['get']]);
+    //$this->middleware('isAdmin', ['only' => ['create', 'update', 'activate', 'disable']]);
 		$this->middleware('logger');
 	}
 
-  public function get(){
-    $order = Request::get('order', '');
+  public function get() {
+    $data = [
+      'order_by' => Request::get('order_by', ''),
+      'filters' => Request::get('filters', ''),
+      'page' => Request::get('page', 0),
+      'per_page' => Request::get('per_page', 0),
+      'roles' => Request::get('roles', []),
+      'user_id' => Request::get('user')->id
+    ];
 
-    $accounts = Accounts::getAccounts([
-      'paginate' => [
-        'skip' => Request::get('skip', 0),
-        'take' => Request::get('take', 0)
-      ]
-    ]);
+    $accountService = new accountServices();
+    $users = $accountService->getAccounts($data);
 
     return Response::json([
-      'result' => [
-        'rows' => $accounts
-      ],
-      'msg' => 'Success',
-      'tot_pages' => Request::get('tot_pages', 0),
-      'tot_rows' => Request::get('tot_rows', 0)
+      'result' => $users,
+      'msg' => 'Success'
     ], 200);
   }
 
-  public function edit($account_id){
-    $account = Accounts::getAccount($account_id);
-    if(count($account) == 1){
+  public function edit($account_id) {
+    $data = [
+      'roles' => Request::get('roles', []),
+    ];
+
+    $accountService = new accountServices();
+    $user = $accountService->getAccount($account_id, $data);
+
+    if($user != null) {
       return Response::json([
-        'result' => [
-          'row' => $account[0]
-        ],
+        'result' => $user,
         'msg' => 'success'
       ], 200);
     }else{
@@ -57,15 +59,14 @@ class accountsController extends Controller{
     }
   }
 
-  public function update($account_id){
-    $name = Request::get('name', '');
-    $description = Request::get('description', '');
-
+  public function update($account_id) {
     $data = [
-      'name' => $name,
-      'description' => $description
+      'name' => Request::get('name', ''),
+      'description' => Request::get('description', ''),
     ];
-    Accounts::updateAccount($account_id, $data);
+
+    $accountService = new accountServices();
+    $user = $accountService->updateAccount($account_id, $data);
     return Response::json([
       'result' => [],
       'msg' => 'success'
@@ -73,76 +74,43 @@ class accountsController extends Controller{
   }
 
   public function create(){
-    $name = Request::input('name', '');
-    $description = Request::input('description', '');
-    $user_id = Request::input('user_id', '');
-    $date_created = date("Y-m-d H:i:s");
-    $status = 2;
+    $data = [
+      'name' => Request::get('name', ''),
+      'description' => Request::get('description', ''),
+      'visibility' => Request::get('visibility', 1),
+      'require_moderation' => Request::get('require_moderation', 1),
+      'created_by' => Request::get('user')->id,
+      'created_at' => date("Y-m-d h:i:s"),
+      'status' => 2
+    ];
 
-    $accountData = [
-      'name' => $name,
-      'description' => $description,
-      'user_id' => $user_id,
-      'date_created' => $date_created,
-      'status' => $status
-    ];
-    $newAccountId = Accounts::createAccount($accountData);
-    $accountUserData = [
-      'account_id' => $newAccountId,
-      'user_id' => $user_id,
-      'date_added' => $date_created,
-      'is_admin' => 1,
-      'status' => $status
-    ];
-    $newAccountUserId = AccountsUsers::createAccountUser($accountUserData);
+    $accountService = new accountServices();
+    $newAccountId = $accountService->createAccount($data);
+
     return Response::json([
       'result' => [
         'newAccountId' => $newAccountId,
-        'newAccountUserId' => $newAccountUserId
       ],
       'msg' => 'success'
     ], 200);
   }
 
-  public function activate($account_id){
-    Accounts::updateAccount($account_id, ['status' => 2]);
+  public function activate($account_id) {
+    $accountService = new accountServices();
+    $users = $accountService->activateAccount($account_id);
+
     return Response::json([
       'result' => [],
       'msg' => 'success'
     ], 200);
   }
 
-  public function disable($account_id){
-    Accounts::updateAccount($account_id, ['status' => 3]);
+  public function disable($account_id) {
+    $accountService = new accountServices();
+    $users = $accountService->disableAccount($account_id);
+
     return Response::json([
       'result' => [],
-      'msg' => 'success'
-    ], 200);
-  }
-
-  public function reasignAccountOwner($account_id){
-    $user_id = Request::get('user_id', 0);
-    $new_user_id = Request::get('new_user_id', 0);
-    Accounts::where('id', '=', $account_id)
-      ->where('user_id', '=', $user_id)
-      ->where('status', '=', 2)
-      ->update(['user_id' => $new_user_id]);
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
-  }
-
-  public function getUsers($account_id){
-    $status = Request::get('status', 0);
-
-    $users = AccountsUsers::where('account_id', '=', $account_id)
-      ->join('users', 'users.id', '=', 'accounts_users.user_id')
-      ->get();
-    return Response::json([
-      'result' => [
-        'rows' => $users
-      ],
       'msg' => 'success'
     ], 200);
   }

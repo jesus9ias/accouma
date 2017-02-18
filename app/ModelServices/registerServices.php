@@ -5,31 +5,34 @@ namespace App\ModelServices;
 use DB;
 
 use App\ModelServices\baseServices;
-use App\models\usersModel as Users;
+use App\models\registersModel as Registers;
 
-class userServices extends baseServices {
+class registerServices extends baseServices {
 
   protected $fields = [
     'USER' => [
       'id',
-      'names',
-      'last_names',
-      'email',
+      'account_id',
+      'description',
+      'concept_id',
+      'created_by',
+      'created_at',
+      'date_register',
+      'ammount_out',
+      'ammount_out',
+      'type',
       'status'
     ],
-    'ADMIN' => [
-      'date_created',
-      'date_updated'
-    ]
+    'ADMIN' => []
   ];
 
-  public function getUsers($data = []) {
+  public function getRegisters($data = []) {
     $selected_fields = $this->fields['USER'];
     if (array_key_exists('roles', $data)) {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $rows = Users::select($selected_fields);
+    $rows = Registers::select($selected_fields);
 
     if (array_key_exists('order_by', $data)) {
       $order_by = $this->ordering($data['order_by']);
@@ -59,13 +62,13 @@ class userServices extends baseServices {
     ];
   }
 
-  public function getUser($id, $data ) {
+  public function getRegister($id, $data ) {
     $selected_fields = $this->fields['USER'];
     if (array_key_exists('roles', $data)) {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $row = Users::select($selected_fields)->where('id', '=', $id)->get();
+    $row = Registers::select($selected_fields)->where('id', '=', $id)->get();
 
     if (count($row) == 1) {
       return $row[0];
@@ -74,19 +77,20 @@ class userServices extends baseServices {
     }
   }
 
-  public function updateUser($id, $data = []) {
-    Users::where('id', '=', $id)->update($data);
+  public function updateRegister($id, $data = []) {
+    Registers::where('id', '=', $id)->update($data);
   }
 
-  public function createUser($data = []) {
-    return Users::insertGetId($data);
+  public function createRegister($data = []) {
+    $newRegisterId = Registers::insertGetId($data);
+    return $newRegisterId;
   }
 
-  public function activateUser($id) {
-    Users::where('id', '=', $id)->update(['status' => 2]);
+  public function activateRegister($id) {
+    Registers::where('id', '=', $id)->update(['status' => 2]);
   }
 
-  public function disableUser($id) {
-    Users::where('id', '=', $id)->update(['status' => 3]);
+  public function disableRegister($id) {
+    Registers::where('id', '=', $id)->update(['status' => 3]);
   }
 }

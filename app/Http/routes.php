@@ -26,13 +26,17 @@ Route::get('/', function () {
 |
 */
 
+
+//-----LOGIN
 Route::get('api/v1/login', 'api\v1\loginController@isLogued');
 Route::post('api/v1/login', 'api\v1\loginController@login');
 Route::delete('api/v1/login', 'api\v1\loginController@close');
 
+//-----RECOVE PASSWORD
 Route::post('api/v1/recove/send_recove_token', 'api\v1\recoveController@sendRecoveToken');
 Route::put('api/v1/recove/complete_recove/{email}/{token}', 'api\v1\recoveController@completeRecove');
 
+//-----USERS
 Route::get('api/v1/users', 'api\v1\usersController@get');
 Route::post('api/v1/users/create', 'api\v1\usersController@create');
 Route::get('api/v1/users/{user_id}', 'api\v1\usersController@edit');
@@ -40,33 +44,37 @@ Route::put('api/v1/users/{user_id}', 'api\v1\usersController@update');
 Route::delete('api/v1/users/{user_id}', 'api\v1\usersController@disable');
 Route::patch('api/v1/users/{user_id}', 'api\v1\usersController@activate');
 
-Route::put('api/v1/me/update_pass', 'api\v1\meController@updatePass');
+//-----ME
+// Route::put('api/v1/me/update_pass', 'api\v1\meController@updatePass');
 
+//-----ACCOUNTS
 Route::get('api/v1/accounts', 'api\v1\accountsController@get');
 Route::post('api/v1/accounts/create', 'api\v1\accountsController@create');
 Route::get('api/v1/accounts/{account_id}', 'api\v1\accountsController@edit');
 Route::put('api/v1/accounts/{account_id}', 'api\v1\accountsController@update');
 Route::delete('api/v1/accounts/{account_id}', 'api\v1\accountsController@disable');
 Route::patch('api/v1/accounts/{account_id}', 'api\v1\accountsController@activate');
-Route::patch('api/v1/accounts/{account_id}/reasign', 'api\v1\accountsController@reasignAccountOwner');
-Route::get('api/v1/accounts/{account_id}/get_users', 'api\v1\accountsController@getUsers');
+//  Route::patch('api/v1/accounts/{account_id}/reasign', 'api\v1\accountsController@reasignAccountOwner');
+//  Route::get('api/v1/accounts/{account_id}/get_users', 'api\v1\accountsController@getUsers');
 
-Route::get('api/v1/account_registers', 'api\v1\accountRegistersController@index');
-Route::get('api/v1/account_registers/{account_id}', 'api\v1\accountRegistersController@get');
-Route::get('api/v1/account_registers/{account_id}/accountAccomulated', 'api\v1\accountRegistersController@accountAccomulated');
-Route::get('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@editAccountRegister');
-Route::put('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@updateAccountRegister');
-Route::patch('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@recoveAccountRegister');
-Route::delete('api/v1/account_registers/{account_id}/{register_id}', 'api\v1\accountRegistersController@deleteAccountRegister');
-Route::post('api/v1/account_registers/{account_id}/create', 'api\v1\accountRegistersController@createAccountRegister');
+//-----ACCOUNT REGISTERS
+Route::get('api/v1/registers', 'api\v1\registersController@get');
+Route::get('api/v1/registers/{register_id}', 'api\v1\registersController@edit');
+Route::put('api/v1/registers/{register_id}', 'api\v1\registersController@update');
+Route::patch('api/v1/registers/{register_id}', 'api\v1\registersController@activate');
+Route::delete('api/v1/registers/{register_id}', 'api\v1\registersController@disable');
+Route::post('api/v1/registers/create', 'api\v1\registersController@create');
 
+//-----ACCOUNT USERS
 Route::post('api/v1/account_users/{account_id}/{user_id}', 'api\v1\accountUsersController@createAccountUser');
 
+//-----CONCEPTS
 Route::get('api/v1/concepts', 'api\v1\conceptsController@get');
 Route::post('api/v1/concepts/create', 'api\v1\conceptsController@create');
 Route::get('api/v1/concepts/{concept_id}', 'api\v1\conceptsController@edit');
 Route::put('api/v1/concepts/{concept_id}', 'api\v1\conceptsController@update');
 
+//-----USER ROLES
 Route::get('api/v1/user_roles/', 'api\v1\userRolesController@index');
 Route::get('api/v1/user_roles/{user_id}', 'api\v1\userRolesController@get');
 Route::put('api/v1/user_roles/{user_id}/{role_slug}', 'api\v1\userRolesController@asign');

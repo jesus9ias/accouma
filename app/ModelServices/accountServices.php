@@ -5,31 +5,32 @@ namespace App\ModelServices;
 use DB;
 
 use App\ModelServices\baseServices;
-use App\models\usersModel as Users;
+use App\models\accountsModel as Accounts;
+use App\models\accountsMembersModel as AccountsMembers;
 
-class userServices extends baseServices {
+class accountServices extends baseServices {
 
   protected $fields = [
     'USER' => [
       'id',
-      'names',
-      'last_names',
-      'email',
+      'name',
+      'description',
+      'visibility',
+      'require_moderation',
+      'created_by',
+      'created_at',
       'status'
     ],
-    'ADMIN' => [
-      'date_created',
-      'date_updated'
-    ]
+    'ADMIN' => []
   ];
 
-  public function getUsers($data = []) {
+  public function getAccounts($data = []) {
     $selected_fields = $this->fields['USER'];
     if (array_key_exists('roles', $data)) {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $rows = Users::select($selected_fields);
+    $rows = Accounts::select($selected_fields);
 
     if (array_key_exists('order_by', $data)) {
       $order_by = $this->ordering($data['order_by']);
@@ -59,13 +60,13 @@ class userServices extends baseServices {
     ];
   }
 
-  public function getUser($id, $data ) {
+  public function getAccount($id, $data ) {
     $selected_fields = $this->fields['USER'];
     if (array_key_exists('roles', $data)) {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $row = Users::select($selected_fields)->where('id', '=', $id)->get();
+    $row = Accounts::select($selected_fields)->where('id', '=', $id)->get();
 
     if (count($row) == 1) {
       return $row[0];
@@ -74,19 +75,34 @@ class userServices extends baseServices {
     }
   }
 
-  public function updateUser($id, $data = []) {
-    Users::where('id', '=', $id)->update($data);
+  public function updateAccount($id, $data = []) {
+    Accounts::where('id', '=', $id)->update($data);
   }
 
-  public function createUser($data = []) {
-    return Users::insertGetId($data);
+  public function createAccount($data = []) {
+    $newAccountId = Accounts::insertGetId($data);
+    $this->createNewAccountOwner($newAccountId, $data['created_by']);
+    return $newAccountId;
   }
 
-  public function activateUser($id) {
-    Users::where('id', '=', $id)->update(['status' => 2]);
+  public function activateAccount($id) {
+    Accounts::where('id', '=', $id)->update(['status' => 2]);
   }
 
-  public function disableUser($id) {
-    Users::where('id', '=', $id)->update(['status' => 3]);
+  public function disableAccount($id) {
+    Accounts::where('id', '=', $id)->update(['status' => 3]);
+  }
+
+  private function createNewAccountOwner($id, $user_id) {
+    AccountsMembers::insert([
+      'account_id' => $id,
+      'user_id' => $user_id,
+      'created_at' => date("Y-m-d h:i:s"),
+      'created_by' => $user_id,
+      'is_owner' => 1,
+      'is_admin' => 1,
+      'is_editor' => 1,
+      'status' => 2,
+    ]);
   }
 }
