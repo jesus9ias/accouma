@@ -12,7 +12,7 @@ class conceptServices extends baseServices {
   protected $fields = [
     'USER' => [
       'id',
-      'concept',
+      'description',
       'created_by',
       'created_at',
     ],

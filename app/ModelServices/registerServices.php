@@ -11,17 +11,21 @@ class registerServices extends baseServices {
 
   protected $fields = [
     'USER' => [
-      'id',
-      'account_id',
-      'description',
-      'concept_id',
-      'created_by',
-      'created_at',
-      'date_register',
-      'ammount_out',
-      'ammount_out',
-      'type',
-      'status'
+      'account_registers.id',
+      'account_registers.account_id',
+      'account_registers.description',
+      'account_registers.concept_id',
+      'account_registers.created_by',
+      'account_registers.created_at',
+      'account_registers.date_register',
+      'account_registers.ammount_out',
+      'account_registers.ammount_out',
+      'account_registers.type',
+      'account_registers.status',
+      'concepts.description as concept_description',
+      'users.names as user_names',
+      'users.last_names as user_last_names',
+      'users.nick as user_nick',
     ],
     'ADMIN' => []
   ];
@@ -32,7 +36,9 @@ class registerServices extends baseServices {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $rows = Registers::select($selected_fields);
+    $rows = Registers::select($selected_fields)
+      ->join('users', 'users.id', '=', 'account_registers.created_by')
+      ->join('concepts', 'concepts.id', '=', 'account_registers.concept_id');
 
     if (array_key_exists('order_by', $data)) {
       $order_by = $this->ordering($data['order_by']);
@@ -70,7 +76,10 @@ class registerServices extends baseServices {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $row = Registers::select($selected_fields)->where('id', '=', $id)->get();
+    $row = Registers::select($selected_fields)->where('id', '=', $id)
+      ->join('users', 'users.id', '=', 'account_registers.created_by')
+      ->join('concepts', 'concepts.id', '=', 'account_registers.concept_id')
+      ->get();
 
     if (count($row) == 1) {
       return $row[0];

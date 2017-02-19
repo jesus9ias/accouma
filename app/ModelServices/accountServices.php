@@ -12,14 +12,17 @@ class accountServices extends baseServices {
 
   protected $fields = [
     'USER' => [
-      'id',
-      'name',
-      'description',
-      'visibility',
-      'require_moderation',
-      'created_by',
-      'created_at',
-      'status'
+      'accounts.id',
+      'accounts.name',
+      'accounts.description',
+      'accounts.visibility',
+      'accounts.require_moderation',
+      'accounts.created_by',
+      'accounts.created_at',
+      'accounts.status',
+      'users.names as user_names',
+      'users.last_names as user_last_names',
+      'users.nick as user_nick'
     ],
     'ADMIN' => []
   ];
@@ -30,7 +33,8 @@ class accountServices extends baseServices {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $rows = Accounts::select($selected_fields);
+    $rows = Accounts::select($selected_fields)
+      ->join('users', 'users.id', '=', 'accounts.created_by');
 
     if (array_key_exists('order_by', $data)) {
       $order_by = $this->ordering($data['order_by']);
@@ -68,7 +72,10 @@ class accountServices extends baseServices {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $row = Accounts::select($selected_fields)->where('id', '=', $id)->get();
+    $row = Accounts::select($selected_fields)
+      ->join('users', 'users.id', '=', 'accounts.created_by')
+      ->where('accounts.id', '=', $id)
+      ->get();
 
     if (count($row) == 1) {
       return $row[0];

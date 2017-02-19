@@ -38,7 +38,7 @@ class conceptsController extends Controller {
 
   public function create() {
     $data = [
-      'concept' => Request::get('concept', ''),
+      'description' => Request::get('description', ''),
       'created_by' => Request::get('user')->id,
       'created_at' => date("Y-m-d h:i:s"),
     ];
