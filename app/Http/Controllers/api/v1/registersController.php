@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller\api\v1;
 use Request;
-use Response;
 
-use App\Helpers\Helpers;
+use App\Helpers\Responses;
 
 use App\ModelServices\registerServices;
 
@@ -40,10 +38,7 @@ class registersController extends apiBaseController {
     $registerService = new registerServices();
     $registers = $registerService->getRegisters($data);
 
-    return Response::json([
-      'result' => $registers,
-      'msg' => 'Success'
-    ], 200);
+    return Responses::success($registers);
   }
 
   public function edit($register_id) {
@@ -55,15 +50,9 @@ class registersController extends apiBaseController {
     $register = $registerService->getRegister($register_id, $data);
 
     if ($register != null) {
-      return Response::json([
-        'result' => $register,
-        'msg' => 'success'
-      ], 200);
+      return Responses::success($register);
     } else {
-      return Response::json([
-        'result' => [],
-        'msg' => 'Not Found'
-      ], 404);
+      return Responses::notFound([]);
     }
   }
 
@@ -76,10 +65,8 @@ class registersController extends apiBaseController {
 
     $registerService = new registerServices();
     $register = $registerService->updateRegister($register_id, $data);
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+
+    return Responses::success([]);
   }
 
   public function create() {
@@ -99,32 +86,23 @@ class registersController extends apiBaseController {
     $registerService = new registerServices();
     $newRegisterId = $registerService->createRegister($data);
 
-    return Response::json([
-      'result' => [
-        'newRegisterId' => $newRegisterId,
-      ],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([
+      'newRegisterId' => $newRegisterId,
+    ]);
   }
 
   public function activate($register_id) {
     $registerService = new registerServices();
     $registers = $registerService->activateRegister($register_id);
 
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([]);
   }
 
   public function disable($register_id) {
     $registerService = new registerServices();
     $registers = $registerService->disableRegister($register_id);
 
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([]);
   }
 
 }

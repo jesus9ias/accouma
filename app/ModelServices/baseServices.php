@@ -77,4 +77,8 @@ class baseServices {
     return $role_fields;
   }
 
+  public function hasPermission($user_permissions, $permission_need) {
+    return in_array($permission_need, $user_permissions);
+  }
+
 }

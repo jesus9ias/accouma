@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller;
 use Request;
-use Response;
 
-use App\Helpers\Helpers;
+use App\Helpers\Responses;
 
 use App\ModelServices\conceptServices;
 
-class conceptsController extends Controller {
+class conceptsController extends apiBaseController {
 
   public function __construct() {
     $this->middleware('isLogued');
@@ -30,10 +28,7 @@ class conceptsController extends Controller {
     $conceptService = new conceptServices();
     $concepts = $conceptService->getConcepts($data);
 
-    return Response::json([
-      'result' => $concepts,
-      'msg' => 'Success'
-    ], 200);
+    return Responses::success($concepts);
   }
 
   public function create() {
@@ -46,12 +41,9 @@ class conceptsController extends Controller {
     $conceptService = new conceptServices();
     $newConceptId = $conceptService->createConcept($data);
 
-    return Response::json([
-      'result' => [
-        'newConceptId' => $newConceptId,
-      ],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([
+      'newConceptId' => $newConceptId,
+    ]);
   }
 
 }

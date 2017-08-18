@@ -41,6 +41,10 @@ class conceptServices extends baseServices {
       }
     }
 
+    if (!$this->hasPermission($data['roles'], 'ADMIN')) {
+      $rows = $rows->where('created_by', '=' , $data['user_id']);
+    }
+
     if (array_key_exists('page', $data) && array_key_exists('per_page', $data)) {
       $pagination = $this->paginate($data['page'], $data['per_page'], $data['user_id'], $data['filters'], $rows, 'users');
       if ($data['page'] > 0 && $data['per_page'] > 0) {
@@ -52,13 +56,12 @@ class conceptServices extends baseServices {
 
     return [
       'rows' => $rows,
-      'tot_rows' =>$pagination['tot_rows'],
-      'tot_pages' =>$pagination['tot_pages']
+      'tot_rows' => $pagination['tot_rows'],
+      'tot_pages' => $pagination['tot_pages']
     ];
   }
 
   public function createConcept($data = []) {
-    $newConceptId = Concepts::insertGetId($data);
-    return $newConceptId;
+    return Concepts::insertGetId($data);
   }
 }

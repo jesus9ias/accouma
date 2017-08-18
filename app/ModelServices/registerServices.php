@@ -76,7 +76,7 @@ class registerServices extends baseServices {
       $selected_fields = $this->getFields($this->fields, $data['roles']);
     }
 
-    $row = Registers::select($selected_fields)->where('id', '=', $id)
+    $row = Registers::select($selected_fields)->where('account_registers.id', '=', $id)
       ->join('users', 'users.id', '=', 'account_registers.created_by')
       ->join('concepts', 'concepts.id', '=', 'account_registers.concept_id')
       ->get();
