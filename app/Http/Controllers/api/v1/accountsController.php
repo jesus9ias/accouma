@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller\api\v1;
 use Request;
-use Response;
 
+use App\Helpers\Responses;
 use App\Helpers\Helpers;
 
 use App\ModelServices\accountServices;
@@ -30,12 +28,9 @@ class accountsController extends apiBaseController {
     ];
 
     $accountService = new accountServices();
-    $users = $accountService->getAccounts($data);
+    $accounts = $accountService->getAccounts($data);
 
-    return Response::json([
-      'result' => $users,
-      'msg' => 'Success'
-    ], 200);
+    return Responses::success($accounts);
   }
 
   public function edit($account_id) {
@@ -44,18 +39,12 @@ class accountsController extends apiBaseController {
     ];
 
     $accountService = new accountServices();
-    $user = $accountService->getAccount($account_id, $data);
+    $account = $accountService->getAccount($account_id, $data);
 
-    if($user != null) {
-      return Response::json([
-        'result' => $user,
-        'msg' => 'success'
-      ], 200);
-    }else{
-      return Response::json([
-        'result' => [],
-        'msg' => 'Not Found'
-      ], 404);
+    if ($account != null) {
+      return Responses::success($account);
+    } else {
+      return Responses::notFound([]);
     }
   }
 
@@ -66,11 +55,8 @@ class accountsController extends apiBaseController {
     ];
 
     $accountService = new accountServices();
-    $user = $accountService->updateAccount($account_id, $data);
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+    $account = $accountService->updateAccount($account_id, $data);
+    return Responses::success([]);
   }
 
   public function create(){
@@ -87,32 +73,23 @@ class accountsController extends apiBaseController {
     $accountService = new accountServices();
     $newAccountId = $accountService->createAccount($data);
 
-    return Response::json([
-      'result' => [
-        'newAccountId' => $newAccountId,
-      ],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([
+      'newAccountId' => $newAccountId,
+    ]);
   }
 
   public function activate($account_id) {
     $accountService = new accountServices();
-    $users = $accountService->activateAccount($account_id);
+    $account = $accountService->activateAccount($account_id);
 
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([]);
   }
 
   public function disable($account_id) {
     $accountService = new accountServices();
-    $users = $accountService->disableAccount($account_id);
+    $account = $accountService->disableAccount($account_id);
 
-    return Response::json([
-      'result' => [],
-      'msg' => 'success'
-    ], 200);
+    return Responses::success([]);
   }
 
 }

@@ -4,9 +4,9 @@ use Request;
 use Route;
 use DB;
 
-class Helpers{
+class Helpers {
 
-	public static function random_txt($num){
+	public static function random_txt($num) {
 		$chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 		$txt = "";
 		for($i=0; $i< $num; $i++){
