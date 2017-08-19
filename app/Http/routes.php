@@ -74,6 +74,10 @@ Route::post('api/v1/concepts/create', 'api\v1\conceptsController@create');
 //Route::get('api/v1/concepts/{concept_id}', 'api\v1\conceptsController@edit');
 //Route::put('api/v1/concepts/{concept_id}', 'api\v1\conceptsController@update');
 
+//-----TAGS
+Route::get('api/v1/tags', 'api\v1\tagsController@get');
+Route::post('api/v1/tags/create', 'api\v1\tagsController@create');
+
 //-----USER ROLES
 Route::get('api/v1/user_roles/', 'api\v1\userRolesController@index');
 Route::get('api/v1/user_roles/{user_id}', 'api\v1\userRolesController@get');
